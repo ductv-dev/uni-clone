@@ -21,13 +21,13 @@ export const CreateWallet = () => {
           <span className="font-bold text-blue-700">Swap</span>
         </OrbitingCircles>
       </div>
-      <div className="fixed bottom-0 w-full pb-15">
+      <div className="fixed bottom-0 w-full px-2.5 pb-15">
         <div className="flex w-full flex-col items-center justify-center gap-3">
           <Button className="bg-blue-700">Tạo ví</Button>
           <Button className="text-blue-700" variant={"outline"}>
             Thêm ví hiện có
           </Button>
-          <p className="text-sm text-gray-500">
+          <p className="px-auto text-sm text-gray-500">
             Bằng việc tiếp tục, tôi đồng ý với{" "}
             <a href="" className="text-sm font-semibold text-blue-800">
               Điều khoản dịch vụ{" "}
