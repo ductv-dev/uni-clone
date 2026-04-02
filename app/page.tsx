@@ -10,6 +10,7 @@ import { Icons } from "@/components/ui/icons"
 import { generateOHLC } from "@/lib/utils"
 import { CandlestickData, Time } from "lightweight-charts"
 import { TicketSlash } from "lucide-react"
+import { useState } from "react"
 
 const data_tokens = [
     {
@@ -57,7 +58,13 @@ const data_tokens = [
     },
   ]
 export default function Page() {
-  const data = generateOHLC() as CandlestickData<Time>[]
+  const [filter, setFilter] = useState(
+    "hourse" as "hourse" | "day" | "week" | "month" | "year"
+  )
+
+  const data = filter === "hourse" ? generateOHLC(10) : generateOHLC(20)
+
+  console.log(data)
   return (
     <div className="pb-50">
       <div className="flex flex-col gap-2.5 p-2.5">
@@ -103,6 +110,7 @@ export default function Page() {
           <CandlestickChart data={data} />
         </div>
       </div>
+
       <Navbar />
     </div>
   )

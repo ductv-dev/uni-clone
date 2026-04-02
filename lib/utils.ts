@@ -5,7 +5,7 @@ import { twMerge } from "tailwind-merge"
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
-export function generateOHLC(count = 150, startPrice = 120) {
+export function generateOHLC(count: number, startPrice = 120) {
   const data = []
   let open = startPrice
   const now = Math.floor(Date.now() / 1000)
