@@ -1,11 +1,14 @@
+"use client"
+import { CandlestickChart } from "@/components/charts/charts-candle"
 import { TriggerButton } from "@/components/custom/button/trigger-button"
 import { CardNotification } from "@/components/custom/cards/card-notification"
 import { CardToken1 } from "@/components/custom/cards/card-token-1"
 import { CardToken2 } from "@/components/custom/cards/card-token-2"
 import { DrawerSetting } from "@/components/custom/drawer/drawer-setting"
 import { Navbar } from "@/components/custom/nav-bar"
-import { Button } from "@/components/ui/button"
 import { Icons } from "@/components/ui/icons"
+import { generateOHLC } from "@/lib/utils"
+import { CandlestickData, Time } from "lightweight-charts"
 import { TicketSlash } from "lucide-react"
 
 const data_tokens = [
@@ -54,6 +57,7 @@ const data_tokens = [
     },
   ]
 export default function Page() {
+  const data = generateOHLC() as CandlestickData<Time>[]
   return (
     <div className="pb-50">
       <div className="flex flex-col gap-2.5 p-2.5">
@@ -78,6 +82,27 @@ export default function Page() {
         ))}
       </div>
       <DrawerSetting />
+      <div
+        style={{
+          padding: "20px",
+        }}
+      >
+        <h1 style={{ color: "white", fontFamily: "sans-serif" }}>
+          ETH/USDT Chart
+        </h1>
+
+        <div
+          style={{
+            maxWidth: "900px",
+            margin: "0 auto",
+            border: "1px solid #1f2937",
+            borderRadius: "8px",
+            overflow: "hidden",
+          }}
+        >
+          <CandlestickChart data={data} />
+        </div>
+      </div>
       <Navbar />
     </div>
   )

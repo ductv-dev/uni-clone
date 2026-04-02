@@ -37,7 +37,7 @@ export const Navbar = () => {
             href={item.href}
             className={`flex flex-1 items-center justify-center rounded-full p-2 py-4 text-sm ${
               currentPath === item.href
-                ? "bg-white/80 text-blue-700 shadow-2xl"
+                ? "bg-black/10 text-blue-700 shadow-2xl backdrop-blur-2xl"
                 : "text-gray-600"
             } hover:bg-gray-200`}
           >
