@@ -21,6 +21,12 @@ export const DrawerSetting: React.FC<Props> = ({}) => {
           <DrawerTitle>Are you absolutely sure?</DrawerTitle>
           <DrawerDescription>This action cannot be undone.</DrawerDescription>
         </DrawerHeader>
+        <div className="no-scrollbar overflow-y-auto">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum atque
+          aut consequuntur, hic quo nulla commodi neque ducimus quibusdam,
+          distinctio quam alias delectus necessitatibus repudiandae consequatur
+          suscipit nihil qui? Molestiae!
+        </div>
         <DrawerFooter>
           <Button>Submit</Button>
           <DrawerClose>
