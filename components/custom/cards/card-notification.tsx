@@ -9,29 +9,36 @@ type TCardNoti = {
   description: string
   icon: React.ReactNode
   isRequired?: boolean
-  clssName?: string
+  className?: string
+  setNotification?: (read: boolean) => void
 }
 export const CardNotification: React.FC<TCardNoti> = ({
   title,
   description,
   icon,
   isRequired,
-  clssName,
+  className,
+  setNotification,
 }) => {
   return (
     <div
       className={
-        `flex items-start gap-2.5 rounded-2xl border border-gray-400/80 bg-white p-2.5` +
-        cn(clssName)
+        `m-2.5 flex h-27 min-w-[calc(100%-20px)] items-start gap-2.5 rounded-2xl border border-gray-400/20 bg-white px-2.5 py-5 shadow-lg` +
+        cn(className)
       }
     >
       <div className="flex items-center justify-center p-2.5">{icon}</div>
       <div className="flex flex-1 flex-col">
         <div className="flex items-center">
-          <div className="line-clamp-1 flex-1 text-sm font-bold">{title}</div>
+          <div className="line-clamp-1 flex-1 text-sm font-bold text-gray-600">
+            {title}
+          </div>
           <div>
             {isRequired ? (
-              <Button className="flex items-center gap-1 rounded-full bg-blue-700 p-2 text-sm text-white">
+              <Button
+                onClick={() => setNotification?.(true)}
+                className="flex items-center gap-1 rounded-full bg-blue-700 p-2 text-sm text-white"
+              >
                 <X size={12} strokeWidth={2} />
               </Button>
             ) : (

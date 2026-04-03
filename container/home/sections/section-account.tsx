@@ -48,7 +48,7 @@ export const SectionAccount: React.FC<Props> = ({ data }) => {
   }
   const shortID = shortenHex(data.id)
   return (
-    <div className="flex items-center p-2.5">
+    <div className="flex items-center border-b border-gray-200 px-2.5 py-4">
       <div className="flex flex-1 gap-1">
         <Drawer>
           <DrawerTrigger>
@@ -111,7 +111,7 @@ export const SectionAccount: React.FC<Props> = ({ data }) => {
           </div>
         </div>
       </div>
-      <ButtonNav onClick={() => route.push("/setting")}>
+      <ButtonNav onClick={() => route.push("/user/setting")}>
         <Settings size={16} strokeWidth={2} className="text-gray-500" />
       </ButtonNav>
     </div>

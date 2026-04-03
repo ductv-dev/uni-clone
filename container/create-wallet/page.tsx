@@ -62,7 +62,7 @@ export const CreateWallet = () => {
       <div className="fixed bottom-0 w-full px-2.5 pb-15">
         <div className="flex w-full flex-col items-center justify-center gap-3">
           <a
-            href="/home"
+            href="/user/home"
             className="flex h-14 items-center justify-center rounded-2xl border-t border-black/10 bg-white px-4 shadow-lg shadow-black/10 hover:bg-gray-100"
           >
             <span className="font-semibold text-gray-500">Tiếp tục</span>
