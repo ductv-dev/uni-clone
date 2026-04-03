@@ -1,25 +1,13 @@
 "use client"
 
 import { CardSetting } from "@/components/custom/cards/card-setting"
-import { Button } from "@/components/ui/button"
-import {
-  DrawerTrigger,
-  DrawerContent,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerClose,
-  Drawer,
-} from "@/components/ui/drawer"
+import { DrawerTrigger, DrawerContent, Drawer } from "@/components/ui/drawer"
+import { shortenHex } from "@/lib/utils"
+import { TUser } from "@/types/type-user"
 import { Copy, User2, Wallet } from "lucide-react"
+import image from "next/image"
 import { useState } from "react"
 import { toast } from "sonner"
-type UProps = {
-  name?: string
-  id?: string
-  image?: string
-}
 
 const lIST_SETTING = [
   {
@@ -33,16 +21,16 @@ const lIST_SETTING = [
   },
 ]
 
-export const SectionAccount: React.FC<UProps> = ({
-  name = "Wallet 1",
-  id = "0x000...0000",
-  image,
-}) => {
+type Props = {
+  data: TUser
+}
+
+export const SectionAccount: React.FC<Props> = ({ data }) => {
   const [isCopied, setIsCopied] = useState(false)
 
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(id)
+      await navigator.clipboard.writeText(data.id)
       toast.success("Đã sao chép vào clipboard!", {
         duration: 2000,
         className: "",
@@ -55,16 +43,16 @@ export const SectionAccount: React.FC<UProps> = ({
       toast.error("Failed to copy to clipboard!")
     }
   }
-
+  const shortID = shortenHex(data.id)
   return (
     <div className="flex items-center p-2.5">
       <div className="flex flex-1 gap-1">
         <Drawer>
           <DrawerTrigger>
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-100">
-              {image ? (
+              {data.image ? (
                 <img
-                  src={image}
+                  src={data.image}
                   alt="avatar"
                   className="h-full w-full rounded-full object-cover"
                 />
@@ -77,9 +65,9 @@ export const SectionAccount: React.FC<UProps> = ({
             {/* Account */}
             <div className="mt-5 flex flex-col items-center justify-center gap-3">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-100">
-                {image ? (
+                {data.image ? (
                   <img
-                    src={image}
+                    src={data.image}
                     alt="avatar"
                     className="h-full w-full rounded-full object-cover"
                   />
@@ -88,9 +76,9 @@ export const SectionAccount: React.FC<UProps> = ({
                 )}
               </div>
               <div className="flex flex-col items-center justify-center">
-                <p className="font-semibold text-gray-800"> {name}</p>
+                <p className="font-semibold text-gray-800"> {data.name}</p>
                 <div className="flex gap-1">
-                  <p className="text-xs text-gray-500">{id}</p>
+                  <p className="text-xs text-gray-500">{shortID}</p>
                   <button onClick={() => handleCopy()} className="">
                     <Copy size={16} strokeWidth={1} />
                   </button>
@@ -111,9 +99,9 @@ export const SectionAccount: React.FC<UProps> = ({
         </Drawer>
 
         <div className="flex flex-col">
-          <p className="font-semibold text-gray-800"> {name}</p>
+          <p className="font-semibold text-gray-800"> {data.name}</p>
           <div className="flex gap-1">
-            <p className="text-xs text-gray-500">{id}</p>
+            <p className="text-xs text-gray-500">{shortID}</p>
             <button onClick={() => handleCopy()} className="">
               <Copy size={16} strokeWidth={1} />
             </button>

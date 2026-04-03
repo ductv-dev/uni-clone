@@ -27,3 +27,13 @@ export function generateOHLC(count: number, startPrice = 120) {
   }
   return data
 }
+export function shortenHex(str: string, start = 6, end = 4) {
+  if (!str) return ""
+
+  // Chuẩn hóa về chữ thường
+  const s = str.toLowerCase()
+
+  if (s.length <= start + end) return s
+
+  return `${s.slice(0, start)}...${s.slice(-end)}`
+}
