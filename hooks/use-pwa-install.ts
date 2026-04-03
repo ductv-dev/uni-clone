@@ -24,19 +24,17 @@ export function usePwaInstall() {
       return
     }
 
+    // Default to true so the button shows up even on iOS or Dev mode
+    setIsInstallable(true)
+
     const handleBeforeInstallPrompt = (e: Event) => {
-      // Prevent the mini-infobar from appearing on mobile
       e.preventDefault()
-      // Stash the event so it can be triggered later.
       setDeferredPrompt(e as BeforeInstallPromptEvent)
-      // Update UI notify the user they can install the PWA
       setIsInstallable(true)
     }
 
     const handleAppInstalled = () => {
-      // Clear the deferredPrompt so it can be garbage collected
       setDeferredPrompt(null)
-      // Hide the install button
       setIsInstallable(false)
     }
 
@@ -53,7 +51,13 @@ export function usePwaInstall() {
   }, [])
 
   const install = async () => {
-    if (!deferredPrompt) return
+    if (!deferredPrompt) {
+      // Fallback cho iOS Safari hoặc khi dev server chưa phát event
+      alert(
+        "Để cài đặt ứng dụng: \n\n1. Nhấn vào biểu tượng Chia sẻ (Share) trên điện thoại\n2. Chọn 'Thêm vào màn hình chính' (Add to Home Screen)."
+      )
+      return
+    }
 
     // Show the install prompt
     await deferredPrompt.prompt()
@@ -65,9 +69,9 @@ export function usePwaInstall() {
       setIsInstallable(false)
     }
 
-    // We've used the prompt, and can't use it again, throw it away
     setDeferredPrompt(null)
   }
+
 
   return { isInstallable, install }
 }
