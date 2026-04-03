@@ -45,7 +45,7 @@ export const Setting = () => {
         </div>
       </div>
       <div className="mt-24 flex flex-col gap-2">
-        {0 && (
+        {isInstallable && (
           <CardSetting
             title="Install App"
             icon={<Download size={16} strokeWidth={2} className="text-blue-500" />}
