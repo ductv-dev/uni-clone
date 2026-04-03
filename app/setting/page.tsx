@@ -1,7 +1,5 @@
+import { Setting } from "@/container/setting/page"
+
 export default function SettingPage() {
-  return (
-    <div>
-      <h1>Settings</h1>
-    </div>
-  );
+  return <Setting />
 }

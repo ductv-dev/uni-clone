@@ -11,9 +11,9 @@ type Action = {
 
 export const useUser = create((set) => ({
   user: {
-    name: "John Doe",
+    name: "Viết Đức",
     id: "0x1234567890abcdef",
-    image: null,
+    image: "https://www.ductv.dev/_next/image?url=%2Fninhbinh.jpg&w=828&q=75",
   },
   setName: (name: TUser["name"]) =>
     set((state: { user: TUser }) => ({ user: { ...state.user, name } })),

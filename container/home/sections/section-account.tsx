@@ -1,11 +1,13 @@
 "use client"
 
+import { ButtonNav } from "@/components/custom/button/button-navigation"
 import { CardSetting } from "@/components/custom/cards/card-setting"
 import { DrawerTrigger, DrawerContent, Drawer } from "@/components/ui/drawer"
 import { shortenHex } from "@/lib/utils"
 import { TUser } from "@/types/type-user"
-import { Copy, User2, Wallet } from "lucide-react"
+import { Copy, Settings, User2, Wallet } from "lucide-react"
 import image from "next/image"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { toast } from "sonner"
 
@@ -27,6 +29,7 @@ type Props = {
 
 export const SectionAccount: React.FC<Props> = ({ data }) => {
   const [isCopied, setIsCopied] = useState(false)
+  const route = useRouter()
 
   const handleCopy = async () => {
     try {
@@ -108,6 +111,9 @@ export const SectionAccount: React.FC<Props> = ({ data }) => {
           </div>
         </div>
       </div>
+      <ButtonNav onClick={() => route.push("/setting")}>
+        <Settings size={16} strokeWidth={2} className="text-gray-500" />
+      </ButtonNav>
     </div>
   )
 }
