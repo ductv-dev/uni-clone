@@ -8,6 +8,7 @@ type TCardSetting = {
   description?: string
   icon: React.ReactNode
   className?: string
+  onClick?: () => void
 }
 
 export const CardSetting: React.FC<TCardSetting> = ({
@@ -15,9 +16,13 @@ export const CardSetting: React.FC<TCardSetting> = ({
   description,
   icon,
   className,
+  onClick,
 }) => {
   return (
-    <div className={`flex w-full items-center gap-2.5 p-2.5 ` + cn(className)}>
+    <div
+      onClick={onClick}
+      className={`flex w-full cursor-pointer items-center gap-2.5 p-2.5 hover:bg-gray-50 ` + cn(className)}
+    >
       <div className="text-gray-600">{icon}</div>
 
       <p className="flex-1 text-lg font-semibold text-gray-600">{title}</p>
@@ -28,3 +33,4 @@ export const CardSetting: React.FC<TCardSetting> = ({
     </div>
   )
 }
+

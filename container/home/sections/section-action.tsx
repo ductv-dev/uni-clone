@@ -8,7 +8,7 @@ import { BottomSheetSwap } from "../bottom-sheet/bottom-sheet-swap"
 export const SectionAction = () => {
   return (
     <div className="no-scrollbar flex w-full gap-2.5 overflow-x-auto p-2.5">
-      <BottomSheetSwap />
+      <BottomSheetSwap isMini={false} />
       <BottomSheetBuySell />
       <BottomSheetReceive />
       <BottomSheetSend />

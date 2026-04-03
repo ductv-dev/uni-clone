@@ -1,8 +1,10 @@
 "use client"
 
 import { CardSetting } from "@/components/custom/cards/card-setting"
-import { ChevronLeft, Settings } from "lucide-react"
+import { usePwaInstall } from "@/hooks/use-pwa-install"
+import { ChevronLeft, Download, Settings } from "lucide-react"
 import { useRouter } from "next/navigation"
+
 const LIST_SETTING = [
   {
     name: "Account",
@@ -24,6 +26,8 @@ const LIST_SETTING = [
 
 export const Setting = () => {
   const route = useRouter()
+  const { isInstallable, install } = usePwaInstall()
+
   return (
     <div>
       <div className="fixed top-2.5 w-full px-2.5">
@@ -41,6 +45,14 @@ export const Setting = () => {
         </div>
       </div>
       <div className="mt-24 flex flex-col gap-2">
+        {0 && (
+          <CardSetting
+            title="Install App"
+            icon={<Download size={16} strokeWidth={2} className="text-blue-500" />}
+            onClick={install}
+            className="text-blue-600 bg-blue-50/50 hover:bg-blue-100 border border-blue-100 rounded-lg mx-2"
+          />
+        )}
         {LIST_SETTING.map((setting) => (
           <CardSetting
             key={setting.name}
@@ -52,3 +64,4 @@ export const Setting = () => {
     </div>
   )
 }
+
