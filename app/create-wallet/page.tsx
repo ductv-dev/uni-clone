@@ -1,6 +1,5 @@
-"use client"
-import { CreateWallet } from "@/container/wellcome/page"
+import { CreateWallet } from "@/container/create-wallet/page"
 
-export default function WellcomePage() {
+export default function CreateWalletPage() {
   return <CreateWallet />
 }
