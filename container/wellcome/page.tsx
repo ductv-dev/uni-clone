@@ -23,12 +23,18 @@ export const Wellcome = () => {
       </div>
       <div className="fixed bottom-0 w-full px-2.5 pb-15">
         <div className="flex w-full flex-col items-center justify-center gap-3">
-          <button className="cursor-pointer rounded-[5px] bg-blue-700 px-4 py-2 transition-transform hover:scale-105">
-            <p className="text-sm font-bold text-white">Tạo ví</p>
-          </button>
-          <button className="cursor-pointer rounded-[5px] border border-blue-700 bg-white px-4 py-2 transition-transform hover:scale-105">
+          <a
+            href="/create-wallet"
+            className="flex h-12 items-center justify-center rounded-full border-t border-black/10 bg-blue-100 px-4 shadow-lg shadow-blue-700/30"
+          >
+            <p className="text-sm font-bold text-blue-700">Tạo ví</p>
+          </a>
+          <a
+            href="/add-wallet"
+            className="flex h-12 items-center justify-center rounded-full border-t border-black/10 bg-white px-4 shadow-lg shadow-black/10"
+          >
             <p className="text-sm font-bold text-blue-700">Thêm ví hiện có</p>
-          </button>
+          </a>
           <p className="px-auto text-center text-sm text-gray-500">
             Bằng việc tiếp tục, tôi đồng ý với{" "}
             <a href="" className="text-sm font-semibold text-blue-800">

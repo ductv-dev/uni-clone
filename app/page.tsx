@@ -8,7 +8,6 @@ import { DrawerSetting } from "@/components/custom/drawer/drawer-setting"
 import { Navbar } from "@/components/custom/nav-bar"
 import { Icons } from "@/components/ui/icons"
 import { generateOHLC } from "@/lib/utils"
-import { CandlestickData, Time } from "lightweight-charts"
 import { TicketSlash } from "lucide-react"
 import { useState } from "react"
 

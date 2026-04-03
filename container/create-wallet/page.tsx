@@ -1,26 +1,24 @@
-import { Field, FieldLabel } from "@/components/ui/field"
+"use client"
+import { Field } from "@/components/ui/field"
 import {
   InputGroup,
   InputGroupInput,
   InputGroupAddon,
-  InputGroupText,
 } from "@/components/ui/input-group"
-import {
-  ArrowBigLeft,
-  ArrowLeft,
-  ChevronLeft,
-  Info,
-  InfoIcon,
-  User,
-} from "lucide-react"
+import { ChevronLeft, Info, User } from "lucide-react"
+import { useRouter } from "next/navigation"
 
 export const CreateWallet = () => {
+  const route = useRouter()
   return (
     <div className="w-full py-12">
       {/* Header */}
-      <div className="fixed top-12 w-full px-2.5">
+      <div className="fixed top-2.5 w-full px-2.5">
         <div className="flex items-center justify-between">
-          <button className="flex h-12 w-12 items-center justify-center rounded-full border-t border-black/10 bg-white shadow-lg shadow-black/10 hover:bg-gray-100">
+          <button
+            onClick={() => route.back()}
+            className="flex h-12 w-12 items-center justify-center rounded-full border-t border-black/10 bg-white shadow-lg shadow-black/10 hover:bg-gray-100"
+          >
             <ChevronLeft strokeWidth={2} className="text-gray-500" />
           </button>
           <button className="flex h-12 items-center justify-center rounded-full border-t border-black/10 bg-white px-4 shadow-lg shadow-black/10 hover:bg-gray-100">
@@ -38,7 +36,7 @@ export const CreateWallet = () => {
             Tạo tên người dùng của bạn
           </h5>
           <p className="text-sm text-gray-500">
-            Đây là địa chỉ cá nhân <p /> mọi người có thể gửi crypto đến
+            Đây là địa chỉ cá nhân mọi người có thể gửi crypto đến
           </p>
         </div>
         <div>
@@ -63,9 +61,12 @@ export const CreateWallet = () => {
       {/* Footer */}
       <div className="fixed bottom-0 w-full px-2.5 pb-15">
         <div className="flex w-full flex-col items-center justify-center gap-3">
-          <button className="flex h-14 items-center justify-center rounded-2xl border-t border-black/10 bg-white px-4 shadow-lg shadow-black/10 hover:bg-gray-100">
+          <a
+            href="/home"
+            className="flex h-14 items-center justify-center rounded-2xl border-t border-black/10 bg-white px-4 shadow-lg shadow-black/10 hover:bg-gray-100"
+          >
             <span className="font-semibold text-gray-500">Tiếp tục</span>
-          </button>
+          </a>
         </div>
       </div>
     </div>
