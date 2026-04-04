@@ -12,7 +12,6 @@ import { LIST_TOKEN } from "@/data/data-list-token"
 export const Home = () => {
   const user = useUser((state: any) => state.user)
   const dataToken = LIST_TOKEN
-  console.log(user)
   return (
     <div className="w-full">
       <SectionAccount data={user} />

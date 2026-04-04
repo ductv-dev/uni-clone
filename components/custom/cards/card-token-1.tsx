@@ -2,6 +2,7 @@
 import { AvatarImage, Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { cn } from "@/lib/utils"
 import { ChevronDown, ChevronUp } from "lucide-react"
+import Link from "next/link"
 
 type TcardToken1Props = {
   rank?: number
@@ -27,8 +28,9 @@ export const CardToken1: React.FC<TcardToken1Props> = ({
   className,
 }) => {
   return (
-    <div
+    <Link
       onClick={onClick}
+      href={`/token/${symbol}`}
       className={
         cn(className) + " flex w-full items-center gap-2.5 rounded-lg px-4 py-2"
       }
@@ -75,6 +77,6 @@ export const CardToken1: React.FC<TcardToken1Props> = ({
           )}
         </div>
       </div>
-    </div>
+    </Link>
   )
 }

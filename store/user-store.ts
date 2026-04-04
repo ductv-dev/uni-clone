@@ -11,7 +11,7 @@ export const useUser = create((set) => ({
     name: "Viết Đức",
     id: "0x1234567890abcdef",
     image: "https://www.ductv.dev/_next/image?url=%2Fninhbinh.jpg&w=828&q=75",
-    balance: 0,
+    balance: 10000000,
     walletAddress: "",
     walletName: "My Wallet",
   },

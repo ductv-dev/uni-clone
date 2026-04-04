@@ -20,7 +20,6 @@ import { toast } from "sonner"
 export const BottomSheetReceive = () => {
   const user = useUser((state: any) => state.user)
   const id = shortenHex(user.id)
-  console.log("user", user)
   const copyToClipboard = (text: string) => {
     navigator.clipboard
       .writeText(text)
