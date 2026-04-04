@@ -12,6 +12,12 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer"
+import {
+  InputGroup,
+  InputGroupInput,
+  InputGroupAddon,
+} from "@/components/ui/input-group"
+import { ScanQrCode, SearchIcon, UserSearch, Wallet2Icon } from "lucide-react"
 
 export const BottomSheetSend = () => {
   return (
@@ -21,21 +27,26 @@ export const BottomSheetSend = () => {
       </DrawerTrigger>
       <DrawerContent className="h-full max-h-full">
         <DrawerHeader>
-          <DrawerTitle>Gửi</DrawerTitle>
+          <DrawerTitle>Chọn người gủi</DrawerTitle>
         </DrawerHeader>
         <div className="no-scrollbar w-full overflow-y-auto px-2.5">
-          <div className="flex flex-col gap-2 rounded-lg border border-gray-200 p-4">
-            <div>
-              <input
-                type="text"
-                placeholder="0"
-                className="text-xl font-bold"
-              />
+          <InputGroup>
+            <InputGroupInput placeholder="Search..." />
+            <InputGroupAddon>
+              <SearchIcon />
+            </InputGroupAddon>
+            <InputGroupAddon align={"inline-end"}>
+              <ScanQrCode />
+            </InputGroupAddon>
+          </InputGroup>
+          <div className="flex w-full flex-col items-center justify-center gap-2.5 py-20">
+            <div className="flex h-14 w-14 items-center justify-center rounded-xl border-t border-black/10 bg-white text-blue-700 shadow-lg shadow-black/10">
+              <UserSearch strokeWidth={3} size={24} />
             </div>
+            <p>Nhập địa chỉ hoặc tên người dùng</p>
           </div>
         </div>
         <DrawerFooter>
-          <Button>Submit</Button>
           <DrawerClose>
             <Button variant="outline">Cancel</Button>
           </DrawerClose>
