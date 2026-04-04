@@ -6,6 +6,8 @@ import { SearchX } from "lucide-react"
 import { SectionMain } from "./sections/section-main"
 import { SectionChart } from "./sections/section-chart"
 import { SectionAbout } from "./sections/section-about"
+import { Button } from "@/components/ui/button"
+import { ButtonNav } from "@/components/custom/button/button-navigation"
 type Props = {
   symbol: string
 }
@@ -27,6 +29,11 @@ export const TokenInfor: React.FC<Props> = ({ symbol }) => {
       <SectionMain data={data} />
       <SectionChart />
       <SectionAbout data={data} />
+      <div className="fixed bottom-0 z-100 w-full pb-5">
+        <div className="flex w-full items-center justify-center">
+          <ButtonNav classname="w-full text-blue-500 font-bold ">Mua</ButtonNav>
+        </div>
+      </div>
     </div>
   )
 }

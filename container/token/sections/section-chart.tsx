@@ -1,7 +1,6 @@
 import { CandlestickChart } from "@/components/charts/charts-candle"
 import { Badge } from "@/components/ui/badge"
 import { generateOHLC, Timeframe } from "@/lib/utils"
-import { div } from "framer-motion/client"
 import { CandlestickData, Time } from "lightweight-charts"
 import { useMemo, useState } from "react"
 
@@ -14,11 +13,11 @@ const TIMEFRAMES: { label: string; value: Timeframe }[] = [
 ]
 
 export const SectionChart = () => {
-  const [time, setTime] = useState("day")
   const [activeTimeframe, setActiveTimeframe] = useState<Timeframe>("1D")
   const data = useMemo(() => {
     return generateOHLC(150, 120, activeTimeframe) as CandlestickData<Time>[]
   }, [activeTimeframe])
+  console.log("data", data)
   return (
     <div className="flex flex-col gap-2.5">
       <div

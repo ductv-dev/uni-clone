@@ -73,7 +73,7 @@ export const CandlestickChart: React.FC<ChartProps> = ({
 
     window.addEventListener("resize", handleResize)
 
-    // 6. Dọn dẹp (Cleanup) khi component unmount
+    // 6. Dọn dẹp  khi component unmount
     return () => {
       window.removeEventListener("resize", handleResize)
       chart.remove()
