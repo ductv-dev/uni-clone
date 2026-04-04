@@ -21,7 +21,7 @@ export const BottomSheetBuySell = () => {
       </DrawerTrigger>
       <DrawerContent className="h-full max-h-full">
         <DrawerHeader>
-          <DrawerTitle>Mua/Bán</DrawerTitle>
+          <DrawerTitle className="text-start">Mua/Bán</DrawerTitle>
         </DrawerHeader>
         <div className="no-scrollbar w-full overflow-y-auto px-2.5">
           <div className="flex flex-col gap-2 rounded-lg border border-gray-200 p-4">

@@ -59,5 +59,6 @@ export function generateRandomToken(): TToken {
     decimals: 18,
     logoURI: `https://via.placeholder.com/32?text=${randomSymbol}`,
     number_changes: parseFloat((Math.random() * 10 - 5).toFixed(2)),
+    usdt: Math.random() * 1000,
   }
 }

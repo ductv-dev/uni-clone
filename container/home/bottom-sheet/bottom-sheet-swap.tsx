@@ -53,7 +53,7 @@ export const BottomSheetSwap: React.FC<Props> = ({
         return
       }
 
-      if (!valueFrom || Number(valueFrom) <= 0) {
+      if (!valueFrom || Number(valueFrom) <= 0 || valueFrom > 9999999) {
         toast.error("Vui lòng nhập số lượng hợp lệ")
         return
       }
