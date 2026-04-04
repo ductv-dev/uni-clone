@@ -11,6 +11,8 @@ type TcardToken1Props = {
   image: string
   number_changes?: number
   price?: number
+  onClick?: () => void
+  className?: string
 }
 
 export const CardToken1: React.FC<TcardToken1Props> = ({
@@ -21,15 +23,22 @@ export const CardToken1: React.FC<TcardToken1Props> = ({
   image,
   number_changes = 0,
   price,
+  onClick,
+  className,
 }) => {
   return (
-    <div className={cn("flex w-full items-center gap-2.5 rounded-lg p-4")}>
+    <div
+      onClick={onClick}
+      className={
+        cn(className) + " flex w-full items-center gap-2.5 rounded-lg px-4 py-2"
+      }
+    >
       <div className="flex flex-1 items-center gap-2.5">
         {rank && <span className="font-medium text-gray-500">{rank}</span>}
 
         <Avatar className="h-12 w-12">
           <AvatarImage src={image} alt="token image" className="grayscale" />
-          <AvatarFallback>{name.charAt(0)}</AvatarFallback>
+          <AvatarFallback>{name?.charAt(0) || "U"}</AvatarFallback>
         </Avatar>
 
         <div className="flex flex-col">

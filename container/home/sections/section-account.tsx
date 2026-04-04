@@ -2,7 +2,7 @@
 
 import { ButtonNav } from "@/components/custom/button/button-navigation"
 import { CardSetting } from "@/components/custom/cards/card-setting"
-import { DrawerTrigger, DrawerContent, Drawer } from "@/components/ui/drawer"
+import { DrawerTrigger, DrawerContent } from "@/components/ui/drawer"
 import { shortenHex } from "@/lib/utils"
 import { TUser } from "@/types/type-user"
 import { Copy, Settings, User2, Wallet } from "lucide-react"
@@ -10,7 +10,7 @@ import image from "next/image"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { toast } from "sonner"
-
+import { Drawer } from "vaul"
 const lIST_SETTING = [
   {
     title: "Đổi tên ví",
@@ -50,7 +50,7 @@ export const SectionAccount: React.FC<Props> = ({ data }) => {
   return (
     <div className="flex items-center border-b border-gray-200 px-2.5 py-4">
       <div className="flex flex-1 gap-1">
-        <Drawer>
+        <Drawer.Root>
           <DrawerTrigger>
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-100">
               {data.image ? (
@@ -67,7 +67,7 @@ export const SectionAccount: React.FC<Props> = ({ data }) => {
           <DrawerContent className="p-2.5">
             {/* Account */}
             <div className="mt-5 flex flex-col items-center justify-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-100">
+              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-blue-100">
                 {data.image ? (
                   <img
                     src={data.image}
@@ -99,7 +99,7 @@ export const SectionAccount: React.FC<Props> = ({ data }) => {
               ))}
             </div>
           </DrawerContent>
-        </Drawer>
+        </Drawer.Root>
 
         <div className="flex flex-col">
           <p className="font-semibold text-gray-800"> {data.name}</p>

@@ -4,5 +4,6 @@ export type TToken = {
   address: string
   decimals: number
   logoURI: string
+  usdt: number
   number_changes?: number
 }

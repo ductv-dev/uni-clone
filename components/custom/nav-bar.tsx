@@ -32,11 +32,10 @@ export const Navbar = () => {
             <a
               key={item.href}
               href={item.href}
-              className={`flex flex-1 items-center justify-center rounded-full p-2 py-4 text-sm ${
-                currentPath === item.href
+              className={`flex flex-1 items-center justify-center rounded-full p-2 py-4 text-sm ${currentPath === item.href
                   ? "bg-black/10 text-blue-700 shadow-2xl backdrop-blur-2xl"
                   : "text-gray-600"
-              } hover:bg-gray-200`}
+                } hover:bg-gray-200`}
             >
               {item.icon}
             </a>

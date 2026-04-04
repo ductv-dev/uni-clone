@@ -7,10 +7,11 @@ import { SectionNotifications } from "./sections/section-notifications"
 import { Section } from "lucide-react"
 import { SectionListToken } from "./sections/section-list-token"
 import { generateListRandomToken } from "@/lib/utils"
+import { LIST_TOKEN } from "@/data/data-list-token"
 
 export const Home = () => {
   const user = useUser((state: any) => state.user)
-  const dataToken = generateListRandomToken(10)
+  const dataToken = LIST_TOKEN
   console.log(user)
   return (
     <div className="w-full">
