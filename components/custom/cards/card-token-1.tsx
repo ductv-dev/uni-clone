@@ -28,9 +28,8 @@ export const CardToken1: React.FC<TcardToken1Props> = ({
   className,
 }) => {
   return (
-    <Link
+    <div
       onClick={onClick}
-      href={`/token/${symbol}`}
       className={
         cn(className) + " flex w-full items-center gap-2.5 rounded-lg px-4 py-2"
       }
@@ -39,7 +38,7 @@ export const CardToken1: React.FC<TcardToken1Props> = ({
         {rank && <span className="font-medium text-gray-500">{rank}</span>}
 
         <Avatar className="h-12 w-12">
-          <AvatarImage src={image} alt="token image" />
+          <AvatarImage src={image} alt="token image" className="" />
           <AvatarFallback>{name?.charAt(0) || "U"}</AvatarFallback>
         </Avatar>
 
@@ -77,6 +76,6 @@ export const CardToken1: React.FC<TcardToken1Props> = ({
           )}
         </div>
       </div>
-    </Link>
+    </div>
   )
 }
