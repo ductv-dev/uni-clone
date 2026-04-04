@@ -54,7 +54,12 @@ export const BottomSheetSwap: React.FC<Props> = ({
       }
 
       if (!valueFrom || Number(valueFrom) <= 0 || valueFrom > 9999999) {
+        const inputElement = document.getElementById(
+          "valueFrom"
+        ) as HTMLInputElement
+        inputElement.focus()
         toast.error("Vui lòng nhập số lượng hợp lệ")
+
         return
       }
 
@@ -160,6 +165,8 @@ export const BottomSheetSwap: React.FC<Props> = ({
                   </DrawerContent>
                 </Drawer>
                 <input
+                  id="valueFrom"
+                  name="valueFrom"
                   type="number"
                   value={valueFrom?.toString() || ""}
                   onChange={(e) => {
