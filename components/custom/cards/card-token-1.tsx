@@ -39,7 +39,7 @@ export const CardToken1: React.FC<TcardToken1Props> = ({
         {rank && <span className="font-medium text-gray-500">{rank}</span>}
 
         <Avatar className="h-12 w-12">
-          <AvatarImage src={image} alt="token image" className="grayscale" />
+          <AvatarImage src={image} alt="token image" />
           <AvatarFallback>{name?.charAt(0) || "U"}</AvatarFallback>
         </Avatar>
 
