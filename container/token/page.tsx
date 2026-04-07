@@ -2,12 +2,13 @@
 
 import { LIST_TOKEN } from "@/data/data-list-token"
 import { SectionHeader } from "./sections/section-header"
-import { SearchX } from "lucide-react"
+import { Landmark, SearchX } from "lucide-react"
 import { SectionMain } from "./sections/section-main"
 import { SectionChart } from "./sections/section-chart"
 import { SectionAbout } from "./sections/section-about"
 import { Button } from "@/components/ui/button"
 import { ButtonNav } from "@/components/custom/button/button-navigation"
+import { StatisticalSection } from "./sections/section-statistical"
 type Props = {
   symbol: string
 }
@@ -24,14 +25,19 @@ export const TokenInfor: React.FC<Props> = ({ symbol }) => {
       </div>
     )
   return (
-    <div className="w-full">
+    <div className="w-full pb-20">
       <SectionHeader />
       <SectionMain data={data} />
       <SectionChart />
       <SectionAbout data={data} />
+      <StatisticalSection />
       <div className="fixed bottom-0 z-100 w-full pb-5">
-        <div className="flex w-full items-center justify-center">
-          <ButtonNav classname="w-full text-blue-500 font-bold ">Mua</ButtonNav>
+        <div className="flex w-full items-center justify-center px-2.5">
+          <ButtonNav classname="w-full flex-1  ">
+            <div className="flex items-center justify-center gap-1 font-bold text-blue-700">
+              <Landmark /> <p>Mua</p>
+            </div>
+          </ButtonNav>
         </div>
       </div>
     </div>
