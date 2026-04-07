@@ -48,7 +48,7 @@ export const BottomSheetReceive = () => {
         <div className="no-scrollbar w-full overflow-y-auto px-2.5 pb-10">
           <div className="flex flex-col gap-2 p-4">
             <div className="flex items-center justify-center gap-2">
-              <p className="font-semibold text-gray-600">{id}</p>
+              <p className="font-semibold text-foreground/60">{id}</p>
               <Button onClick={() => copyToClipboard(user.id)}>
                 <Copy />
               </Button>
@@ -57,9 +57,9 @@ export const BottomSheetReceive = () => {
             <p>Từ tài khoản khác</p>
             <a
               href="https://www.coinbase.com/fr-fr"
-              className="flex items-center gap-2.5 rounded-lg border border-gray-300/50 p-2.5"
+              className="flex items-center gap-2.5 rounded-lg border border-border/50 p-2.5"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-700">
+              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary">
                 <Coins color="gold" />
               </div>
               <p>Coinbase</p>

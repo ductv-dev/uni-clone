@@ -54,11 +54,11 @@ export const SectionAccount: React.FC<Props> = ({ data }) => {
   }
   const shortID = shortenHex(data.id)
   return (
-    <div className="flex items-center border-b border-gray-200 px-2.5 py-4">
+    <div className="flex items-center border-b border-border px-2.5 py-4">
       <div className="flex flex-1 gap-1">
         <Drawer>
           <DrawerTrigger>
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-100">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/20">
               {data.image ? (
                 <img
                   src={data.image}
@@ -68,14 +68,14 @@ export const SectionAccount: React.FC<Props> = ({ data }) => {
                   className="h-full w-full rounded-full object-cover"
                 />
               ) : (
-                <User2 size={20} className="text-blue-700" />
+                <User2 size={20} className="text-primary" />
               )}
             </div>
           </DrawerTrigger>
           <DrawerContent className="px-2.5 pb-20">
             {/* Account */}
             <div className="mt-5 flex flex-col items-center justify-center gap-3">
-              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-blue-100">
+              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/20">
                 {data.image ? (
                   <img
                     src={data.image}
@@ -85,13 +85,13 @@ export const SectionAccount: React.FC<Props> = ({ data }) => {
                     className="h-full w-full rounded-full object-cover"
                   />
                 ) : (
-                  <User2 size={20} className="text-blue-700" />
+                  <User2 size={20} className="text-primary" />
                 )}
               </div>
               <div className="flex flex-col items-center justify-center">
-                <p className="font-semibold text-gray-800"> {data.name}</p>
+                <p className="font-semibold text-foreground/60"> {data.name}</p>
                 <div className="flex gap-1">
-                  <p className="text-xs text-gray-500">{shortID}</p>
+                  <p className="text-xs text-foreground/60">{shortID}</p>
                   <button onClick={() => handleCopy()} className="">
                     <Copy size={16} strokeWidth={1} />
                   </button>
@@ -109,7 +109,7 @@ export const SectionAccount: React.FC<Props> = ({ data }) => {
                 </DrawerTrigger>
                 <DrawerContent className="w-full px-2.5">
                   <div className="flex w-full flex-col items-center gap-2 py-10">
-                    <p className="text-lg font-semibold text-gray-500">
+                    <p className="text-lg font-semibold text-foreground/60">
                       Chỉnh sửa tên người dùng của bạn
                     </p>
                     <InputGroup className="max-w-xs">
@@ -141,9 +141,9 @@ export const SectionAccount: React.FC<Props> = ({ data }) => {
         </Drawer>
 
         <div className="flex flex-col">
-          <p className="font-semibold text-gray-800"> {data.name}</p>
+          <p className="font-semibold text-foreground/60"> {data.name}</p>
           <div className="flex gap-1">
-            <p className="text-xs text-gray-500">{shortID}</p>
+            <p className="text-xs text-foreground/60">{shortID}</p>
             <button onClick={() => handleCopy()} className="">
               <Copy size={16} strokeWidth={1} />
             </button>
@@ -151,7 +151,7 @@ export const SectionAccount: React.FC<Props> = ({ data }) => {
         </div>
       </div>
       <ButtonNav onClick={() => route.push("/user/setting")}>
-        <Settings size={16} strokeWidth={2} className="text-gray-500" />
+        <Settings size={16} strokeWidth={2} className="text-foreground/60" />
       </ButtonNav>
     </div>
   )

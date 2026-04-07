@@ -10,7 +10,7 @@ type Props = {
 export const SectionBalance: React.FC<Props> = ({ data, number_changes }) => {
   return (
     <div className="p-2.5">
-      <h1 className="text text-3xl font-bold text-gray-500">
+      <h1 className="text text-3xl font-bold text-foreground/60">
         {data.balance?.toLocaleString(undefined, { minimumFractionDigits: 2 })}{" "}
         US$
       </h1>

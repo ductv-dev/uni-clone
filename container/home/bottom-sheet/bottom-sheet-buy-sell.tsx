@@ -53,17 +53,17 @@ export const BottomSheetBuySell = () => {
       <DrawerContent className="h-full max-h-full">
         <DrawerHeader>
           <DrawerTitle className="flex w-full items-center justify-center gap-4">
-            <motion.div className="flex w-fit rounded-full bg-gray-100">
+            <motion.div className="flex w-fit rounded-full bg-accent">
               <Badge
                 onClick={() => setIsBuy(true)}
-                className={`rounded-full px-4 py-4 font-semibold text-gray-500 ${isBuy ? "border-t border-t-blue-700/10 bg-blue-100 text-blue-700 shadow-sm shadow-blue-700" : "bg-transparent"}`}
+                className={`rounded-full px-4 py-4 font-semibold text-foreground/60 ${isBuy ? "border-t border-t-primary/10 bg-primary/20 text-primary shadow-sm shadow-primary/50" : "bg-transparent"}`}
               >
                 Mua
               </Badge>
 
               <Badge
                 onClick={() => setIsBuy(false)}
-                className={`rounded-full px-4 py-4 font-semibold text-gray-500 ${!isBuy ? "border-t border-t-blue-700/10 bg-blue-100 text-blue-700 shadow-sm shadow-blue-700" : "bg-transparent"}`}
+                className={`rounded-full px-4 py-4 font-semibold text-foreground/60 ${!isBuy ? "border-t border-t-primary/10 bg-primary/20 text-primary shadow-sm shadow-primary/50" : "bg-transparent"}`}
               >
                 Bán
               </Badge>
@@ -74,7 +74,7 @@ export const BottomSheetBuySell = () => {
           <div className="flex w-full flex-col items-center justify-center">
             <div className="my-12 flex flex-col items-center justify-between gap-2.5">
               <div className="flex justify-center gap-5">
-                <label className="text-3xl font-bold text-gray-500">USDT</label>
+                <label className="text-3xl font-bold text-foreground/60">USDT</label>
                 <input
                   id="total"
                   name="total"
@@ -88,7 +88,7 @@ export const BottomSheetBuySell = () => {
                 />
               </div>
 
-              <span className="flex-1 text-sm text-gray-500">
+              <span className="flex-1 text-sm text-foreground/60">
                 ≈ {result.toFixed(4)}{" "}
                 <Drawer open={isOpen} onOpenChange={setIsOpen}>
                   <DrawerTrigger>
@@ -115,7 +115,7 @@ export const BottomSheetBuySell = () => {
                             setIsOpen(false)
                           }}
                           className={
-                            token.symbol === tokenFrom ? "bg-gray-100" : ""
+                            token.symbol === tokenFrom ? "bg-accent" : ""
                           }
                         />
                       ))}

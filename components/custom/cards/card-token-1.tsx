@@ -35,7 +35,7 @@ export const CardToken1: React.FC<TcardToken1Props> = ({
       }
     >
       <div className="flex flex-1 items-center gap-2.5">
-        {rank && <span className="font-medium text-gray-500">{rank}</span>}
+        {rank && <span className="font-medium text-foreground/60">{rank}</span>}
 
         <Avatar className="h-12 w-12">
           <AvatarImage src={image} alt="token image" className="" />
@@ -44,7 +44,7 @@ export const CardToken1: React.FC<TcardToken1Props> = ({
 
         <div className="flex flex-col">
           <span className="text-sm font-medium">{name}</span>
-          {symbol && <span className="text-xs text-gray-500">{symbol}</span>}
+          {symbol && <span className="text-xs text-foreground/60">{symbol}</span>}
         </div>
       </div>
       <div className="flex flex-col items-end">
@@ -54,7 +54,7 @@ export const CardToken1: React.FC<TcardToken1Props> = ({
           </span>
         )}
         {description && (
-          <span className="text-xs text-gray-500">{description}</span>
+          <span className="text-xs text-foreground/60">{description}</span>
         )}
         <div className="flex items-center">
           {number_changes > 0 ? (
@@ -72,7 +72,7 @@ export const CardToken1: React.FC<TcardToken1Props> = ({
               </span>
             </div>
           ) : (
-            <span className="text-xs font-medium text-gray-500">0%</span>
+            <span className="text-xs font-medium text-foreground/60">0%</span>
           )}
         </div>
       </div>

@@ -4,9 +4,7 @@ import { useUser } from "@/store/user-store"
 import { SectionBalance } from "./sections/section-balance"
 import { SectionAction } from "./sections/section-action"
 import { SectionNotifications } from "./sections/section-notifications"
-import { Section } from "lucide-react"
 import { SectionListToken } from "./sections/section-list-token"
-import { generateListRandomToken } from "@/lib/utils"
 import { LIST_TOKEN } from "@/data/data-list-token"
 
 export const Home = () => {

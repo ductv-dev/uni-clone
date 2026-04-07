@@ -39,7 +39,7 @@ export const BottomSheetSearch = () => {
   return (
     <Drawer open={drawerOpen} onOpenChange={setDrawerOpen}>
       <DrawerTrigger className="w-full">
-        <div className="flex flex-1 gap-2 rounded-full border-t border-gray-500 bg-white p-2.5 shadow-md shadow-gray-500">
+        <div className="flex flex-1 gap-2 rounded-full border-t border-border bg-background p-2.5 shadow-md shadow-border">
           <Search />
           <p>Nhập từ khóa tìm kiếm</p>
         </div>

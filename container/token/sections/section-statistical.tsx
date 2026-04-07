@@ -36,10 +36,10 @@ const DATA_STATISTICAL = [
 export const StatisticalSection = () => {
   return (
     <div className="px-2.5">
-      <p className="text-lg font-bold text-gray-500">Thống kê</p>
+      <p className="text-lg font-bold text-foreground/60">Thống kê</p>
       <div className="flex flex-col gap-1">
         {DATA_STATISTICAL.map((item, index) => (
-          <div key={index} className="flex items-center gap-2.5 text-gray-800">
+          <div key={index} className="flex items-center gap-2.5 text-foreground/60">
             <div className="flex flex-1 items-center gap-1">
               <div>{item.icon}</div>
               <p className="">{item.label}</p>

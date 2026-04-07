@@ -18,13 +18,13 @@ export const TriggerButton: React.FC<TTriggerButton> = ({
   return (
     <div
       className={cn(
-        "flex max-w-50 flex-col items-start gap-2.5 rounded-xl border-none bg-blue-100 p-4",
+        "flex max-w-50 flex-col items-start gap-2.5 rounded-xl border-none bg-primary/20 p-4",
         className
       )}
     >
-      {Icon ? <Icon className="h-5 w-5 text-blue-800" /> : <span>{icon}</span>}
+      {Icon ? <Icon className="h-5 w-5 text-primary" /> : <span>{icon}</span>}
       {title && (
-        <p className="text-start text-sm font-semibold text-blue-800">
+        <p className="text-start text-sm font-semibold text-primary">
           {title}
         </p>
       )}

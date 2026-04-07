@@ -128,7 +128,7 @@ export const BottomSheetSwap: React.FC<Props> = ({
         </DrawerHeader>
         <div className="no-scrollbar w-full overflow-y-auto px-2.5">
           {/*  From Token */}
-          <div className="flex flex-col gap-2 rounded-lg border border-gray-200 p-4">
+          <div className="flex flex-col gap-2 rounded-lg border border-border p-4">
             <div className="flex flex-col items-center justify-between gap-2.5">
               <div className="flex w-full items-center justify-between gap-2.5">
                 <p>Từ</p>
@@ -157,7 +157,7 @@ export const BottomSheetSwap: React.FC<Props> = ({
                             setIsOpen(false)
                           }}
                           className={
-                            token.symbol === tokenFrom ? "bg-gray-100" : ""
+                            token.symbol === tokenFrom ? "bg-accent" : ""
                           }
                         />
                       ))}
@@ -183,7 +183,7 @@ export const BottomSheetSwap: React.FC<Props> = ({
           <div className="flex justify-center py-2">
             <button
               onClick={handleReverseTokens}
-              className="rounded-full border border-gray-200 p-2 transition-colors hover:bg-gray-50"
+              className="rounded-full border border-border bg-background p-2 transition-colors hover:bg-accent"
               type="button"
             >
               <ArrowDownUp className="h-4 w-4" />
@@ -191,7 +191,7 @@ export const BottomSheetSwap: React.FC<Props> = ({
           </div>
 
           {/*  To Token */}
-          <div className="flex flex-col gap-2 rounded-lg border border-gray-200 p-4">
+          <div className="flex flex-col gap-2 rounded-lg border border-border p-4">
             <div className="flex flex-col items-center justify-between gap-2.5">
               <div className="flex w-full items-center justify-between gap-2.5">
                 <p>Đến</p>
@@ -223,7 +223,7 @@ export const BottomSheetSwap: React.FC<Props> = ({
                                 setIsOpen(false)
                               }}
                               className={
-                                token.symbol === tokenTo ? "bg-gray-100" : ""
+                                token.symbol === tokenTo ? "bg-accent" : ""
                               }
                             />
                           )

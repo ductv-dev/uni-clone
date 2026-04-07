@@ -67,14 +67,14 @@ export const SearchPage = () => {
   return (
     <div className="h-full w-full">
       {/* Field tìm kiếm */}
-      <div className="fixed top-0 z-50 w-full bg-white p-2.5">
+      <div className="fixed top-0 z-50 w-full bg-background p-2.5">
         <BottomSheetSearch />
       </div>
 
       <div className="mt-20 px-2.5 pb-20">
         {/* List token yêu thích */}
         <div className="flex flex-col gap-2">
-          <p className="font-semibold text-gray-500">Token yêu thích</p>
+          <p className="font-semibold text-foreground/60">Token yêu thích</p>
 
           <div className="grid grid-cols-2 gap-2.5">
             {LIST_TOKEN.map(
@@ -91,8 +91,8 @@ export const SearchPage = () => {
                 )
             )}
           </div>
-          <div className="flex items-center gap-2.5 px-2.5 py-2 text-gray-500">
-            <p className="h-px flex-1 bg-gray-500"></p>
+          <div className="flex items-center gap-2.5 px-2.5 py-2 text-foreground/60">
+            <p className="h-px flex-1 bg-accent"></p>
 
             {quantityFavorite === 4 ? (
               <button
@@ -111,14 +111,14 @@ export const SearchPage = () => {
                 <ChevronsDownUp className="" size={14} />
               </button>
             )}
-            <p className="h-px flex-1 bg-gray-500"></p>
+            <p className="h-px flex-1 bg-accent"></p>
           </div>
         </div>
         {/* List token hàng đầu */}
         <div className="flex flex-col gap-2">
           {/* Bộ lọc */}
           <div className="flex items-center">
-            <p className="flex-1 font-semibold text-gray-500">Token hàng đầu</p>
+            <p className="flex-1 font-semibold text-foreground/60">Token hàng đầu</p>
             <Select defaultValue={OPTION_SELECT[0].value}>
               <SelectTrigger className="w-full max-w-48">
                 <SelectValue placeholder="Select a fruit" />

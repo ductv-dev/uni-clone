@@ -40,7 +40,7 @@ export const BottomSheetSend = () => {
             </InputGroupAddon>
           </InputGroup>
           <div className="flex w-full flex-col items-center justify-center gap-2.5 py-20">
-            <div className="flex h-14 w-14 items-center justify-center rounded-xl border-t border-black/10 bg-white text-blue-700 shadow-lg shadow-black/10">
+            <div className="flex h-14 w-14 items-center justify-center rounded-xl border-t border-border bg-background text-primary shadow-lg shadow-border">
               <UserSearch strokeWidth={3} size={24} />
             </div>
             <p>Nhập địa chỉ hoặc tên người dùng</p>

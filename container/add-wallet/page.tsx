@@ -14,17 +14,17 @@ const LIST_WALLET = [
   {
     name: "Nhập cụm từ khóa khôi phục",
     description: "Nhập private key của bạn để thêm ví vào ứng dụng",
-    icon: <Key size={20} className="text-blue-700" />,
+    icon: <Key size={20} className="text-primary" />,
   },
   {
     name: "Khôi phục ví",
     description: "Nhập seed phrase của bạn để thêm ví vào ứng dụng",
-    icon: <Wallet size={20} className="text-blue-700" />,
+    icon: <Wallet size={20} className="text-primary" />,
   },
   {
     name: "Connect with hardware wallet",
     description: "Kết nối ví phần cứng của bạn để thêm ví vào ứng dụng",
-    icon: <Cpu size={20} className="text-blue-700" />,
+    icon: <Cpu size={20} className="text-primary" />,
   },
 ]
 
@@ -36,18 +36,18 @@ export const AddWallet = () => {
         <div className="flex items-center justify-between">
           <button
             onClick={() => route.back()}
-            className="flex h-12 w-12 items-center justify-center rounded-full border-t border-black/10 bg-white shadow-lg shadow-black/10 hover:bg-gray-100"
+            className="flex h-12 w-12 items-center justify-center rounded-full border-t border-border bg-background shadow-lg shadow-border hover:bg-accent"
           >
-            <ChevronLeft strokeWidth={2} className="text-gray-500" />
+            <ChevronLeft strokeWidth={2} className="text-foreground/60" />
           </button>
         </div>
       </div>
       <div className="mt-24 flex w-full flex-col items-center justify-center gap-12">
         <div className="flex flex-col items-center justify-center gap-2.5 text-center">
-          <div className="flex h-14 w-14 items-center justify-center rounded-xl border-t border-black/10 bg-white text-blue-700 shadow-lg shadow-black/10">
+          <div className="flex h-14 w-14 items-center justify-center rounded-xl border-t border-border bg-background text-primary shadow-lg shadow-border">
             <Wallet2Icon strokeWidth={3} size={24} />
           </div>
-          <h5 className="font-semibold text-gray-500">
+          <h5 className="font-semibold text-foreground/60">
             Chọn cách thêm ví của bạn
           </h5>
         </div>
@@ -56,17 +56,17 @@ export const AddWallet = () => {
             <a
               href="#"
               key={wallet.name}
-              className="flex w-full items-center justify-center rounded-sm border-t border-black/10 bg-white shadow-lg shadow-black/10 hover:bg-gray-100"
+              className="flex w-full items-center justify-center rounded-sm border-t border-border bg-background shadow-lg shadow-border hover:bg-accent"
             >
               <div className="flex gap-2.5 px-2.5 py-5">
-                <div className="flex flex-col items-start justify-center rounded-full bg-blue-100/50 px-2.5 py-1">
+                <div className="flex flex-col items-start justify-center rounded-full bg-primary/20/50 px-2.5 py-1">
                   {wallet.icon}
                 </div>
                 <div className="">
-                  <p className="-sm font-semibold text-gray-700">
+                  <p className="-sm font-semibold text-foreground/60">
                     {wallet.name}
                   </p>
-                  <p className="line-clamp-1 text-xs text-gray-400">
+                  <p className="line-clamp-1 text-xs text-foreground/60">
                     {wallet.description}
                   </p>
                 </div>

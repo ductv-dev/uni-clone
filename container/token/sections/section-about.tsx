@@ -6,7 +6,7 @@ type Props = {
 export const SectionAbout: React.FC<Props> = ({ data }) => {
   return (
     <div className="flex flex-col p-2.5">
-      <p className="text-lg font-bold text-gray-500">
+      <p className="text-lg font-bold text-foreground/60">
         Giới thiệu về {data.name}{" "}
       </p>
       <p>

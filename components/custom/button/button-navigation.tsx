@@ -19,7 +19,7 @@ export const ButtonNav: React.FC<TButtonNav> = ({
       onClick={() => onClick?.()}
       className={
         cn(classname) +
-        `flex h-12 items-center justify-center rounded-full border-t border-black/10 bg-white px-4 shadow-lg shadow-black/10 hover:bg-gray-100`
+        `flex h-12 items-center justify-center rounded-full border-t border-border bg-background px-4 shadow-lg shadow-border hover:bg-accent`
       }
     >
       {children}

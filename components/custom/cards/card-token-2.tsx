@@ -24,7 +24,7 @@ export const CardToken2: React.FC<TCardToken2> = ({
     <div
       onClick={onClick}
       className={
-        `w-full max-w-50 rounded-[10px] border border-gray-200 p-2.5` +
+        `w-full max-w-50 rounded-[10px] border border-border p-2.5` +
         cn(className)
       }
     >
@@ -39,7 +39,7 @@ export const CardToken2: React.FC<TCardToken2> = ({
         <p className="flex-1 text-lg">{name}</p>
       </div>
 
-      <p className="font-semibold text-gray-700">
+      <p className="font-semibold text-foreground/60">
         {price.toLocaleString(undefined, { minimumFractionDigits: 2 })} US$
       </p>
 
