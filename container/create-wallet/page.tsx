@@ -5,11 +5,29 @@ import {
   InputGroupInput,
   InputGroupAddon,
 } from "@/components/ui/input-group"
+import { useUser } from "@/store/user-store"
+import { TUser } from "@/types/type-user"
 import { ChevronLeft, Info, User } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { useState } from "react"
+import { toast } from "sonner"
 
 export const CreateWallet = () => {
   const route = useRouter()
+  const setName = useUser((state) => state.setName)
+  const [newName, setNewName] = useState<TUser["name"]>("")
+
+  const handleSetName = () => {
+    if (!newName) {
+      setName("Wallet 1")
+      route.push("/user/home")
+      toast.success("Vui lòng thiết lập tên người dùng!")
+      return
+    }
+    setName(newName)
+    toast.success("Đã lưu tên người dùng!")
+    route.push("/user/home")
+  }
   return (
     <div className="w-full py-12">
       {/* Header */}
@@ -44,8 +62,9 @@ export const CreateWallet = () => {
             <InputGroup className="h-14 rounded-2xl">
               <InputGroupInput
                 className="text-xl font-semibold text-black focus:ring-0 focus:ring-offset-0 focus-visible:ring-0"
-                id="input-group-url"
                 placeholder="your-username"
+                onChange={(e) => setNewName(e.currentTarget.value)}
+                value={newName}
               />
               <InputGroupAddon align="inline-end">
                 <p className="text-xl font-semibold text-black">.uni.eth</p>
@@ -61,12 +80,12 @@ export const CreateWallet = () => {
       {/* Footer */}
       <div className="fixed bottom-0 w-full px-2.5 pb-15">
         <div className="flex w-full flex-col items-center justify-center gap-3">
-          <a
-            href="/user/home"
+          <button
+            onClick={() => handleSetName()}
             className="flex h-14 items-center justify-center rounded-2xl border-t border-black/10 bg-white px-4 shadow-lg shadow-black/10 hover:bg-gray-100"
           >
             <span className="font-semibold text-gray-500">Tiếp tục</span>
-          </a>
+          </button>
         </div>
       </div>
     </div>

@@ -6,7 +6,6 @@ import { Landmark, SearchX } from "lucide-react"
 import { SectionMain } from "./sections/section-main"
 import { SectionChart } from "./sections/section-chart"
 import { SectionAbout } from "./sections/section-about"
-import { Button } from "@/components/ui/button"
 import { ButtonNav } from "@/components/custom/button/button-navigation"
 import { StatisticalSection } from "./sections/section-statistical"
 type Props = {

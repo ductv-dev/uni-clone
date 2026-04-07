@@ -23,7 +23,6 @@ export const BottomSheetSearch = () => {
   const route = useRouter()
   const { data, isLoading, error } = useSearchTokens(searchQuery)
 
-  const [isOpen, setIsOpen] = useState(false)
   const [drawerOpen, setDrawerOpen] = useState(false)
 
   useEffect(() => {
