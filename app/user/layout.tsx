@@ -6,7 +6,7 @@ export default function UserLayout({
   children: React.ReactNode
 }>) {
   return (
-    <div>
+    <div className="w-full">
       {children}
       <Navbar />
     </div>
