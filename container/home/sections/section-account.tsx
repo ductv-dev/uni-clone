@@ -42,12 +42,10 @@ export const SectionAccount: React.FC<Props> = ({ data }) => {
         icon: <Copy size={16} strokeWidth={2} className="text-green-500" />,
       })
     } catch (err) {
-      console.error("Failed to copy: ", err)
       toast.error("Failed to copy to clipboard!")
     }
   }
   const [isOpen, setIsOpen] = useState(false)
-  const [drawerOpen, setDrawerOpen] = useState(false)
 
   const handleSetName = () => {
     setName(newName)

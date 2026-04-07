@@ -26,11 +26,11 @@ export const Navbar = () => {
   const currentPath = usePathname() || "/"
 
   return (
-    <div className="to fixed bottom-0 flex w-full justify-center px-2 pb-5">
+    <div className="to fixed bottom-0 flex w-full justify-center px-2 pb-2.5">
       <div className="flex w-full max-w-lg items-center gap-2.5">
         <motion.div
           animate={{ opacity: 1 }}
-          className="flex flex-1 items-center rounded-full bg-gray-100/50 p-1 shadow-lg"
+          className="flex flex-1 items-center rounded-full bg-gray-100/40 p-1 shadow-lg backdrop-blur-2xl"
         >
           {NAVBAR_ITEMS.map((item) => (
             <a

@@ -17,7 +17,6 @@ export const SectionChart = () => {
   const data = useMemo(() => {
     return generateOHLC(150, 120, activeTimeframe) as CandlestickData<Time>[]
   }, [activeTimeframe])
-  console.log("data", data)
   return (
     <div className="flex flex-col gap-2.5">
       <div

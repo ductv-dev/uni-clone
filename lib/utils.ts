@@ -114,3 +114,9 @@ export function generateOHLC(
 
   return data
 }
+
+export function randomPrice(a: number) {
+  while (true) {
+    const price = a + Math.random() * 400
+  }
+}
