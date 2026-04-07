@@ -7,7 +7,7 @@ type TCardToken2 = {
   image: string
   name: string
   price: number
-  number_changes: number
+  number_changes?: number
   className?: string
 }
 
@@ -21,7 +21,7 @@ export const CardToken2: React.FC<TCardToken2> = ({
   return (
     <div
       className={
-        `w-full max-w-50 rounded-[5px] border border-gray-200 p-2.5` +
+        `w-full max-w-50 rounded-[10px] border border-gray-200 p-2.5` +
         cn(className)
       }
     >
@@ -40,7 +40,7 @@ export const CardToken2: React.FC<TCardToken2> = ({
         {price.toLocaleString(undefined, { minimumFractionDigits: 2 })} US$
       </p>
 
-      {number_changes > 0 ? (
+      {(number_changes ?? 0) > 0 ? (
         <div className="flex items-center">
           <ChevronUp className="h-4 w-4 text-green-500" />
           <span className="font-medium text-green-500">{number_changes}%</span>
@@ -49,7 +49,7 @@ export const CardToken2: React.FC<TCardToken2> = ({
         <div className="flex items-center">
           <ChevronDown className="h-4 w-4 text-red-500" />
           <span className="font-medium text-red-500">
-            {Math.abs(number_changes)}%
+            {Math.abs(number_changes ?? 0)}%
           </span>
         </div>
       )}
