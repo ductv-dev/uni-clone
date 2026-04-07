@@ -9,6 +9,7 @@ type TCardToken2 = {
   price: number
   number_changes?: number
   className?: string
+  onClick?: () => void
 }
 
 export const CardToken2: React.FC<TCardToken2> = ({
@@ -17,9 +18,11 @@ export const CardToken2: React.FC<TCardToken2> = ({
   price,
   number_changes,
   className,
+  onClick,
 }) => {
   return (
     <div
+      onClick={onClick}
       className={
         `w-full max-w-50 rounded-[10px] border border-gray-200 p-2.5` +
         cn(className)

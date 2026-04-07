@@ -28,7 +28,9 @@ import {
   TrendingDown,
   TrendingUp,
 } from "lucide-react"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
+import { BottomSheetSearch } from "./bottom-sheet/bottom-sheet-search"
 
 const OPTION_SELECT = [
   {
@@ -61,21 +63,15 @@ const OPTION_SELECT = [
 export const SearchPage = () => {
   const [searchQuery, setSearchQuery] = useState("")
   const [quantityFavorite, setQuantityFavorite] = useState(4)
+  const route = useRouter()
   return (
-    <div className="flex h-full w-full">
+    <div className="h-full w-full">
       {/* Field tìm kiếm */}
       <div className="fixed top-0 z-50 w-full bg-white p-2.5">
-        <Field className="max-w-sm">
-          <InputGroup className="rounded-full">
-            <InputGroupInput id="inline-start-input" placeholder="Search..." />
-            <InputGroupAddon align="inline-start">
-              <SearchIcon className="text-muted-foreground" />
-            </InputGroupAddon>
-          </InputGroup>
-        </Field>
+        <BottomSheetSearch />
       </div>
 
-      <div className="mt-12 px-2.5 pb-20">
+      <div className="mt-20 px-2.5 pb-20">
         {/* List token yêu thích */}
         <div className="flex flex-col gap-2">
           <p className="font-semibold text-gray-500">Token yêu thích</p>
@@ -85,6 +81,7 @@ export const SearchPage = () => {
               (token, index) =>
                 index < quantityFavorite && (
                   <CardToken2
+                    onClick={() => route.push(`/token/${token.symbol}`)}
                     key={token.address}
                     name={token.name}
                     image={token.logoURI}
@@ -144,6 +141,7 @@ export const SearchPage = () => {
           <div>
             {LIST_TOKEN.map((token, index) => (
               <CardToken1
+                onClick={() => route.push(`/token/${token.symbol}`)}
                 rank={index + 1}
                 name={token.name}
                 image={token.logoURI}

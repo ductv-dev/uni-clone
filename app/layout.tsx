@@ -5,6 +5,7 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
 import { Toaster } from "sonner"
+import Providers from "@/provider/query-provider"
 
 export const metadata: Metadata = {
   title: "Uni",
@@ -55,7 +56,9 @@ export default function RootLayout({
     >
       <body>
         <ThemeProvider>
-          <div className="">{children}</div>
+          <Providers>
+            <div className="">{children}</div>
+          </Providers>
         </ThemeProvider>
         <Toaster position="top-center" />
       </body>
