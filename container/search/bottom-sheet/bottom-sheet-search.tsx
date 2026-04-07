@@ -16,15 +16,29 @@ import { SkeletonCardToken1 } from "@/components/custom/skeleton/skeleton-card-t
 import { useSearchTokens } from "@/hooks/use-search"
 import { ChevronLeft, Search, SearchIcon } from "lucide-react"
 import { useRouter } from "next/navigation"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export const BottomSheetSearch = () => {
   const [searchQuery, setSearchQuery] = useState("")
   const route = useRouter()
   const { data, isLoading, error } = useSearchTokens(searchQuery)
 
+  const [isOpen, setIsOpen] = useState(false)
+  const [drawerOpen, setDrawerOpen] = useState(false)
+
+  useEffect(() => {
+    if (drawerOpen) {
+      setTimeout(() => {
+        const inputElement = document.getElementById(
+          "search-token"
+        ) as HTMLInputElement
+        inputElement.focus()
+      }, 100)
+    }
+  }, [drawerOpen])
+
   return (
-    <Drawer>
+    <Drawer open={drawerOpen} onOpenChange={setDrawerOpen}>
       <DrawerTrigger className="w-full">
         <div className="flex flex-1 gap-2 rounded-full border-t border-gray-500 bg-white p-2.5 shadow-md shadow-gray-500">
           <Search />
@@ -38,6 +52,7 @@ export const BottomSheetSearch = () => {
           </DrawerClose>
           <InputGroup className="w-full">
             <InputGroupInput
+              id="search-token"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search..."
