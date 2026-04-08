@@ -48,7 +48,9 @@ export const BottomSheetSend = () => {
         </div>
         <DrawerFooter>
           <DrawerClose>
-            <Button variant="outline">Cancel</Button>
+            <div className="rounded-2xl border border-border px-6 py-2 font-semibold text-foreground/60 transition-colors">
+              Cancel
+            </div>
           </DrawerClose>
         </DrawerFooter>
       </DrawerContent>

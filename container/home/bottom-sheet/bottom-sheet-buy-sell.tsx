@@ -239,7 +239,8 @@ export const BottomSheetBuySell: React.FC<Props> = ({
             <div className="rounded-lg border border-border px-4 py-3 text-sm text-foreground/60">
               {isBuy ? (
                 <p>
-                  1 {selectedToken.symbol} = {selectedToken.usdt.toFixed(2)} USDT
+                  1 {selectedToken.symbol} = {selectedToken.usdt.toFixed(2)}{" "}
+                  USDT
                 </p>
               ) : (
                 <p>
@@ -251,7 +252,7 @@ export const BottomSheetBuySell: React.FC<Props> = ({
           )}
         </div>
         <DrawerFooter>
-          <Button onClick={handleConfirm} disabled={isLoading}>
+          <Button size={"lg"} onClick={handleConfirm} disabled={isLoading}>
             {isLoading
               ? "Đang xử lý..."
               : isBuy
@@ -259,7 +260,9 @@ export const BottomSheetBuySell: React.FC<Props> = ({
                 : `Bán ${selectedToken?.symbol ?? "token"}`}
           </Button>
           <DrawerClose asChild>
-            <Button variant="outline">Hủy</Button>
+            <Button size={"lg"} variant="outline">
+              Hủy
+            </Button>
           </DrawerClose>
         </DrawerFooter>
       </DrawerContent>

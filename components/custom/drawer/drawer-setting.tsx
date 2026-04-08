@@ -28,10 +28,8 @@ export const DrawerSetting: React.FC<Props> = ({}) => {
           suscipit nihil qui? Molestiae!
         </div>
         <DrawerFooter>
-          <Button>Submit</Button>
-          <DrawerClose>
-            <Button variant="outline">Cancel</Button>
-          </DrawerClose>
+          <Button size={"lg"}>Submit</Button>
+          <DrawerClose>Cancel</DrawerClose>
         </DrawerFooter>
       </DrawerContent>
     </Drawer>

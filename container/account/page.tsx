@@ -112,13 +112,16 @@ export const Account = () => {
                     </div>
                     <DrawerFooter className="px-0">
                       <Button
+                        size={"lg"}
                         onClick={handleEditName}
                         disabled={!name.trim() || name.trim() === user.name}
                       >
                         Lưu thay đổi
                       </Button>
                       <DrawerClose asChild>
-                        <Button variant="outline">Hủy</Button>
+                        <Button size={"lg"} variant="outline">
+                          Hủy
+                        </Button>
                       </DrawerClose>
                     </DrawerFooter>
                   </DrawerContent>

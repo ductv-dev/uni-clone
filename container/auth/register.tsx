@@ -58,7 +58,7 @@ export const Register = () => {
               <form onSubmit={handleSubmit(onSubmit)}>
                 <FieldGroup>
                   <Field>
-                    <Button variant="outline" type="button">
+                    <Button size={"lg"} variant="outline" type="button">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
@@ -70,7 +70,7 @@ export const Register = () => {
                       </svg>
                       Login with Apple
                     </Button>
-                    <Button variant="outline" type="button">
+                    <Button size={"lg"} variant="outline" type="button">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
@@ -130,7 +130,9 @@ export const Register = () => {
                   </Field>
 
                   <Field>
-                    <Button type="submit">Continue with email</Button>
+                    <Button size={"lg"} type="submit">
+                      Continue with email
+                    </Button>
                     <FieldDescription className="text-center">
                       Do you have an account? <a href="login">Sign in</a>
                     </FieldDescription>
