@@ -63,18 +63,20 @@ export const StatisticalSection: React.FC<Props> = ({ data }) => {
   return (
     <div className="px-2.5">
       <p className="text-lg font-bold text-foreground/60">Thống kê</p>
-      <div className="mt-2 flex flex-col gap-2">
+      <div className="mt-2 grid grid-cols-2 gap-2">
         {statisticalData.map((item, index) => (
           <div
             key={index}
-            className="flex items-center gap-2.5 rounded-xl border border-border bg-card px-4 py-3 text-foreground/60"
+            className="flex min-h-28 flex-col justify-between rounded-xl border border-border bg-card px-4 py-3 text-foreground/60"
           >
-            <div className="flex flex-1 items-center gap-1">
-              <div>{item.icon}</div>
-              <p>{item.label}</p>
+            <div className="flex items-start gap-2 text-sm">
+              <div className="mt-0.5 shrink-0">{item.icon}</div>
+              <p className="line-clamp-2 leading-5">{item.label}</p>
             </div>
 
-            <p className="font-medium text-foreground/80">{item.value}</p>
+            <p className="text-base font-semibold text-foreground/80">
+              {item.value}
+            </p>
           </div>
         ))}
       </div>
