@@ -26,7 +26,7 @@ export const CardSetting: React.FC<TCardSetting> = ({
         className
       )}
     >
-      <div className="text-foreground/60">{icon}</div>
+      <div className="rounded-lg bg-accent p-2.5">{icon}</div>
 
       <p className="flex-1 text-start text-lg font-semibold">{title}</p>
       <div className="flex items-center justify-center gap-2.5">

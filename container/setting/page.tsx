@@ -3,17 +3,13 @@
 import { CardSetting } from "@/components/custom/cards/card-setting"
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler"
 import { usePwaInstall } from "@/hooks/use-pwa-install"
-import { ChevronLeft, Download, Moon, Settings, Sun } from "lucide-react"
+import { ChevronLeft, Download, Moon, Settings, Sun, User2 } from "lucide-react"
 import { useTheme } from "next-themes"
 import { redirect, useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { toast } from "sonner"
 
 const LIST_SETTING = [
-  {
-    name: "Account",
-    icon: <Settings size={16} strokeWidth={2} className="text-foreground/60" />,
-  },
   {
     name: "Notifications",
     icon: <Settings size={16} strokeWidth={2} className="text-foreground/60" />,
@@ -71,6 +67,13 @@ export const Setting = () => {
             icon={setting.icon}
           />
         ))}
+        <CardSetting
+          className=""
+          onClick={() => redirect("/user/account")}
+          title="Account"
+          icon={<User2 size={16} className="text-primary" strokeWidth={2} />}
+        />
+
         <CardSetting
           className="text-red-500"
           onClick={() => handleLogout()}

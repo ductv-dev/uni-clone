@@ -11,7 +11,7 @@ type UserStore = {
 
 export const useUser = create<UserStore>((set) => ({
   user: {
-    name: "Wallet 1",
+    name: "Account",
     id: "0x1234567890abcdef",
     avatar: "",
     email: "",

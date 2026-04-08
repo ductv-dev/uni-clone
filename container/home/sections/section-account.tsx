@@ -19,8 +19,8 @@ import {
 import { shortenHex } from "@/lib/utils"
 import { useUser } from "@/store/user-store"
 import { TUser } from "@/types/type-user"
-import { Copy, Settings, User2 } from "lucide-react"
-import { useRouter } from "next/navigation"
+import { Copy, Settings, User2, Wallet } from "lucide-react"
+import { redirect, useRouter } from "next/navigation"
 import { useState } from "react"
 import { toast } from "sonner"
 
@@ -98,6 +98,11 @@ export const SectionAccount: React.FC<Props> = ({ data }) => {
                 </div>
               </div>
             </div>
+            <CardSetting
+              onClick={() => redirect("/user/my-wallet")}
+              title="My Wallet"
+              icon={<Wallet strokeWidth={3} size={20} />}
+            />
             {/* Setting */}
             <div className="flex flex-col">
               <Drawer open={isOpen} onOpenChange={setIsOpen}>

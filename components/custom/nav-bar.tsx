@@ -48,7 +48,7 @@ export const Navbar = () => {
         </motion.div>
         <BottomSheetSwap
           isMini={true}
-          className="flex h-15 w-20 items-center justify-center rounded-full border-t border-primary/30 bg-primary/20 shadow-lg shadow-primary/50"
+          className="flex h-15 w-20 items-center justify-center rounded-full border-t border-primary/30 bg-primary/20 shadow-lg shadow-primary/50 backdrop-blur-2xl"
         />
       </div>
     </div>
