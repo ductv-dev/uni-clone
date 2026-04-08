@@ -13,8 +13,8 @@ export const useUser = create<UserStore>((set) => ({
   user: {
     name: "Wallet 1",
     id: "0x1234567890abcdef",
-    image: "",
-    balance: 1000,
+    avatar: "",
+    email: "",
   },
   setName: (name: TUser["name"]) =>
     set((state: { user: TUser }) => ({ user: { ...state.user, name } })),
