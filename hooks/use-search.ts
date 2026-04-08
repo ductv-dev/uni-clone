@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useQuery } from "@tanstack/react-query"
-import { LIST_TOKEN } from "@/data/data-list-token"
+import { LIST_TOKEN } from "@/data/mock-data-list-token"
 import { TToken } from "@/types/type-token"
 
 const fakeApiDelay = (ms: number) =>

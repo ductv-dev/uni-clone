@@ -16,7 +16,7 @@ import {
   SelectItem,
   Select,
 } from "@/components/ui/select"
-import { LIST_TOKEN } from "@/data/data-list-token"
+import { LIST_TOKEN } from "@/data/mock-data-list-token"
 import {
   ChartLine,
   ChartNoAxesCombined,
@@ -118,7 +118,9 @@ export const SearchPage = () => {
         <div className="flex flex-col gap-2">
           {/* Bộ lọc */}
           <div className="flex items-center">
-            <p className="flex-1 font-semibold text-foreground/60">Token hàng đầu</p>
+            <p className="flex-1 font-semibold text-foreground/60">
+              Token hàng đầu
+            </p>
             <Select defaultValue={OPTION_SELECT[0].value}>
               <SelectTrigger className="w-full max-w-48">
                 <SelectValue placeholder="Select a fruit" />

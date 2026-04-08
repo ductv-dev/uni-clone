@@ -4,14 +4,17 @@ import { TUser } from "@/types/type-user"
 import { ChevronDown, ChevronUp } from "lucide-react"
 
 type Props = {
-  data: TUser
+  total_balance: number
   number_changes: number
 }
-export const SectionBalance: React.FC<Props> = ({ data, number_changes }) => {
+export const SectionBalance: React.FC<Props> = ({
+  total_balance,
+  number_changes,
+}) => {
   return (
     <div className="p-2.5">
       <h1 className="text text-3xl font-bold text-foreground/60">
-        {data.balance?.toLocaleString(undefined, { minimumFractionDigits: 2 })}{" "}
+        {total_balance?.toLocaleString(undefined, { minimumFractionDigits: 2 })}{" "}
         US$
       </h1>
       {number_changes > 0 ? (

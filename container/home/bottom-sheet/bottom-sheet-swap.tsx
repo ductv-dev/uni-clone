@@ -13,7 +13,7 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer"
 import { cn } from "@/lib/utils"
-import { LIST_TOKEN } from "@/data/data-list-token"
+import { LIST_TOKEN } from "@/data/mock-data-list-token"
 import { TToken } from "@/types/type-token"
 import { useEffect, useState } from "react"
 import { CardToken1 } from "@/components/custom/cards/card-token-1"

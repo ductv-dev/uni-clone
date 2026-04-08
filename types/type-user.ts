@@ -1,8 +1,7 @@
 export type TUser = {
   name: string
   id: string
-  image?: string | null
-  balance?: number
-  walletAddress?: string
-  walletName?: string
+  email: string
+  phone?: string | null
+  avatar?: string | null
 }

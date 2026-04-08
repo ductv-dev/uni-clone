@@ -1,13 +1,9 @@
 "use client"
 
 import { CardNotification } from "@/components/custom/cards/card-notification"
-import { TUser } from "@/types/type-user"
 import { Wallet } from "lucide-react"
 import { useState } from "react"
 
-type Props = {
-  data: TUser
-}
 type TNotification = {
   id: number
   title: string
@@ -16,7 +12,7 @@ type TNotification = {
   is_repuired: boolean
   read?: boolean
 }
-export const SectionNotifications: React.FC<Props> = ({ data }) => {
+export const SectionNotifications = () => {
   const [dataNotifications, setDataNotifications] = useState<TNotification[]>([
     {
       id: 1,

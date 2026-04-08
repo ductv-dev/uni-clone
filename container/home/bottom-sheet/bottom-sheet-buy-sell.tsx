@@ -14,7 +14,7 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer"
 import {} from "@/components/ui/input-group"
-import { LIST_TOKEN } from "@/data/data-list-token"
+import { LIST_TOKEN } from "@/data/mock-data-list-token"
 import { TToken } from "@/types/type-token"
 import { motion } from "framer-motion"
 import { ChevronDown } from "lucide-react"
@@ -74,7 +74,9 @@ export const BottomSheetBuySell = () => {
           <div className="flex w-full flex-col items-center justify-center">
             <div className="my-12 flex flex-col items-center justify-between gap-2.5">
               <div className="flex justify-center gap-5">
-                <label className="text-3xl font-bold text-foreground/60">USDT</label>
+                <label className="text-3xl font-bold text-foreground/60">
+                  USDT
+                </label>
                 <input
                   id="total"
                   name="total"

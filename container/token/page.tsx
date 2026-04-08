@@ -1,6 +1,6 @@
 "use client"
 
-import { LIST_TOKEN } from "@/data/data-list-token"
+import { LIST_TOKEN } from "@/data/mock-data-list-token"
 import { SectionHeader } from "./sections/section-header"
 import { Landmark, SearchX } from "lucide-react"
 import { SectionMain } from "./sections/section-main"

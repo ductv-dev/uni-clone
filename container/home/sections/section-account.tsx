@@ -59,9 +59,9 @@ export const SectionAccount: React.FC<Props> = ({ data }) => {
         <Drawer>
           <DrawerTrigger>
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/20">
-              {data.image ? (
+              {data.avatar ? (
                 <img
-                  src={data.image}
+                  src={data.avatar}
                   alt="avatar"
                   width={48}
                   height={48}
@@ -76,9 +76,9 @@ export const SectionAccount: React.FC<Props> = ({ data }) => {
             {/* Account */}
             <div className="mt-5 flex flex-col items-center justify-center gap-3">
               <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/20">
-                {data.image ? (
+                {data.avatar ? (
                   <img
-                    src={data.image}
+                    src={data.avatar}
                     alt="avatar"
                     width={64}
                     height={64}
