@@ -1,30 +1,22 @@
 "use client"
 import { CardToken1 } from "@/components/custom/cards/card-token-1"
 import { CardToken2 } from "@/components/custom/cards/card-token-2"
-import { Field, FieldLabel, FieldDescription } from "@/components/ui/field"
-import {
-  InputGroup,
-  InputGroupInput,
-  InputGroupAddon,
-} from "@/components/ui/input-group"
 import {
   SelectTrigger,
   SelectValue,
   SelectContent,
   SelectGroup,
-  SelectLabel,
   SelectItem,
   Select,
 } from "@/components/ui/select"
 import { LIST_TOKEN } from "@/data/mock-data-list-token"
+import { TToken } from "@/types/type-token"
 import {
   ChartLine,
   ChartNoAxesCombined,
   ChartPie,
   ChevronsDownUp,
   ChevronsUpDown,
-  icons,
-  SearchIcon,
   TrendingDown,
   TrendingUp,
 } from "lucide-react"
@@ -56,14 +48,32 @@ const OPTION_SELECT = [
   {
     label: "Giá giảm(24H)",
     icon: <TrendingDown />,
-    value: "gia_giam_2",
+    value: "gia_giam_24h",
   },
 ]
 
 export const SearchPage = () => {
-  const [searchQuery, setSearchQuery] = useState("")
+  const [sortBy, setSortBy] = useState(OPTION_SELECT[0].value)
   const [quantityFavorite, setQuantityFavorite] = useState(4)
   const route = useRouter()
+
+  const sortedTokens = [...LIST_TOKEN].sort((a: TToken, b: TToken) => {
+    switch (sortBy) {
+      case "khoi_luong":
+        return b.usdt - a.usdt
+      case "tvl_uni":
+        return b.decimals - a.decimals
+      case "von_hoa_thi_truong":
+        return b.usdt * 1_000_000 - a.usdt * 1_000_000
+      case "gia_tang_24h":
+        return (b.number_changes ?? 0) - (a.number_changes ?? 0)
+      case "gia_giam_24h":
+        return (a.number_changes ?? 0) - (b.number_changes ?? 0)
+      default:
+        return 0
+    }
+  })
+
   return (
     <div className="h-full w-full">
       {/* Field tìm kiếm */}
@@ -77,19 +87,16 @@ export const SearchPage = () => {
           <p className="font-semibold text-foreground/60">Token yêu thích</p>
 
           <div className="grid grid-cols-2 gap-2.5">
-            {LIST_TOKEN.map(
-              (token, index) =>
-                index < quantityFavorite && (
-                  <CardToken2
-                    onClick={() => route.push(`/token/${token.symbol}`)}
-                    key={token.address}
-                    name={token.name}
-                    image={token.logoURI}
-                    price={token.usdt}
-                    number_changes={token.number_changes}
-                  />
-                )
-            )}
+            {LIST_TOKEN.slice(0, quantityFavorite).map((token) => (
+              <CardToken2
+                onClick={() => route.push(`/token/${token.symbol}`)}
+                key={token.address}
+                name={token.name}
+                image={token.logoURI}
+                price={token.usdt}
+                number_changes={token.number_changes}
+              />
+            ))}
           </div>
           <div className="flex items-center gap-2.5 px-2.5 py-2 text-foreground/60">
             <p className="h-px flex-1 bg-accent"></p>
@@ -121,9 +128,9 @@ export const SearchPage = () => {
             <p className="flex-1 font-semibold text-foreground/60">
               Token hàng đầu
             </p>
-            <Select defaultValue={OPTION_SELECT[0].value}>
+            <Select value={sortBy} onValueChange={setSortBy}>
               <SelectTrigger className="w-full max-w-48">
-                <SelectValue placeholder="Select a fruit" />
+                <SelectValue placeholder="Sắp xếp theo" />
               </SelectTrigger>
               <SelectContent position="popper">
                 <SelectGroup>
@@ -141,15 +148,16 @@ export const SearchPage = () => {
           </div>
           {/* Danh sách token */}
           <div>
-            {LIST_TOKEN.map((token, index) => (
+            {sortedTokens.map((token, index) => (
               <CardToken1
                 onClick={() => route.push(`/token/${token.symbol}`)}
                 rank={index + 1}
                 name={token.name}
+                symbol={token.symbol}
                 image={token.logoURI}
                 price={token.usdt}
                 number_changes={token.number_changes}
-                key={index}
+                key={token.address}
               />
             ))}
           </div>

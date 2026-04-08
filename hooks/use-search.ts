@@ -27,6 +27,7 @@ export const searchToken = async (query: string): Promise<TToken[]> => {
 
 export const useSearchTokens = (query: string) => {
   const [debouncedQuery, setDebouncedQuery] = useState(query)
+  const normalizedQuery = debouncedQuery.trim()
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -39,7 +40,7 @@ export const useSearchTokens = (query: string) => {
   return useQuery<TToken[]>({
     queryKey: ["search-token", debouncedQuery],
     queryFn: () => searchToken(debouncedQuery),
-    enabled: true,
+    enabled: Boolean(normalizedQuery),
     staleTime: 1000 * 60 * 5,
   })
 }

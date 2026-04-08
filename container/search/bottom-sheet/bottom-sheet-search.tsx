@@ -22,6 +22,7 @@ export const BottomSheetSearch = () => {
   const [searchQuery, setSearchQuery] = useState("")
   const route = useRouter()
   const { data, isLoading, error } = useSearchTokens(searchQuery)
+  const normalizedQuery = searchQuery.trim()
 
   const [drawerOpen, setDrawerOpen] = useState(false)
 
@@ -47,10 +48,11 @@ export const BottomSheetSearch = () => {
       <DrawerContent className="h-full max-h-full">
         <div className="flex items-center gap-1 p-2.5">
           <DrawerClose className="px-2">
-            <ChevronLeft />
+            <ChevronLeft className="text-foreground" />
           </DrawerClose>
-          <InputGroup className="w-full">
+          <InputGroup className="h-12 w-full rounded-full">
             <InputGroupInput
+              className="h-12"
               id="search-token"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -74,12 +76,20 @@ export const BottomSheetSearch = () => {
               <p className="text-sm text-destructive">
                 Lỗi tìm kiếm. Vui lòng thử lại.
               </p>
+            ) : !normalizedQuery ? (
+              <p className="text-sm text-muted-foreground">
+                Nhập tên, ký hiệu hoặc địa chỉ token để tìm kiếm.
+              </p>
             ) : data?.length ? (
               data.map((token) => (
                 <CardToken1
                   key={token.symbol}
-                  onClick={() => route.push(`/token/${token.symbol}`)}
+                  onClick={() => {
+                    setDrawerOpen(false)
+                    route.push(`/token/${token.symbol}`)
+                  }}
                   name={token.name}
+                  symbol={token.symbol}
                   image={token.logoURI}
                   price={token.usdt}
                   number_changes={token.number_changes}

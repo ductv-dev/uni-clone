@@ -14,7 +14,7 @@ export const useUser = create<UserStore>((set) => ({
     name: "Account",
     id: "0x1234567890abcdef",
     avatar: "",
-    email: "",
+    email: "example@gmail.com",
   },
   setName: (name: TUser["name"]) =>
     set((state: { user: TUser }) => ({ user: { ...state.user, name } })),

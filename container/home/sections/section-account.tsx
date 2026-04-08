@@ -1,5 +1,4 @@
 "use client"
-
 import { ButtonNav } from "@/components/custom/button/button-navigation"
 import { CardSetting } from "@/components/custom/cards/card-setting"
 import { Button } from "@/components/ui/button"
@@ -10,11 +9,6 @@ import {
   DrawerClose,
   DrawerFooter,
 } from "@/components/ui/drawer"
-import {
-  InputGroup,
-  InputGroupInput,
-  InputGroupAddon,
-} from "@/components/ui/input-group"
 
 import { shortenHex } from "@/lib/utils"
 import { useUser } from "@/store/user-store"
@@ -30,8 +24,6 @@ type Props = {
 
 export const SectionAccount: React.FC<Props> = ({ data }) => {
   const route = useRouter()
-  const setName = useUser((state) => state.setName)
-  const [newName, setNewName] = useState<TUser["name"]>("")
 
   const handleCopy = async () => {
     try {
@@ -47,11 +39,6 @@ export const SectionAccount: React.FC<Props> = ({ data }) => {
   }
   const [isOpen, setIsOpen] = useState(false)
 
-  const handleSetName = () => {
-    setName(newName)
-    toast.success("Đã lưu tên người dùng!")
-    setIsOpen(false)
-  }
   const shortID = shortenHex(data.id)
   return (
     <div className="flex items-center border-b border-border px-2.5 py-4">
@@ -72,7 +59,7 @@ export const SectionAccount: React.FC<Props> = ({ data }) => {
               )}
             </div>
           </DrawerTrigger>
-          <DrawerContent className="px-2.5 pb-20">
+          <DrawerContent className="px-2.5">
             {/* Account */}
             <div className="mt-5 flex flex-col items-center justify-center gap-3">
               <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/20">
@@ -103,40 +90,11 @@ export const SectionAccount: React.FC<Props> = ({ data }) => {
               title="My Wallet"
               icon={<Wallet strokeWidth={3} size={20} />}
             />
-            {/* Setting */}
-            <div className="flex flex-col">
-              <Drawer open={isOpen} onOpenChange={setIsOpen}>
-                <DrawerTrigger className="w-full">
-                  <CardSetting
-                    title="Đổi tên người dùng"
-                    icon={<User2 strokeWidth={3} size={20} />}
-                  />
-                </DrawerTrigger>
-                <DrawerContent className="w-full px-2.5">
-                  <div className="flex w-full flex-col items-center gap-2 py-10">
-                    <p className="text-lg font-semibold text-foreground/60">
-                      Chỉnh sửa tên người dùng của bạn
-                    </p>
-                    <InputGroup className="max-w-xs">
-                      <InputGroupInput
-                        onChange={(e) => setNewName(e.currentTarget.value)}
-                        placeholder="Nhập tên người dùng mới"
-                        value={newName}
-                      />
-
-                      <InputGroupAddon align="inline-end">
-                        .uni.eth
-                      </InputGroupAddon>
-                    </InputGroup>
-                  </div>
-                  <DrawerFooter>
-                    <Button onClick={() => handleSetName()} variant="outline">
-                      Lưu
-                    </Button>
-                  </DrawerFooter>
-                </DrawerContent>
-              </Drawer>
-            </div>
+            <CardSetting
+              title="Account"
+              onClick={() => redirect("/user/account")}
+              icon={<User2 strokeWidth={3} size={20} />}
+            />
             <DrawerFooter>
               <DrawerClose>
                 <Button variant="outline">Cancel</Button>
