@@ -15,7 +15,7 @@ export const Home = () => {
       <SectionAccount data={user} />
       <SectionBalance number_changes={2.2} total_balance={10032432} />
       <SectionAction />
-      <SectionNotifications data={user} />
+      <SectionNotifications />
       <SectionListToken data={dataToken} />
     </div>
   )
