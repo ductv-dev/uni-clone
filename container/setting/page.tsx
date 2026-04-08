@@ -4,8 +4,9 @@ import { CardSetting } from "@/components/custom/cards/card-setting"
 import { usePwaInstall } from "@/hooks/use-pwa-install"
 import { ChevronLeft, Download, Moon, Settings, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
-import { useRouter } from "next/navigation"
+import { redirect, useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
+import { toast } from "sonner"
 
 const LIST_SETTING = [
   {
@@ -53,12 +54,14 @@ function ThemeToggleRow() {
       </p>
       {/* Toggle switch */}
       <div
-        className={`relative h-6 w-11 rounded-full transition-colors duration-300 ${isDark ? "bg-primary" : "bg-foreground/20"
-          }`}
+        className={`relative h-6 w-11 rounded-full transition-colors duration-300 ${
+          isDark ? "bg-primary" : "bg-foreground/20"
+        }`}
       >
         <span
-          className={`absolute top-0.5 h-5 w-5 rounded-full bg-background shadow-sm transition-transform duration-300 ${isDark ? "translate-x-5" : "translate-x-0.5"
-            }`}
+          className={`absolute top-0.5 h-5 w-5 rounded-full bg-background shadow-sm transition-transform duration-300 ${
+            isDark ? "translate-x-5" : "translate-x-0.5"
+          }`}
         />
       </div>
     </div>
@@ -68,7 +71,10 @@ function ThemeToggleRow() {
 export const Setting = () => {
   const route = useRouter()
   const { isInstallable, install } = usePwaInstall()
-
+  const handleLogout = () => {
+    toast.success("Logout successfully")
+    redirect("/login")
+  }
   return (
     <div>
       <div className="fixed top-2.5 w-full px-2.5">
@@ -85,7 +91,7 @@ export const Setting = () => {
           <div className="h-12 w-12"></div>
         </div>
       </div>
-      <div className="mt-24 px-2.5 flex flex-col gap-2">
+      <div className="mt-24 flex flex-col gap-2 px-2.5">
         {isInstallable && (
           <CardSetting
             title="Install App"
@@ -104,6 +110,12 @@ export const Setting = () => {
             icon={setting.icon}
           />
         ))}
+        <CardSetting
+          className="text-red-500"
+          onClick={() => handleLogout()}
+          title="Logout"
+          icon={<Download size={16} className="text-red-500" strokeWidth={2} />}
+        />
       </div>
     </div>
   )

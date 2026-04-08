@@ -9,7 +9,7 @@ export const Wellcome = () => {
     <div className="min-h-screen w-screen">
       <div className="relative flex h-[50vh] w-full flex-col items-center justify-center overflow-hidden">
         <OrbitingCircles iconSize={40} speed={0.3}>
-          <span className="-700 font-bold">Swap</span>
+          <span className="font-bold text-primary">Swap</span>
           <span className="font-bold text-primary">Swap</span>
           <span className="font-bold text-primary">Swap</span>
           <span className="font-bold text-primary">Swap</span>
@@ -25,7 +25,7 @@ export const Wellcome = () => {
         <div className="flex w-full flex-col items-center justify-center gap-3">
           <a
             href="/create-wallet"
-            className="flex h-12 items-center justify-center rounded-full border-t border-border bg-primary/20 px-4 shadow-lg shadow-primary/50/30"
+            className="shadow-primary/50/30 flex h-12 items-center justify-center rounded-full border-t border-border bg-primary/20 px-4 shadow-lg"
           >
             <p className="text-sm font-bold text-primary">Tạo ví</p>
           </a>

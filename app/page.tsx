@@ -1,7 +1,5 @@
-"use client"
-
-import { Wellcome } from "@/container/wellcome/page"
+import { redirect } from "next/navigation"
 
 export default function Page() {
-  return <Wellcome />
+  return redirect("/login")
 }
