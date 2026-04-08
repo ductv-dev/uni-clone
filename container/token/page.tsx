@@ -1,13 +1,15 @@
 "use client"
 
+import { BottomSheetBuySell } from "@/container/home/bottom-sheet/bottom-sheet-buy-sell"
+import { ButtonNav } from "@/components/custom/button/button-navigation"
 import { LIST_TOKEN } from "@/data/mock-data-list-token"
 import { SectionHeader } from "./sections/section-header"
 import { Landmark, SearchX } from "lucide-react"
 import { SectionMain } from "./sections/section-main"
 import { SectionChart } from "./sections/section-chart"
 import { SectionAbout } from "./sections/section-about"
-import { ButtonNav } from "@/components/custom/button/button-navigation"
 import { StatisticalSection } from "./sections/section-statistical"
+
 type Props = {
   symbol: string
 }
@@ -29,14 +31,19 @@ export const TokenInfor: React.FC<Props> = ({ symbol }) => {
       <SectionMain data={data} />
       <SectionChart />
       <SectionAbout data={data} />
-      <StatisticalSection />
+      <StatisticalSection data={data} />
       <div className="fixed bottom-0 z-100 w-full pb-5">
         <div className="flex w-full items-center justify-center px-2.5">
-          <ButtonNav classname="w-full flex-1  ">
-            <div className="flex items-center justify-center gap-1 font-bold text-primary">
-              <Landmark /> <p>Mua</p>
-            </div>
-          </ButtonNav>
+          <BottomSheetBuySell
+            defaultTokenSymbol={data.symbol}
+            trigger={
+              <ButtonNav classname="w-full flex-1">
+                <div className="flex items-center justify-center gap-1 font-bold text-primary">
+                  <Landmark /> <p>Mua</p>
+                </div>
+              </ButtonNav>
+            }
+          />
         </div>
       </div>
     </div>

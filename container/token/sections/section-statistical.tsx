@@ -5,47 +5,76 @@ import {
   TrendingUp,
   TrendingDown,
 } from "lucide-react"
-const DATA_STATISTICAL = [
-  {
-    label: "Vốn hóa thị trường",
-    icon: <ChartNoAxesCombined />,
-    value: 8.2,
-  },
-  {
-    label: "Định giá pha loãng hoàn toàn",
-    icon: <ChartLine />,
-    value: 9.1,
-  },
-  {
-    label: "Khối lượng trong vòng 24h",
-    icon: <ChartPie />,
-    value: 0.54,
-  },
-  {
-    label: "Giá cao nhất trong 52 tuần",
-    icon: <TrendingUp />,
-    value: 10000.44,
-  },
-  {
-    label: "Giá thấp nhất trong vòng 52 tuần",
-    icon: <TrendingDown />,
-    value: 20000.44,
-  },
-]
+import { TToken } from "@/types/type-token"
 
-export const StatisticalSection = () => {
+type Props = {
+  data: TToken
+}
+
+const formatMoney = (value: number) =>
+  new Intl.NumberFormat("en-US", {
+    notation: value >= 1_000_000 ? "compact" : "standard",
+    maximumFractionDigits: value >= 1_000_000 ? 2 : 2,
+  }).format(value)
+
+export const StatisticalSection: React.FC<Props> = ({ data }) => {
+  const circulatingSupply = 12_500_000 * (18 / data.decimals)
+  const fullyDilutedSupply = circulatingSupply * 1.2
+  const marketCap = data.usdt * circulatingSupply
+  const fdv = data.usdt * fullyDilutedSupply
+  const volume24h = marketCap * 0.076
+  const high52w = data.usdt * 1.42
+  const low52w = data.usdt * 0.48
+  const liquidity = marketCap * 0.11
+
+  const statisticalData = [
+    {
+      label: "Vốn hóa thị trường",
+      icon: <ChartNoAxesCombined />,
+      value: `${formatMoney(marketCap)} US$`,
+    },
+    {
+      label: "Định giá pha loãng hoàn toàn",
+      icon: <ChartLine />,
+      value: `${formatMoney(fdv)} US$`,
+    },
+    {
+      label: "Khối lượng trong vòng 24h",
+      icon: <ChartPie />,
+      value: `${formatMoney(volume24h)} US$`,
+    },
+    {
+      label: "Thanh khoản ước tính",
+      icon: <ChartPie />,
+      value: `${formatMoney(liquidity)} US$`,
+    },
+    {
+      label: "Giá cao nhất trong 52 tuần",
+      icon: <TrendingUp />,
+      value: `${formatMoney(high52w)} US$`,
+    },
+    {
+      label: "Giá thấp nhất trong vòng 52 tuần",
+      icon: <TrendingDown />,
+      value: `${formatMoney(low52w)} US$`,
+    },
+  ]
+
   return (
     <div className="px-2.5">
       <p className="text-lg font-bold text-foreground/60">Thống kê</p>
-      <div className="flex flex-col gap-1">
-        {DATA_STATISTICAL.map((item, index) => (
-          <div key={index} className="flex items-center gap-2.5 text-foreground/60">
+      <div className="mt-2 flex flex-col gap-2">
+        {statisticalData.map((item, index) => (
+          <div
+            key={index}
+            className="flex items-center gap-2.5 rounded-xl border border-border bg-card px-4 py-3 text-foreground/60"
+          >
             <div className="flex flex-1 items-center gap-1">
               <div>{item.icon}</div>
-              <p className="">{item.label}</p>
+              <p>{item.label}</p>
             </div>
 
-            <p className="">{item.value} US$</p>
+            <p className="font-medium text-foreground/80">{item.value}</p>
           </div>
         ))}
       </div>

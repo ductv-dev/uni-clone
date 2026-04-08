@@ -23,6 +23,7 @@ import { Input } from "@/components/ui/input"
 import { shortenHex } from "@/lib/utils"
 import { useUser } from "@/store/user-store"
 import { Copy, Download, Pen, ShieldCheck, User2 } from "lucide-react"
+import { redirect } from "next/navigation"
 import { useState } from "react"
 import { toast } from "sonner"
 
@@ -148,7 +149,12 @@ export const Account = () => {
             description="Chưa xác minh"
             icon={<User2 />}
           />
-          <CardSetting title="Đăng xuất" icon={<Download />} />
+          <CardSetting
+            onClick={() => redirect("/login")}
+            className="text-red-500"
+            title="Đăng xuất"
+            icon={<Download className="text-red-500" />}
+          />
         </div>
       </div>
     </div>

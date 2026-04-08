@@ -34,7 +34,9 @@ export const SectionChart = () => {
           <Badge
             onClick={() => setActiveTimeframe(t.value)}
             className={
-              t.value === activeTimeframe ? "bg-primary text-background" : ""
+              t.value === activeTimeframe
+                ? "bg-primary text-background"
+                : "bg-background text-primary"
             }
             key={t.value}
           >
