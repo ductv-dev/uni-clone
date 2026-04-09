@@ -28,8 +28,8 @@ export const Setting = () => {
   const route = useRouter()
   const { isInstallable, install } = usePwaInstall()
   const handleLogout = () => {
-    toast.success("Logout successfully")
-    redirect("/login")
+    toast.success("Đăng xuất thành công")
+    redirect("/wellcome")
   }
   return (
     <div>
@@ -77,7 +77,7 @@ export const Setting = () => {
         <CardSetting
           className="text-red-500"
           onClick={() => handleLogout()}
-          title="Logout"
+          title="Đăng xuất"
           icon={<Download size={16} className="text-red-500" strokeWidth={2} />}
         />
       </div>
