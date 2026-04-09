@@ -2,37 +2,21 @@
 
 import { BottomSheetSwap } from "@/container/home/bottom-sheet/bottom-sheet-swap"
 import { motion } from "framer-motion"
-import { History, Home, Search } from "lucide-react"
+import { TNavItem } from "@/types"
 import { usePathname } from "next/navigation"
 
-const NAVBAR_ITEMS = [
-  {
-    label: "Home",
-    href: "/user/home",
-    icon: <Home />,
-  },
-  {
-    label: "Search",
-    href: "/user/search",
-    icon: <Search />,
-  },
-  {
-    label: "History",
-    href: "/user/history",
-    icon: <History />,
-  },
-]
-export const Navbar = () => {
+type Props = { data: TNavItem[] }
+
+export const Navbar: React.FC<Props> = ({ data }) => {
   const currentPath = usePathname() || "/"
 
   return (
     <div className="fixed  z-10 bottom-0 flex w-full justify-center px-2 pb-2.5 md:flex">
       <div className="flex w-full max-w-lg items-center gap-2.5">
         <motion.div
-          animate={{ opacity: 1 }}
           className="flex flex-1 items-center rounded-full bg-accent/40 p-1 shadow-lg backdrop-blur-2xl"
         >
-          {NAVBAR_ITEMS.map((item) => (
+          {data.map((item) => (
             <a
               key={item.href}
               href={item.href}

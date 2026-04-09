@@ -12,25 +12,20 @@ import { TUser } from "@/types"
 import {
   ArrowLeftRight,
   Copy,
-  History,
-  Home,
-  Search,
+
   Settings,
   User2,
   Wallet,
 } from "lucide-react"
-import { redirect, usePathname, useRouter } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { useState } from "react"
 import { toast } from "sonner"
 import { AnimatedThemeToggler } from "../ui/animated-theme-toggler"
+import { TNavItem } from "@/types"
+import { UserAvatar } from "../ui/user-avatar"
 
-const NAVBAR_ITEMS = [
-  { label: "Home", href: "/user/home", icon: <Home size={16} /> },
-  { label: "Search", href: "/user/search", icon: <Search size={16} /> },
-  { label: "History", href: "/user/history", icon: <History size={16} /> },
-]
-
-export const NavbarDesktop = () => {
+type Props = { data: TNavItem[] }
+export const NavbarDesktop: React.FC<Props> = ({ data }) => {
   const currentPath = usePathname() || "/"
   const router = useRouter()
   const user = useUser((state: { user: TUser }) => state.user)
@@ -64,7 +59,7 @@ export const NavbarDesktop = () => {
 
         {/* ── Nav links ── */}
         <nav className="flex items-center gap-1 rounded-full border border-border bg-accent/30 p-1 backdrop-blur-xl">
-          {NAVBAR_ITEMS.map((item) => {
+          {data?.map((item) => {
             const isActive = currentPath === item.href
             return (
               <a
@@ -79,7 +74,6 @@ export const NavbarDesktop = () => {
                   {item.icon}
                 </span>
                 {item.label}
-
               </a>
             )
           })}
@@ -93,34 +87,14 @@ export const NavbarDesktop = () => {
           <Drawer open={isDrawerOpen} onOpenChange={setIsDrawerOpen} direction="right">
             <DrawerTrigger asChild>
               <button className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/20 ring-2 ring-primary/20 transition-all hover:ring-primary/40">
-                {user?.avatar ? (
-                  <img
-                    src={user.avatar}
-                    alt="avatar"
-                    width={36}
-                    height={36}
-                    className="h-full w-full rounded-full object-cover"
-                  />
-                ) : (
-                  <User2 size={16} className="text-primary" />
-                )}
+                <UserAvatar src={user.avatar} size={36} />
               </button>
             </DrawerTrigger>
             <DrawerContent className="px-2.5">
               {/* Profile header */}
               <div className="mt-5 flex flex-col items-center justify-center gap-3">
                 <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/20">
-                  {user?.avatar ? (
-                    <img
-                      src={user.avatar}
-                      alt="avatar"
-                      width={64}
-                      height={64}
-                      className="h-full w-full rounded-full object-cover"
-                    />
-                  ) : (
-                    <User2 size={24} className="text-primary" />
-                  )}
+                  <UserAvatar src={user.avatar} size={64} />
                 </div>
                 <div className="flex flex-col items-center gap-0.5">
                   <p className="font-semibold text-foreground">{user?.name}</p>
@@ -140,7 +114,7 @@ export const NavbarDesktop = () => {
               <CardSetting
                 onClick={() => {
                   setIsDrawerOpen(false)
-                  redirect("/user/my-wallet")
+                  router.push("/user/my-wallet")
                 }}
                 title="My Wallet"
                 icon={<Wallet strokeWidth={3} size={20} />}
@@ -148,7 +122,7 @@ export const NavbarDesktop = () => {
               <CardSetting
                 onClick={() => {
                   setIsDrawerOpen(false)
-                  redirect("/user/account")
+                  router.push("/user/account")
                 }}
                 title="Account"
                 icon={<User2 strokeWidth={3} size={20} />}

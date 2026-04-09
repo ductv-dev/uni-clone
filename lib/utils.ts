@@ -115,12 +115,6 @@ export function generateOHLC(
   return data
 }
 
-export function randomPrice(a: number) {
-  while (true) {
-    const price = a + Math.random() * 400
-  }
-}
-
 // random data 24h của token
 export function randomData24h() {
   const data = []
