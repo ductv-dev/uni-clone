@@ -2,11 +2,12 @@
 
 import { shortenHex } from "@/lib/utils"
 import { useUser } from "@/store/user-store"
+import { TUser } from "@/types"
 import { Coins, Copy } from "lucide-react"
 import { toast } from "sonner"
 
 export const FormReceive: React.FC = () => {
-  const user = useUser((state: any) => state.user)
+  const user = useUser((state: { user: TUser }) => state.user)
   const id = shortenHex(user?.id ?? "")
 
   const copyToClipboard = () => {
@@ -29,13 +30,13 @@ export const FormReceive: React.FC = () => {
       <p className="text-sm text-foreground/60 text-center pb-2">
         Nạp tiền vào ví bằng cách chuyển crypto từ ví hoặc tài khoản khác
       </p>
-      
+
       <div className="flex flex-col gap-2 p-4 border border-border rounded-xl bg-background">
         <div className="flex items-center justify-between gap-2">
           <p className="font-semibold text-foreground/60 text-lg tracking-wider bg-accent/50 py-1.5 px-3 rounded-lg overflow-hidden text-ellipsis whitespace-nowrapflex-1">
             {id}
           </p>
-          <button 
+          <button
             onClick={copyToClipboard}
             className="flex items-center justify-center p-2.5 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
           >
@@ -43,7 +44,7 @@ export const FormReceive: React.FC = () => {
           </button>
         </div>
       </div>
-      
+
       <div className="flex items-center gap-4 py-2">
         <div className="h-[1px] bg-border flex-1"></div>
         <p className="text-xs text-foreground/40 font-semibold uppercase tracking-widest">Từ tài khoản khác</p>

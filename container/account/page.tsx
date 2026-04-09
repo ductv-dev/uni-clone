@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import { CardSetting } from "@/components/custom/cards/card-setting"
 import {
@@ -22,14 +21,15 @@ import {
 import { Input } from "@/components/ui/input"
 import { shortenHex } from "@/lib/utils"
 import { useUser } from "@/store/user-store"
+import { TUser } from "@/types"
 import { Copy, Download, Pen, ShieldCheck, User2 } from "lucide-react"
 import { redirect } from "next/navigation"
 import { useState } from "react"
 import { toast } from "sonner"
 
 export const Account = () => {
-  const user = useUser((state: any) => state.user)
-  const setName = useUser((state: any) => state.setName)
+  const user = useUser((state: { user: TUser }) => state.user)
+  const setName = useUser((state: { setName: (name: string) => void }) => state.setName)
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [name, setNameValue] = useState(user.name)
 
@@ -73,8 +73,10 @@ export const Account = () => {
             <div className="flex flex-col gap-5">
               <div className="flex items-center gap-2.5">
                 <Avatar className="size-12">
-                  <AvatarImage src={user.avatar} alt={user.name} />
-                  <AvatarFallback>{user.name.charAt(0, 1)}</AvatarFallback>
+                  <AvatarImage src={
+                    user.avatar
+                  } alt={user.name} />
+                  <AvatarFallback>{user?.name.charAt(0) || "U"}</AvatarFallback>
                   <AvatarBadge className="right-0 bottom-0 size-10">
                     <ShieldCheck />
                   </AvatarBadge>

@@ -18,18 +18,23 @@ interface ChartProps {
     downColor?: string
     wickUpColor?: string
     wickDownColor?: string
+    vertLines?: string
+    horzLines?: string
   }
 }
 
 export const CandlestickChart: React.FC<ChartProps> = ({
   data,
   colors: {
-    backgroundColor = "#131722", // Màu nền tối (thường thấy ở DEX)
+    backgroundColor = "#fff", // Màu nền tối (thường thấy ở DEX)
     textColor = "#d1d4dc",
     upColor = "#26a69a", // Nến xanh
     downColor = "#ef5350", // Nến đỏ
     wickUpColor = "#26a69a",
     wickDownColor = "#ef5350",
+    vertLines = "#e0e1f9",
+    horzLines = "#e0e1f9",
+
   } = {},
 }) => {
   const chartContainerRef = useRef<HTMLDivElement>(null)
@@ -45,10 +50,10 @@ export const CandlestickChart: React.FC<ChartProps> = ({
         attributionLogo: false,
       },
       width: chartContainerRef.current.clientWidth,
-      height: 400,
+      height: chartContainerRef.current.clientHeight,
       grid: {
-        vertLines: { color: "#1f2937" },
-        horzLines: { color: "#1f2937" },
+        vertLines: { color: vertLines },
+        horzLines: { color: horzLines },
       },
     })
 
@@ -86,6 +91,8 @@ export const CandlestickChart: React.FC<ChartProps> = ({
     downColor,
     wickUpColor,
     wickDownColor,
+    vertLines,
+    horzLines,
   ])
 
   return (

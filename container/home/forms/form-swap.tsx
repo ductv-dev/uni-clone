@@ -41,7 +41,7 @@ export const FormSwap: React.FC<Props> = ({ onSuccess }) => {
       toast.error("Token đi và token đến phải khác nhau")
       return
     }
-    if (!valueFrom || valueFrom <= 0 || valueFrom > 9999999) {
+    if (!valueFrom || valueFrom <= 0 || valueFrom > 9999999 || valueFrom === null) {
       const el = document.getElementById(inputId) as HTMLInputElement
       el?.focus()
       toast.error("Vui lòng nhập số lượng hợp lệ")

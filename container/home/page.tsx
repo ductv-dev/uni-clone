@@ -9,10 +9,11 @@ import { SectionNotifications } from "./sections/section-notifications"
 import { DesktopActionTabs } from "./desktop/desktop-action-tabs"
 import { Wallet } from "lucide-react"
 import { useState } from "react"
+import { TUser } from "@/types"
 
 export const Home = () => {
-  const user = useUser((state: any) => state.user)
-  const dataToken = LIST_TOKEN
+  const user = useUser((state: { user: TUser }) => state.user)
+  const dataToken = LIST_TOKEN.slice(0, 5)
 
   const [notifications, setNotifications] = useState([
     {

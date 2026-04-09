@@ -1,8 +1,8 @@
 "use client"
+import { MiniChart } from "@/components/charts/chart-widget"
 import { AvatarImage, Avatar, AvatarFallback } from "@/components/ui/avatar"
-import { cn } from "@/lib/utils"
+import { cn, randomData24h } from "@/lib/utils"
 import { ChevronDown, ChevronUp } from "lucide-react"
-import Link from "next/link"
 
 type TcardToken1Props = {
   rank?: number
@@ -27,11 +27,14 @@ export const CardToken1: React.FC<TcardToken1Props> = ({
   onClick,
   className,
 }) => {
+
+  const data = randomData24h()
   return (
+
     <div
       onClick={onClick}
       className={
-        cn(className) + " flex w-full items-center gap-2.5 rounded-lg px-4 py-2"
+        cn(className) + " cursor-pointer hover:bg-accent flex w-full items-center gap-2.5 rounded-lg px-4 py-2"
       }
     >
       <div className="flex flex-1 items-center gap-2.5">
@@ -46,6 +49,9 @@ export const CardToken1: React.FC<TcardToken1Props> = ({
           <span className="text-sm font-medium">{name}</span>
           {symbol && <span className="text-xs text-foreground/60">{symbol}</span>}
         </div>
+      </div>
+      <div>
+        <MiniChart data={data} width={50} height={12} strokeWidth={2} />
       </div>
       <div className="flex flex-col items-end">
         {price && (
@@ -77,5 +83,6 @@ export const CardToken1: React.FC<TcardToken1Props> = ({
         </div>
       </div>
     </div>
+
   )
 }

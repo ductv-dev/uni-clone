@@ -1,18 +1,14 @@
 "use client"
 
 import { CardSetting } from "@/components/custom/cards/card-setting"
-import { Button } from "@/components/ui/button"
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
-  DrawerFooter,
   DrawerTrigger,
 } from "@/components/ui/drawer"
-import { BottomSheetSwap } from "@/container/home/bottom-sheet/bottom-sheet-swap"
 import { shortenHex } from "@/lib/utils"
 import { useUser } from "@/store/user-store"
-import { motion } from "framer-motion"
+import { TUser } from "@/types"
 import {
   ArrowLeftRight,
   Copy,
@@ -26,6 +22,7 @@ import {
 import { redirect, usePathname, useRouter } from "next/navigation"
 import { useState } from "react"
 import { toast } from "sonner"
+import { AnimatedThemeToggler } from "../ui/animated-theme-toggler"
 
 const NAVBAR_ITEMS = [
   { label: "Home", href: "/user/home", icon: <Home size={16} /> },
@@ -36,7 +33,7 @@ const NAVBAR_ITEMS = [
 export const NavbarDesktop = () => {
   const currentPath = usePathname() || "/"
   const router = useRouter()
-  const user = useUser((state: any) => state.user)
+  const user = useUser((state: { user: TUser }) => state.user)
   const shortID = user?.id ? shortenHex(user.id) : ""
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
@@ -90,7 +87,6 @@ export const NavbarDesktop = () => {
 
         {/* ── Right: Swap + User ── */}
         <div className="flex items-center gap-3">
-          {/* Swap button */}
 
 
           {/* User avatar dropdown */}
@@ -169,6 +165,8 @@ export const NavbarDesktop = () => {
 
             </DrawerContent>
           </Drawer>
+          <AnimatedThemeToggler />
+
         </div>
       </div>
     </header>

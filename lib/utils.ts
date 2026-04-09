@@ -120,3 +120,16 @@ export function randomPrice(a: number) {
     const price = a + Math.random() * 400
   }
 }
+
+// random data 24h của token
+export function randomData24h() {
+  const data = []
+  const now = Date.now()
+  for (let i = 0; i < 24; i++) {
+    data.push({
+      time: now - i * 60 * 60 * 1000,
+      value: Math.random() * 100,
+    })
+  }
+  return data
+}

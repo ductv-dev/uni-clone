@@ -77,52 +77,54 @@ export const SearchPage = () => {
   return (
     <div className="h-full w-full">
       {/* Field tìm kiếm */}
-      <div className="fixed top-0 z-50 w-full bg-background p-2.5">
+      <div className="fixed lg:static top-0 z-50 max-w-xl mx-auto w-full bg-background p-2.5">
         <BottomSheetSearch />
       </div>
 
-      <div className="mt-20 px-2.5 pb-20">
+      <div className="mt-20 lg:mt-0 lg:flex w-full px-2.5 gap-2.5 lg:gap-5 pb-20">
         {/* List token yêu thích */}
-        <div className="flex flex-col gap-2">
-          <p className="font-semibold text-foreground/60">Token yêu thích</p>
+        <div className="lg:w-[380px]">
+          <div className="flex sticky top-0 flex-col gap-2">
+            <p className="font-semibold text-foreground/60">Token yêu thích</p>
 
-          <div className="grid grid-cols-2 gap-2.5">
-            {LIST_TOKEN.slice(0, quantityFavorite).map((token) => (
-              <CardToken2
-                onClick={() => route.push(`/user/token/${token.symbol}`)}
-                key={token.address}
-                name={token.name}
-                image={token.logoURI}
-                price={token.usdt}
-                number_changes={token.number_changes}
-              />
-            ))}
-          </div>
-          <div className="flex items-center gap-2.5 px-2.5 py-2 text-foreground/60">
-            <p className="h-px flex-1 bg-accent"></p>
+            <div className="grid grid-cols-2 gap-2.5">
+              {LIST_TOKEN.slice(0, quantityFavorite).map((token) => (
+                <CardToken2
+                  onClick={() => route.push(`/token/${token.symbol}`)}
+                  key={token.address}
+                  name={token.name}
+                  image={token.logoURI}
+                  price={token.usdt}
+                  number_changes={token.number_changes}
+                />
+              ))}
+            </div>
+            <div className="flex items-center gap-2.5 px-2.5 py-2 text-foreground/60">
+              <p className="h-px flex-1 bg-accent"></p>
 
-            {quantityFavorite === 4 ? (
-              <button
-                onClick={() => setQuantityFavorite(6)}
-                className="flex items-center gap-1"
-              >
-                <p>Hiện thêm</p>
-                <ChevronsUpDown className="" size={14} />
-              </button>
-            ) : (
-              <button
-                onClick={() => setQuantityFavorite(4)}
-                className="flex items-center gap-1"
-              >
-                <p>Thu lại</p>
-                <ChevronsDownUp className="" size={14} />
-              </button>
-            )}
-            <p className="h-px flex-1 bg-accent"></p>
+              {quantityFavorite === 4 ? (
+                <button
+                  onClick={() => setQuantityFavorite(6)}
+                  className="flex items-center gap-1"
+                >
+                  <p>Hiện thêm</p>
+                  <ChevronsUpDown className="" size={14} />
+                </button>
+              ) : (
+                <button
+                  onClick={() => setQuantityFavorite(4)}
+                  className="flex items-center gap-1"
+                >
+                  <p>Thu lại</p>
+                  <ChevronsDownUp className="" size={14} />
+                </button>
+              )}
+              <p className="h-px flex-1 bg-accent"></p>
+            </div>
           </div>
         </div>
         {/* List token hàng đầu */}
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-1  flex-col gap-2">
           {/* Bộ lọc */}
           <div className="flex items-center">
             <p className="flex-1 font-semibold text-foreground/60">
@@ -150,7 +152,7 @@ export const SearchPage = () => {
           <div>
             {sortedTokens.map((token, index) => (
               <CardToken1
-                onClick={() => route.push(`/user/token/${token.symbol}`)}
+                onClick={() => route.push(`/token/${token.symbol}`)}
                 rank={index + 1}
                 name={token.name}
                 symbol={token.symbol}
