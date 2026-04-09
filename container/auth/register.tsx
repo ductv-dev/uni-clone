@@ -26,9 +26,9 @@ export const Register = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<RegisterSchemaType>({
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     resolver: zodResolver(RegisterSchema as any),
   })
   const onSubmit: SubmitHandler<RegisterSchemaType> = (data) => {

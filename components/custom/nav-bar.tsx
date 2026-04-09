@@ -2,7 +2,7 @@
 
 import { BottomSheetSwap } from "@/container/home/bottom-sheet/bottom-sheet-swap"
 import { motion } from "framer-motion"
-import { ArrowRightLeft, History, Home, Search } from "lucide-react"
+import { History, Home, Search } from "lucide-react"
 import { usePathname } from "next/navigation"
 
 const NAVBAR_ITEMS = [
@@ -26,7 +26,7 @@ export const Navbar = () => {
   const currentPath = usePathname() || "/"
 
   return (
-    <div className="to fixed bottom-0 flex w-full justify-center px-2 pb-2.5">
+    <div className="to fixed bottom-0 flex w-full justify-center px-2 pb-2.5 md:flex">
       <div className="flex w-full max-w-lg items-center gap-2.5">
         <motion.div
           animate={{ opacity: 1 }}

@@ -4,10 +4,8 @@ import { TriggerButton } from "@/components/custom/button/trigger-button"
 import { Button } from "@/components/ui/button"
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerDescription,
-  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
@@ -18,6 +16,7 @@ import { Coins, Copy } from "lucide-react"
 import { toast } from "sonner"
 
 export const BottomSheetReceive = () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const user = useUser((state: any) => state.user)
   const id = shortenHex(user.id)
   const copyToClipboard = (text: string) => {

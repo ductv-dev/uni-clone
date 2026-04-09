@@ -1,7 +1,7 @@
 "use client"
 import { Button } from "@/components/ui/button"
-import { useForm, SubmitHandler } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { SubmitHandler, useForm } from "react-hook-form"
 
 import {
   Card,
@@ -18,10 +18,10 @@ import {
   FieldSeparator,
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
-import { Bitcoin } from "lucide-react"
 import { LoginSchema, LoginSchemaType } from "@/schema/schema-login"
-import { toast } from "sonner"
+import { Bitcoin } from "lucide-react"
 import { redirect } from "next/navigation"
+import { toast } from "sonner"
 
 export const Login = () => {
   const {
@@ -38,14 +38,19 @@ export const Login = () => {
   }
   return (
     <div className="flex min-h-svh flex-col items-center justify-center gap-6 bg-muted p-6 md:p-10">
-      <div className="flex w-full max-w-sm flex-col gap-6">
+      <div className="relative flex w-full max-w-sm flex-col gap-6">
         <a href="#" className="flex items-center gap-2 self-center font-medium">
           <div className="flex size-6 items-center justify-center rounded-md bg-primary text-primary-foreground">
             <Bitcoin className="size-4" />
           </div>
           Uni Crypto
         </a>
-        <div className="flex flex-col gap-6">
+        {/* background */}
+        <div className="absolute inset-0 bg-background">
+          <div className="absolute top-1/2 left-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 blur-3xl" />
+          <div className="absolute top-1/2 right-1/2 h-[400px] w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/5 blur-3xl" />
+        </div>
+        <div className="absolute top-1/2 left-1/2 flex w-full -translate-x-1/2 -translate-y-1/2 flex-col gap-6">
           <Card>
             <CardHeader className="text-center">
               <CardTitle className="text-xl">Welcome back</CardTitle>
