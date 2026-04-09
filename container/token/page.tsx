@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button"
 import { toast } from "sonner"
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer"
 import { NavbarDesktop } from "@/components/layout/nav-bar-desktop"
+import { NAVBAR_ITEMS } from "@/lib/nav-config"
 
 type Props = {
   symbol: string
@@ -53,7 +54,7 @@ export const TokenInfor: React.FC<Props> = ({ symbol }) => {
     )
   return (
     <div className="w-full pb-20">
-      <NavbarDesktop />
+      <NavbarDesktop data={NAVBAR_ITEMS} />
       <SectionHeader />
 
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 md:flex-row md:px-6 md:py-8">
