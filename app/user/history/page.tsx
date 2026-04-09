@@ -1,3 +1,5 @@
-import { HistoryPage } from "@/container/history/page"
+import { History } from "@/container/history/page"
 
-export default HistoryPage
+export default function HistoryPage() {
+    return <History />
+}

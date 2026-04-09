@@ -2,7 +2,7 @@ import { BookAlert } from "lucide-react"
 import { CardHistory } from "@/components/custom/cards/card-history"
 import { MOCK_TRANSACTIONS } from "@/data/data-mock-history"
 
-export const HistoryPage = () => {
+export const History = () => {
   return (
     <div className="flex h-full w-full flex-col gap-2.5 p-2.5">
       <h1 className="text-xl font-semibold">Hoạt động</h1>
