@@ -153,7 +153,7 @@ export const Account = () => {
             icon={<User2 />}
           />
           <CardSetting
-            onClick={() => redirect("/login")}
+            onClick={() => redirect("/wellcome")}
             className="text-red-500"
             title="Đăng xuất"
             icon={<Download className="text-red-500" />}

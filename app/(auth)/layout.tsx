@@ -1,5 +1,3 @@
-import { Navbar } from "@/components/custom/nav-bar"
-
 export default function AuthLayout({
   children,
 }: Readonly<{

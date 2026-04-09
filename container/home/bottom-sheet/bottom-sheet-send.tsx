@@ -1,23 +1,15 @@
 "use client"
 
 import { TriggerButton } from "@/components/custom/button/trigger-button"
-import { Button } from "@/components/ui/button"
 import {
   Drawer,
   DrawerClose,
   DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer"
-import {
-  InputGroup,
-  InputGroupInput,
-  InputGroupAddon,
-} from "@/components/ui/input-group"
-import { ScanQrCode, SearchIcon, UserSearch, Wallet2Icon } from "lucide-react"
+import { FormSend } from "../forms/form-send"
 
 export const BottomSheetSend = () => {
   return (
@@ -25,35 +17,20 @@ export const BottomSheetSend = () => {
       <DrawerTrigger>
         <TriggerButton className="w-30" icon="send" title="Gửi" />
       </DrawerTrigger>
-      <DrawerContent className="h-full max-h-full">
+      <DrawerContent className="max-h-[90%]">
         <DrawerHeader>
-          <DrawerTitle>Chọn người gủi</DrawerTitle>
+          <DrawerTitle className="text-start text-lg font-medium opacity-0 h-0">Chọn người gủi</DrawerTitle>
         </DrawerHeader>
-        <div className="no-scrollbar w-full overflow-y-auto px-2.5">
-          <InputGroup>
-            <InputGroupInput placeholder="Search..." />
-            <InputGroupAddon>
-              <SearchIcon />
-            </InputGroupAddon>
-            <InputGroupAddon align={"inline-end"}>
-              <ScanQrCode />
-            </InputGroupAddon>
-          </InputGroup>
-          <div className="flex w-full flex-col items-center justify-center gap-2.5 py-20">
-            <div className="flex h-14 w-14 items-center justify-center rounded-xl border-t border-border bg-background text-primary shadow-lg shadow-border">
-              <UserSearch strokeWidth={3} size={24} />
-            </div>
-            <p>Nhập địa chỉ hoặc tên người dùng</p>
-          </div>
-        </div>
-        <DrawerFooter>
-          <DrawerClose>
-            <div className="rounded-2xl border border-border px-6 py-2 font-semibold text-foreground/60 transition-colors">
-              Cancel
+        <div className="no-scrollbar w-full overflow-y-auto px-4 pb-12">
+          <FormSend />
+          <DrawerClose asChild>
+            <div className="mt-8 text-center cursor-pointer text-sm font-semibold text-foreground/60 transition-colors">
+              Hủy
             </div>
           </DrawerClose>
-        </DrawerFooter>
+        </div>
       </DrawerContent>
     </Drawer>
   )
 }
+

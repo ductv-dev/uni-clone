@@ -1,4 +1,5 @@
-import { Navbar } from "@/components/custom/nav-bar"
+import { NavbarDesktop } from "@/components/layout/nav-bar-desktop"
+import { Navbar } from "@/components/layout/nav-bar-mobile"
 
 export default function UserLayout({
   children,
@@ -7,8 +8,13 @@ export default function UserLayout({
 }>) {
   return (
     <div className="w-full">
-      {children}
-      <Navbar />
+      <div className="md:hidden">
+        <Navbar />
+      </div>
+      <div className="hidden md:block">
+        <NavbarDesktop />
+      </div>
+      <div className="mx-auto max-w-7xl">{children}</div>
     </div>
   )
 }
