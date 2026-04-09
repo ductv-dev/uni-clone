@@ -89,7 +89,7 @@ export const SearchPage = () => {
           <div className="grid grid-cols-2 gap-2.5">
             {LIST_TOKEN.slice(0, quantityFavorite).map((token) => (
               <CardToken2
-                onClick={() => route.push(`/token/${token.symbol}`)}
+                onClick={() => route.push(`/user/token/${token.symbol}`)}
                 key={token.address}
                 name={token.name}
                 image={token.logoURI}
@@ -150,7 +150,7 @@ export const SearchPage = () => {
           <div>
             {sortedTokens.map((token, index) => (
               <CardToken1
-                onClick={() => route.push(`/token/${token.symbol}`)}
+                onClick={() => route.push(`/user/token/${token.symbol}`)}
                 rank={index + 1}
                 name={token.name}
                 symbol={token.symbol}

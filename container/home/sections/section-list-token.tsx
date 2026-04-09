@@ -10,7 +10,7 @@ type Props = {
 }
 export const SectionListToken: React.FC<Props> = ({ data, isDesktop = false }) => {
   const route = useRouter()
-  
+
   if (isDesktop) {
     const displayData = data.slice(0, 8)
     return (
@@ -30,7 +30,7 @@ export const SectionListToken: React.FC<Props> = ({ data, isDesktop = false }) =
                 price={token.decimals}
                 image={token.logoURI}
                 number_changes={token.number_changes}
-                onClick={() => route.push(`/token/${token.symbol}`)}
+                onClick={() => route.push(`/user/token/${token.symbol}`)}
               />
             </div>
           ))}
@@ -51,7 +51,7 @@ export const SectionListToken: React.FC<Props> = ({ data, isDesktop = false }) =
               price={token.decimals}
               image={token.logoURI}
               number_changes={token.number_changes}
-              onClick={() => route.push(`/token/${token.symbol}`)}
+              onClick={() => route.push(`/user/token/${token.symbol}`)}
             />
           )
       )}

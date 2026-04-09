@@ -86,7 +86,7 @@ export const FormBuySell: React.FC<Props> = ({ onSuccess }) => {
             className={cn(
               "rounded-full px-6 py-2 font-semibold text-foreground/60 transition-colors",
               isBuy &&
-                "border-t border-t-primary/10 bg-primary/20 text-primary shadow-sm shadow-primary/50"
+              "border-t border-t-primary/10 bg-primary/20 text-primary shadow-sm shadow-primary/50"
             )}
             type="button"
           >
@@ -97,7 +97,7 @@ export const FormBuySell: React.FC<Props> = ({ onSuccess }) => {
             className={cn(
               "rounded-full px-6 py-2 font-semibold text-foreground/60 transition-colors",
               !isBuy &&
-                "border-t border-t-primary/10 bg-primary/20 text-primary shadow-sm shadow-primary/50"
+              "border-t border-t-primary/10 bg-primary/20 text-primary shadow-sm shadow-primary/50"
             )}
             type="button"
           >
@@ -132,39 +132,41 @@ export const FormBuySell: React.FC<Props> = ({ onSuccess }) => {
           <span className="text-lg font-semibold text-foreground">
             {result.toFixed(isBuy ? 6 : 2)}
           </span>
-          <span className="font-semibold text-foreground">USDT</span>
-
-          <Drawer open={isTokenPickerOpen} onOpenChange={setIsTokenPickerOpen}>
-            <DrawerTrigger asChild>
-              <button type="button">
-                <Badge className="h-7 cursor-pointer px-3">
-                  {currency} <ChevronDown className="ml-1 h-3 w-3" />
-                </Badge>
-              </button>
-            </DrawerTrigger>
-            <DrawerContent className="h-[70%] max-h-full">
-              <DrawerHeader>
-                <DrawerTitle className="text-start text-lg font-medium">
-                  Chọn token
-                </DrawerTitle>
-              </DrawerHeader>
-              <div className="no-scrollbar w-full overflow-y-auto px-2.5">
-                {LIST_TOKEN.map((token) => (
-                  <CardToken1
-                    key={token.symbol}
-                    name={token.name}
-                    image={token.logoURI}
-                    symbol={token.symbol}
-                    onClick={() => {
-                      setCurrency(token.symbol)
-                      setIsTokenPickerOpen(false)
-                    }}
-                    className={cn(token.symbol === currency && "bg-accent")}
-                  />
-                ))}
-              </div>
-            </DrawerContent>
-          </Drawer>
+          {!isBuy ? (
+            <span className="font-semibold text-foreground">USDT</span>
+          ) : (
+            <Drawer open={isTokenPickerOpen} onOpenChange={setIsTokenPickerOpen}>
+              <DrawerTrigger asChild>
+                <button type="button">
+                  <Badge className="h-7 cursor-pointer px-3">
+                    {currency} <ChevronDown className="ml-1 h-3 w-3" />
+                  </Badge>
+                </button>
+              </DrawerTrigger>
+              <DrawerContent className="h-[70%] max-h-full">
+                <DrawerHeader>
+                  <DrawerTitle className="text-start text-lg font-medium">
+                    Chọn token
+                  </DrawerTitle>
+                </DrawerHeader>
+                <div className="no-scrollbar w-full overflow-y-auto px-2.5">
+                  {LIST_TOKEN.map((token) => (
+                    <CardToken1
+                      key={token.symbol}
+                      name={token.name}
+                      image={token.logoURI}
+                      symbol={token.symbol}
+                      onClick={() => {
+                        setCurrency(token.symbol)
+                        setIsTokenPickerOpen(false)
+                      }}
+                      className={cn(token.symbol === currency && "bg-accent")}
+                    />
+                  ))}
+                </div>
+              </DrawerContent>
+            </Drawer>
+          )}
         </div>
       </div>
 

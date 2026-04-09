@@ -21,7 +21,6 @@ export const SectionChart = () => {
     <div className="flex flex-col gap-2.5">
       <div
         style={{
-          border: "1px solid #1f2937",
           overflow: "hidden",
           maxWidth: "800px",
         }}

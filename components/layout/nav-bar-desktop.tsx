@@ -53,7 +53,7 @@ export const NavbarDesktop = () => {
   }
 
   return (
-    <header className="sticky top-0 z-50 hidden w-full border-b border-border bg-background/80 backdrop-blur-xl md:block">
+    <header className="sticky top-0 z-50 hidden w-full  bg-background/80 backdrop-blur-xl md:block">
       <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-6">
         {/* ── Logo ── */}
         <a href="/user/home" className="flex items-center gap-2.5">
@@ -74,7 +74,7 @@ export const NavbarDesktop = () => {
                 key={item.href}
                 href={item.href}
                 className={`relative flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all ${isActive
-                  ? "bg-background text-primary shadow-sm"
+                  ? "bg-background text-primary  border-primary border-t shadow-sm"
                   : "text-foreground/60 hover:text-foreground"
                   }`}
               >
@@ -82,12 +82,7 @@ export const NavbarDesktop = () => {
                   {item.icon}
                 </span>
                 {item.label}
-                {isActive && (
-                  <motion.span
-                    layoutId="nav-active-dot"
-                    className="absolute -bottom-0.5 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-primary"
-                  />
-                )}
+
               </a>
             )
           })}

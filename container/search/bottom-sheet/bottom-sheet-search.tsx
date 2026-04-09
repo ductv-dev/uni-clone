@@ -86,7 +86,7 @@ export const BottomSheetSearch = () => {
                   key={token.symbol}
                   onClick={() => {
                     setDrawerOpen(false)
-                    route.push(`/token/${token.symbol}`)
+                    route.push(`/user/token/${token.symbol}`)
                   }}
                   name={token.name}
                   symbol={token.symbol}
