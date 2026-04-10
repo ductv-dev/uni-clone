@@ -18,7 +18,7 @@ import { Input } from "@/components/ui/input"
 import { RegisterSchema, RegisterSchemaType } from "@/schema/schema-register"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Bitcoin } from "lucide-react"
-import { useRouter } from "next/router"
+import { useRouter } from "next/navigation"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { toast } from "sonner"
 
