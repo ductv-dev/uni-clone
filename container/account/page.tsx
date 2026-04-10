@@ -23,7 +23,7 @@ import { shortenHex } from "@/lib/utils"
 import { useUser } from "@/store/user-store"
 import { TUser } from "@/types"
 import { Copy, Download, Pen, ShieldCheck, User2 } from "lucide-react"
-import { redirect } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { toast } from "sonner"
 
@@ -32,6 +32,7 @@ export const Account = () => {
   const setName = useUser(
     (state: { setName: (name: string) => void }) => state.setName
   )
+  const route = useRouter()
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [name, setNameValue] = useState(user.name)
 
@@ -155,7 +156,7 @@ export const Account = () => {
             icon={<User2 />}
           />
           <CardSetting
-            onClick={() => redirect("/wellcome")}
+            onClick={() => route.push("/wellcome")}
             className="text-red-500"
             title="Đăng xuất"
             icon={<Download className="text-red-500" />}

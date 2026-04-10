@@ -1,6 +1,5 @@
 "use client"
 
-import { TUser } from "@/types/type-user"
 import { ChevronDown, ChevronUp } from "lucide-react"
 
 type Props = {

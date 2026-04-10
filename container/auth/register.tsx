@@ -18,11 +18,12 @@ import { Input } from "@/components/ui/input"
 import { RegisterSchema, RegisterSchemaType } from "@/schema/schema-register"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Bitcoin } from "lucide-react"
-import { redirect } from "next/navigation"
+import { useRouter } from "next/router"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { toast } from "sonner"
 
 export const Register = () => {
+  const route = useRouter()
   const {
     register,
     handleSubmit,
@@ -35,7 +36,7 @@ export const Register = () => {
     toast.success(
       `Register successfully. Email: ${data.email} Password: ${data.password}`
     )
-    redirect("/login")
+    route.push("/login")
   }
   return (
     <div className="flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10">

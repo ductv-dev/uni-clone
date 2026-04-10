@@ -3,17 +3,17 @@ import { ButtonNav } from "@/components/custom/button/button-navigation"
 import { CardSetting } from "@/components/custom/cards/card-setting"
 import { Button } from "@/components/ui/button"
 import {
-  DrawerTrigger,
   Drawer,
-  DrawerContent,
   DrawerClose,
+  DrawerContent,
   DrawerFooter,
+  DrawerTrigger,
 } from "@/components/ui/drawer"
 
 import { shortenHex } from "@/lib/utils"
 import { TUser } from "@/types/type-user"
 import { Copy, Settings, User2, Wallet } from "lucide-react"
-import { redirect, useRouter } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { toast } from "sonner"
 
@@ -85,13 +85,13 @@ export const SectionAccount: React.FC<Props> = ({ data }) => {
               </div>
             </div>
             <CardSetting
-              onClick={() => redirect("/user/my-wallet")}
+              onClick={() => route.push("/user/my-wallet")}
               title="My Wallet"
               icon={<Wallet strokeWidth={3} size={20} />}
             />
             <CardSetting
               title="Account"
-              onClick={() => redirect("/user/account")}
+              onClick={() => route.push("/user/account")}
               icon={<User2 strokeWidth={3} size={20} />}
             />
             <DrawerFooter>

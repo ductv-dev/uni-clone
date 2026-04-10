@@ -1,6 +1,6 @@
 "use client"
 import { MiniChart } from "@/components/charts/chart-widget"
-import { AvatarImage, Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { cn, randomData24h } from "@/lib/utils"
 import { ChevronDown, ChevronUp } from "lucide-react"
 import { useMemo } from "react"

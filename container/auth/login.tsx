@@ -20,10 +20,11 @@ import {
 import { Input } from "@/components/ui/input"
 import { LoginSchema, LoginSchemaType } from "@/schema/schema-login"
 import { Bitcoin } from "lucide-react"
-import { redirect } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 
 export const Login = () => {
+  const route = useRouter()
   const {
     register,
     handleSubmit,
@@ -33,7 +34,7 @@ export const Login = () => {
     toast.success(
       `Login successfully. Email: ${data.email} Password: ${data.password}`
     )
-    redirect("/user/home")
+    route.push("/user/home")
   }
   return (
     <div className="flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10">

@@ -4,9 +4,7 @@ import { CardSetting } from "@/components/custom/cards/card-setting"
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler"
 import { usePwaInstall } from "@/hooks/use-pwa-install"
 import { ChevronLeft, Download, Moon, Settings, Sun, User2 } from "lucide-react"
-import { useTheme } from "next-themes"
-import { redirect, useRouter } from "next/navigation"
-import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 
 const LIST_SETTING = [
@@ -29,7 +27,7 @@ export const Setting = () => {
   const { isInstallable, install } = usePwaInstall()
   const handleLogout = () => {
     toast.success("Đăng xuất thành công")
-    redirect("/wellcome")
+    route.push("/wellcome")
   }
   return (
     <div>
@@ -69,7 +67,7 @@ export const Setting = () => {
         ))}
         <CardSetting
           className=""
-          onClick={() => redirect("/user/account")}
+          onClick={() => route.push("/user/account")}
           title="Account"
           icon={<User2 size={16} className="text-primary" strokeWidth={2} />}
         />
