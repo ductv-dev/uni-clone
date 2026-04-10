@@ -57,7 +57,9 @@ export default function RootLayout({
       <body>
         <ThemeProvider>
           <Providers>
-            <div className=" max-w-7xl mx-auto">{children}</div>
+            <div className="max-w-screen">
+              <div className="mx-auto max-w-7xl">{children}</div>
+            </div>
           </Providers>
         </ThemeProvider>
         <Toaster position="top-center" />

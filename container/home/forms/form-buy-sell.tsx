@@ -48,7 +48,9 @@ export const FormBuySell: React.FC<Props> = ({ onSuccess }) => {
       }
 
       if (!amount || Number(amount) <= 0 || amount > 9999999) {
-        const inputElement = document.getElementById(inputId) as HTMLInputElement | null
+        const inputElement = document.getElementById(
+          inputId
+        ) as HTMLInputElement | null
         inputElement?.focus()
         toast.error("Vui lòng nhập số lượng hợp lệ")
         return
@@ -86,7 +88,7 @@ export const FormBuySell: React.FC<Props> = ({ onSuccess }) => {
             className={cn(
               "rounded-full px-6 py-2 font-semibold text-foreground/60 transition-colors",
               isBuy &&
-              "border-t border-t-primary/10 bg-primary/20 text-primary shadow-sm shadow-primary/50"
+                "border-t border-t-primary/10 bg-primary/20 text-primary shadow-sm shadow-primary/50"
             )}
             type="button"
           >
@@ -97,7 +99,7 @@ export const FormBuySell: React.FC<Props> = ({ onSuccess }) => {
             className={cn(
               "rounded-full px-6 py-2 font-semibold text-foreground/60 transition-colors",
               !isBuy &&
-              "border-t border-t-primary/10 bg-primary/20 text-primary shadow-sm shadow-primary/50"
+                "border-t border-t-primary/10 bg-primary/20 text-primary shadow-sm shadow-primary/50"
             )}
             type="button"
           >
@@ -109,7 +111,9 @@ export const FormBuySell: React.FC<Props> = ({ onSuccess }) => {
       <div className="flex flex-col gap-2 rounded-xl border border-border bg-background p-4">
         <div className="flex items-center justify-between text-xs text-foreground/50">
           <span>{isBuy ? "Thanh toán" : "Số lượng bán"}</span>
-          <span>{isBuy ? "Bằng USDT" : `Token ${selectedToken?.symbol ?? ""}`}</span>
+          <span>
+            {isBuy ? "Bằng USDT" : `Token ${selectedToken?.symbol ?? ""}`}
+          </span>
         </div>
         <div className="flex items-center justify-between gap-2">
           <label className="text-2xl font-bold text-foreground/60">
@@ -135,7 +139,10 @@ export const FormBuySell: React.FC<Props> = ({ onSuccess }) => {
           {!isBuy ? (
             <span className="font-semibold text-foreground">USDT</span>
           ) : (
-            <Drawer open={isTokenPickerOpen} onOpenChange={setIsTokenPickerOpen}>
+            <Drawer
+              open={isTokenPickerOpen}
+              onOpenChange={setIsTokenPickerOpen}
+            >
               <DrawerTrigger asChild>
                 <button type="button">
                   <Badge className="h-7 cursor-pointer px-3">
@@ -172,21 +179,27 @@ export const FormBuySell: React.FC<Props> = ({ onSuccess }) => {
 
       <div className="min-h-[44px]">
         {selectedToken && (
-          <div className="rounded-xl border border-border px-4 py-3 text-sm text-foreground/50 bg-background/50">
+          <div className="rounded-xl border border-border bg-background/50 px-4 py-3 text-sm text-foreground/50">
             {isBuy ? (
               <p>
                 1 {selectedToken.symbol} = {selectedToken.usdt.toFixed(2)} USDT
               </p>
             ) : (
               <p>
-                1 {selectedToken.symbol} bán được {selectedToken.usdt.toFixed(2)} USDT
+                1 {selectedToken.symbol} bán được{" "}
+                {selectedToken.usdt.toFixed(2)} USDT
               </p>
             )}
           </div>
         )}
       </div>
 
-      <Button size="lg" onClick={handleConfirm} disabled={isLoading} className="w-full mt-2">
+      <Button
+        size="lg"
+        onClick={handleConfirm}
+        disabled={isLoading}
+        className="mt-2 w-full"
+      >
         {isLoading
           ? "Đang xử lý..."
           : isBuy

@@ -19,12 +19,14 @@ export const BottomSheetReceive = () => {
       </DrawerTrigger>
       <DrawerContent className="max-h-[90%]">
         <DrawerHeader>
-          <DrawerTitle className="text-start text-lg font-medium opacity-0 h-0">Nhận</DrawerTitle>
+          <DrawerTitle className="h-0 text-start text-lg font-medium opacity-0">
+            Nhận
+          </DrawerTitle>
         </DrawerHeader>
         <div className="no-scrollbar w-full overflow-y-auto px-4 pb-12">
           <FormReceive />
           <DrawerClose asChild>
-            <div className="mt-8 text-center cursor-pointer text-sm font-semibold text-foreground/60 transition-colors">
+            <div className="mt-8 cursor-pointer text-center text-sm font-semibold text-foreground/60 transition-colors">
               Đóng
             </div>
           </DrawerClose>
@@ -33,4 +35,3 @@ export const BottomSheetReceive = () => {
     </Drawer>
   )
 }
-

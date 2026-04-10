@@ -29,7 +29,9 @@ import { toast } from "sonner"
 
 export const Account = () => {
   const user = useUser((state: { user: TUser }) => state.user)
-  const setName = useUser((state: { setName: (name: string) => void }) => state.setName)
+  const setName = useUser(
+    (state: { setName: (name: string) => void }) => state.setName
+  )
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [name, setNameValue] = useState(user.name)
 
@@ -73,9 +75,7 @@ export const Account = () => {
             <div className="flex flex-col gap-5">
               <div className="flex items-center gap-2.5">
                 <Avatar className="size-12">
-                  <AvatarImage src={
-                    user.avatar
-                  } alt={user.name} />
+                  <AvatarImage src={user.avatar} alt={user.name} />
                   <AvatarFallback>{user?.name.charAt(0) || "U"}</AvatarFallback>
                   <AvatarBadge className="right-0 bottom-0 size-10">
                     <ShieldCheck />

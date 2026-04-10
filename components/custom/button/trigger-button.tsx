@@ -24,9 +24,7 @@ export const TriggerButton: React.FC<TTriggerButton> = ({
     >
       {Icon ? <Icon className="h-5 w-5 text-primary" /> : <span>{icon}</span>}
       {title && (
-        <p className="text-start text-sm font-semibold text-primary">
-          {title}
-        </p>
+        <p className="text-start text-sm font-semibold text-primary">{title}</p>
       )}
     </div>
   )

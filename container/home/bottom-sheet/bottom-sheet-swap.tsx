@@ -42,7 +42,7 @@ export const BottomSheetSwap: React.FC<Props> = ({
         <div className="no-scrollbar w-full overflow-y-auto px-4 pb-12">
           <FormSwap onSuccess={() => setDrawerOpen(false)} />
           <DrawerClose asChild>
-            <div className="mt-4 text-center cursor-pointer text-sm font-semibold text-foreground/60 transition-colors">
+            <div className="mt-4 cursor-pointer text-center text-sm font-semibold text-foreground/60 transition-colors">
               Hủy
             </div>
           </DrawerClose>
@@ -51,4 +51,3 @@ export const BottomSheetSwap: React.FC<Props> = ({
     </Drawer>
   )
 }
-

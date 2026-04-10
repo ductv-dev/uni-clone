@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/drawer"
 
 import { shortenHex } from "@/lib/utils"
-import { useUser } from "@/store/user-store"
 import { TUser } from "@/types/type-user"
 import { Copy, Settings, User2, Wallet } from "lucide-react"
 import { redirect, useRouter } from "next/navigation"

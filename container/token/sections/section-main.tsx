@@ -31,13 +31,10 @@ export const SectionMain: React.FC<Props> = ({ data }) => {
   const priceChange = data.usdt * randomChange
   const percentageChange = randomChange * 100
 
-
-
   return (
-    <div className="flex gap-2.5 ">
+    <div className="flex gap-2.5">
       <div className="flex-1">
-        <div className=" flex mt-16 md:mt-0 flex-col gap-2.5 p-2.5">
-
+        <div className="mt-16 flex flex-col gap-2.5 p-2.5 md:mt-0">
           <div className="flex gap-2.5">
             <Avatar className="h-12 w-12">
               <AvatarImage src={data.logoURI} alt="token image" className="" />
@@ -71,7 +68,9 @@ export const SectionMain: React.FC<Props> = ({ data }) => {
                   ) : (
                     <ChevronDown className="text-red-500" />
                   )}
-                  <p className="text-foreground/60">{priceChange.toFixed(2)} US$</p>
+                  <p className="text-foreground/60">
+                    {priceChange.toFixed(2)} US$
+                  </p>
                 </div>
                 <p className="text-foreground/60">
                   ({percentageChange.toFixed(2)}%)
@@ -81,6 +80,10 @@ export const SectionMain: React.FC<Props> = ({ data }) => {
           </div>
         </div>
       </div>
-      <FavoriteStar isFavorite={isFavorite} onClick={() => setIsFavorite(!isFavorite)} />    </div>
+      <FavoriteStar
+        isFavorite={isFavorite}
+        onClick={() => setIsFavorite(!isFavorite)}
+      />{" "}
+    </div>
   )
 }

@@ -20,10 +20,7 @@ type Props = {
   trigger?: React.ReactNode
 }
 
-export const BottomSheetBuySell: React.FC<Props> = ({
-  className,
-  trigger,
-}) => {
+export const BottomSheetBuySell: React.FC<Props> = ({ className, trigger }) => {
   const [drawerOpen, setDrawerOpen] = useState(false)
 
   return (
@@ -41,14 +38,14 @@ export const BottomSheetBuySell: React.FC<Props> = ({
       </DrawerTrigger>
       <DrawerContent className="h-[90%] max-h-[90%]">
         <DrawerHeader>
-          <DrawerTitle className="text-center font-medium opacity-0 h-0">
+          <DrawerTitle className="h-0 text-center font-medium opacity-0">
             Mua / Bán
           </DrawerTitle>
         </DrawerHeader>
         <div className="no-scrollbar overflow-y-auto px-4 pb-12">
           <FormBuySell onSuccess={() => setDrawerOpen(false)} />
           <DrawerClose asChild>
-            <div className="mt-4 text-center cursor-pointer text-sm font-semibold text-foreground/60 transition-colors">
+            <div className="mt-4 cursor-pointer text-center text-sm font-semibold text-foreground/60 transition-colors">
               Hủy
             </div>
           </DrawerClose>
@@ -57,4 +54,3 @@ export const BottomSheetBuySell: React.FC<Props> = ({
     </Drawer>
   )
 }
-

@@ -41,7 +41,9 @@ export const DesktopSwapCard = () => {
       return
     }
     if (!valueFrom || Number(valueFrom) <= 0 || valueFrom > 9999999) {
-      const el = document.getElementById("desktop-valueFrom") as HTMLInputElement
+      const el = document.getElementById(
+        "desktop-valueFrom"
+      ) as HTMLInputElement
       el?.focus()
       toast.error("Vui lòng nhập số lượng hợp lệ")
       return
@@ -132,7 +134,7 @@ export const DesktopSwapCard = () => {
             value={valueFrom?.toString() || ""}
             onChange={(e) => setValueFrom(parseFloat(e.target.value) || 0)}
             placeholder="0"
-            className="w-full text-end text-xl font-bold bg-transparent [-moz-appearance:textfield] focus:outline-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+            className="w-full bg-transparent text-end text-xl font-bold [-moz-appearance:textfield] focus:outline-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
           />
         </div>
       </div>

@@ -8,7 +8,9 @@ export default function NotFound() {
         <AlertCircle size={36} className="text-primary" />
       </div>
       <div className="flex flex-col items-center gap-1.5 text-center">
-        <h1 className="text-2xl font-bold tracking-tight">404 — Trang không tồn tại</h1>
+        <h1 className="text-2xl font-bold tracking-tight">
+          404 — Trang không tồn tại
+        </h1>
         <p className="max-w-sm text-sm text-foreground/60">
           Đường dẫn bạn truy cập không hợp lệ hoặc đã bị xóa.
         </p>

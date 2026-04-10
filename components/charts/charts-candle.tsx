@@ -6,11 +6,17 @@ import {
   CandlestickData,
   Time,
   CandlestickSeries,
+  HistogramSeries,
+  HistogramData,
+  LineSeries,
+  AreaSeries,
 } from "lightweight-charts"
+import { TTypeChart } from "@/types"
 
-// 1. Định nghĩa Interface cho Props và Data
-interface ChartProps {
+type ChartProps = {
+  type: TTypeChart
   data: CandlestickData<Time>[]
+  volumeData: HistogramData<Time>[]
   colors?: {
     backgroundColor?: string
     textColor?: string
@@ -24,17 +30,18 @@ interface ChartProps {
 }
 
 export const CandlestickChart: React.FC<ChartProps> = ({
+  type,
   data,
+  volumeData,
   colors: {
-    backgroundColor = "#fff", // Màu nền tối (thường thấy ở DEX)
+    backgroundColor = "#fff",
     textColor = "#d1d4dc",
-    upColor = "#26a69a", // Nến xanh
-    downColor = "#ef5350", // Nến đỏ
+    upColor = "#26a69a",
+    downColor = "#ef5350",
     wickUpColor = "#26a69a",
     wickDownColor = "#ef5350",
     vertLines = "#e0e1f9",
     horzLines = "#e0e1f9",
-
   } = {},
 }) => {
   const chartContainerRef = useRef<HTMLDivElement>(null)
@@ -42,7 +49,7 @@ export const CandlestickChart: React.FC<ChartProps> = ({
   useEffect(() => {
     if (!chartContainerRef.current) return
 
-    // 2. Khởi tạo biểu đồ
+    //  Khởi tạo biểu đồ
     const chart = createChart(chartContainerRef.current, {
       layout: {
         background: { type: ColorType.Solid, color: backgroundColor },
@@ -57,19 +64,50 @@ export const CandlestickChart: React.FC<ChartProps> = ({
       },
     })
 
-    // 3. Cấu hình định dạng chuỗi nến (Candlestick Series)
-    const candlestickSeries = chart.addSeries(CandlestickSeries, {
-      upColor,
-      downColor,
-      borderVisible: false,
-      wickUpColor,
-      wickDownColor,
+    // Cấu hình định dạng chuỗi nến hoặc đường
+    let mainSeries
+    if (type.value === "candle") {
+      mainSeries = chart.addSeries(CandlestickSeries, {
+        upColor,
+        downColor,
+        borderVisible: false,
+        wickUpColor,
+        wickDownColor,
+      })
+      mainSeries.setData(data)
+    } else {
+      mainSeries = chart.addSeries(LineSeries, {
+        color: "#1e1bd1",
+        lineWidth: 1,
+      })
+      const lineData = data.map((d) => ({ time: d.time, value: d.close }))
+      mainSeries.setData(lineData)
+    }
+
+    mainSeries.priceScale().applyOptions({
+      scaleMargins: {
+        top: 0.1,
+        bottom: 0.4,
+      },
     })
 
-    // 4. Gắn dữ liệu vào biểu đồ
-    candlestickSeries.setData(data)
 
-    // 5. Xử lý sự kiện Resize để biểu đồ luôn responsive
+
+    const volumeSeries = chart.addSeries(HistogramSeries, {
+      priceFormat: { type: "volume" },
+      priceScaleId: "", // Đặt trống để biến nó thành overlay
+    })
+    volumeSeries.priceScale().applyOptions({
+      scaleMargins: {
+        top: 0.8, // Volume chỉ chiếm 20% bên dưới
+        bottom: 0,
+      },
+    })
+
+    // Gắn dữ liệu vào biểu đồ volume
+    volumeSeries.setData(volumeData)
+
+    // Xử lý sự kiện Resize để biểu đồ luôn responsive
     const handleResize = () => {
       if (chartContainerRef.current) {
         chart.applyOptions({ width: chartContainerRef.current.clientWidth })
@@ -78,13 +116,15 @@ export const CandlestickChart: React.FC<ChartProps> = ({
 
     window.addEventListener("resize", handleResize)
 
-    // 6. Dọn dẹp  khi component unmount
+    // Dọn dẹp  khi component unmount
     return () => {
       window.removeEventListener("resize", handleResize)
       chart.remove()
     }
   }, [
+    type,
     data,
+    volumeData,
     backgroundColor,
     textColor,
     upColor,

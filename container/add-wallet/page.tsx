@@ -59,7 +59,7 @@ export const AddWallet = () => {
               className="flex w-full items-center justify-center rounded-sm border-t border-border bg-background shadow-lg shadow-border hover:bg-accent"
             >
               <div className="flex gap-2.5 px-2.5 py-5">
-                <div className="flex flex-col items-start justify-center rounded-full bg-primary/20/50 px-2.5 py-1">
+                <div className="bg-primary/20/50 flex flex-col items-start justify-center rounded-full px-2.5 py-1">
                   {wallet.icon}
                 </div>
                 <div className="">

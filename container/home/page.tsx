@@ -19,7 +19,8 @@ export const Home = () => {
     {
       id: 1,
       title: "Nhận token đầu tiên của bạn",
-      description: "Hãy nhận token đầu tiên của bạn để bắt đầu hành trình khám phá thế giới DeFi!",
+      description:
+        "Hãy nhận token đầu tiên của bạn để bắt đầu hành trình khám phá thế giới DeFi!",
       icon: <Wallet strokeWidth={3} size={20} />,
       is_repuired: true,
       read: false,
@@ -27,7 +28,8 @@ export const Home = () => {
     {
       id: 2,
       title: "Thiết lập tên người dùng",
-      description: "Hãy thiết lập tên người dùng của bạn để hoàn thành quá trình đăng ký!",
+      description:
+        "Hãy thiết lập tên người dùng của bạn để hoàn thành quá trình đăng ký!",
       icon: <Wallet strokeWidth={3} size={20} />,
       is_repuired: false,
       read: false,
@@ -41,7 +43,10 @@ export const Home = () => {
       {/* ── Mobile ── */}
       <div className="md:hidden">
         <SectionAccount data={user} />
-        <SectionBalance number_changes={numberChanges} total_balance={totalBalance} />
+        <SectionBalance
+          number_changes={numberChanges}
+          total_balance={totalBalance}
+        />
         <SectionAction />
         <SectionNotifications
           notifications={notifications}
@@ -55,8 +60,8 @@ export const Home = () => {
       </div>
 
       {/* ── Desktop ── */}
-      <div className="hidden md:flex w-full max-w-7xl mx-auto gap-6 px-6 py-8">
-        <div className="flex flex-1 flex-col gap-5 min-w-0">
+      <div className="mx-auto hidden w-full max-w-7xl gap-6 px-6 py-8 md:flex">
+        <div className="flex min-w-0 flex-1 flex-col gap-5">
           <SectionBalance
             number_changes={numberChanges}
             total_balance={totalBalance}
@@ -75,7 +80,7 @@ export const Home = () => {
           <SectionListToken data={dataToken} isDesktop />
         </div>
 
-        <div className="w-[380px]   shrink-0">
+        <div className="w-[380px] shrink-0">
           <div className="sticky top-24">
             <DesktopActionTabs />
           </div>

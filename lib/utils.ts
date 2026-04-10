@@ -1,6 +1,6 @@
 import { TToken } from "@/types/type-token"
 import { clsx, type ClassValue } from "clsx"
-import { Time } from "lightweight-charts"
+import { CandlestickData, Time } from "lightweight-charts"
 import { twMerge } from "tailwind-merge"
 
 export function cn(...inputs: ClassValue[]) {
@@ -56,7 +56,7 @@ export function generateOHLC(
   let volatility = 4
   switch (timeframe) {
     case "1H":
-      volatility = 1
+      volatility = 100
       break
     case "1D":
       volatility = 4
@@ -109,10 +109,18 @@ export function generateOHLC(
       close: +close.toFixed(2),
     })
 
-    open = close // Giá mở cửa cây nến sau bằng giá đóng cửa cây nến trước
+    open = close
   }
 
   return data
+}
+
+export function generateVolumeData(data: CandlestickData<Time>[]) {
+  return data.map((candle) => ({
+    time: candle.time,
+    value: candle.high - candle.low,
+    color: candle.close >= candle.open ? "#26a69a" : "#ef5350",
+  }))
 }
 
 // random data 24h của token

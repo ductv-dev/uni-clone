@@ -6,10 +6,5 @@ export type {
   TTransactionStatus,
 } from "./type-transaction"
 export type { TToken } from "./type-token"
-
-// Shared nav type — dùng chung cho cả mobile và desktop navbar
-export type TNavItem = {
-  label: string
-  href: string
-  icon: React.ReactNode
-}
+export type { TNavItem } from "./type-nav"
+export type { TTypeChart } from "./type-type-chart"

@@ -72,6 +72,5 @@ export function usePwaInstall() {
     setDeferredPrompt(null)
   }
 
-
   return { isInstallable, install }
 }

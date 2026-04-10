@@ -1,7 +1,6 @@
 "use client"
 
 import { cn } from "@/lib/utils"
-import { Settings } from "lucide-react"
 
 type TButtonNav = {
   classname?: string

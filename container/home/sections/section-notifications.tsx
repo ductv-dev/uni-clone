@@ -23,11 +23,14 @@ export const SectionNotifications: React.FC<Props> = ({
   notifications,
   onMarkRead,
 }) => {
-  const [internalNotifications, setInternalNotifications] = useState<TNotification[]>([
+  const [internalNotifications, setInternalNotifications] = useState<
+    TNotification[]
+  >([
     {
       id: 1,
       title: "Nhận token đầu tiên của bạn",
-      description: "Hãy nhận token đầu tiên của bạn để bắt đầu hành trình khám phá thế giới DeFi!",
+      description:
+        "Hãy nhận token đầu tiên của bạn để bắt đầu hành trình khám phá thế giới DeFi!",
       icon: <Wallet strokeWidth={3} size={20} />,
       is_repuired: true,
       read: false,
@@ -35,7 +38,8 @@ export const SectionNotifications: React.FC<Props> = ({
     {
       id: 2,
       title: "Thiết lập tên người dùng",
-      description: "Hãy thiết lập tên người dùng của bạn để hoàn thành quá trình đăng ký!",
+      description:
+        "Hãy thiết lập tên người dùng của bạn để hoàn thành quá trình đăng ký!",
       icon: <Wallet strokeWidth={3} size={20} />,
       is_repuired: false,
       read: false,
@@ -62,10 +66,10 @@ export const SectionNotifications: React.FC<Props> = ({
   if (isDesktop) {
     return (
       <div className="flex flex-col gap-2">
-        <p className="px-1 text-xs font-semibold uppercase tracking-wider text-foreground/40">
+        <p className="px-1 text-xs font-semibold tracking-wider text-foreground/40 uppercase">
           Thông báo
         </p>
-        <div className="flex gap-3 overflow-x-auto no-scrollbar pb-1">
+        <div className="no-scrollbar flex gap-3 overflow-x-auto pb-1">
           {unreadNotifications.map((noti) => (
             <CardNotification
               key={noti.id}
@@ -73,7 +77,9 @@ export const SectionNotifications: React.FC<Props> = ({
               description={noti.description}
               icon={noti.icon}
               isRequired={noti.is_repuired}
-              setNotification={(read: boolean) => handleSetNotification(noti.id, read)}
+              setNotification={(read: boolean) =>
+                handleSetNotification(noti.id, read)
+              }
             />
           ))}
         </div>
@@ -91,7 +97,9 @@ export const SectionNotifications: React.FC<Props> = ({
             description={noti.description}
             icon={noti.icon}
             isRequired={noti.is_repuired}
-            setNotification={(read: boolean) => handleSetNotification(noti.id, read)}
+            setNotification={(read: boolean) =>
+              handleSetNotification(noti.id, read)
+            }
           />
         ))}
       </div>

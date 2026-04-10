@@ -39,14 +39,14 @@ export const BottomSheetSearch = () => {
 
   return (
     <Drawer open={drawerOpen} onOpenChange={setDrawerOpen}>
-      <DrawerTrigger className="w-full ">
+      <DrawerTrigger className="w-full">
         <div className="flex flex-1 gap-2 rounded-full border-t border-border bg-background p-2.5 shadow-md shadow-border">
           <Search />
           <p>Nhập từ khóa tìm kiếm</p>
         </div>
       </DrawerTrigger>
-      <DrawerContent className="h-full  max-h-full">
-        <div className="max-w-2xl mx-auto">
+      <DrawerContent className="h-full max-h-full">
+        <div className="mx-auto max-w-2xl">
           <div className="flex items-center gap-1 py-2.5">
             <DrawerClose className="px-2">
               <ChevronLeft className="text-foreground" />
@@ -63,9 +63,7 @@ export const BottomSheetSearch = () => {
                 <SearchIcon />
               </InputGroupAddon>
             </InputGroup>
-            <div className="size-12">
-
-            </div>
+            <div className="size-12"></div>
           </div>
 
           <div className="no-scrollbar w-full overflow-y-auto px-2.5">

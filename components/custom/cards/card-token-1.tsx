@@ -27,14 +27,13 @@ export const CardToken1: React.FC<TcardToken1Props> = ({
   onClick,
   className,
 }) => {
-
   const data = randomData24h()
   return (
-
     <div
       onClick={onClick}
       className={
-        cn(className) + " cursor-pointer hover:bg-accent flex w-full items-center gap-2.5 rounded-lg px-4 py-2"
+        cn(className) +
+        " flex w-full cursor-pointer items-center gap-2.5 rounded-lg px-4 py-2 hover:bg-accent"
       }
     >
       <div className="flex flex-1 items-center gap-2.5">
@@ -47,7 +46,9 @@ export const CardToken1: React.FC<TcardToken1Props> = ({
 
         <div className="flex flex-col">
           <span className="text-sm font-medium">{name}</span>
-          {symbol && <span className="text-xs text-foreground/60">{symbol}</span>}
+          {symbol && (
+            <span className="text-xs text-foreground/60">{symbol}</span>
+          )}
         </div>
       </div>
       <div>
@@ -83,6 +84,5 @@ export const CardToken1: React.FC<TcardToken1Props> = ({
         </div>
       </div>
     </div>
-
   )
 }

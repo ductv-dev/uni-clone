@@ -11,10 +11,18 @@ export const DesktopActionTabs = () => {
     <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
       <Tabs defaultValue="swap">
         <TabsList className="mb-4 w-full">
-          <TabsTrigger value="swap" className="flex-1">Swap</TabsTrigger>
-          <TabsTrigger value="buy-sell" className="flex-1">Mua / Bán</TabsTrigger>
-          <TabsTrigger value="receive" className="flex-1">Nhận</TabsTrigger>
-          <TabsTrigger value="send" className="flex-1">Gửi</TabsTrigger>
+          <TabsTrigger value="swap" className="flex-1">
+            Swap
+          </TabsTrigger>
+          <TabsTrigger value="buy-sell" className="flex-1">
+            Mua / Bán
+          </TabsTrigger>
+          <TabsTrigger value="receive" className="flex-1">
+            Nhận
+          </TabsTrigger>
+          <TabsTrigger value="send" className="flex-1">
+            Gửi
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="swap" className="mt-0">
@@ -33,4 +41,3 @@ export const DesktopActionTabs = () => {
     </div>
   )
 }
-

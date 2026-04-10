@@ -23,8 +23,12 @@ type Props = {
 
 export const FormSwap: React.FC<Props> = ({ onSuccess }) => {
   const inputId = useId()
-  const [tokenFrom, setTokenFrom] = useState(LIST_TOKEN[0].symbol as TToken["symbol"])
-  const [tokenTo, setTokenTo] = useState(LIST_TOKEN[2].symbol as TToken["symbol"])
+  const [tokenFrom, setTokenFrom] = useState(
+    LIST_TOKEN[0].symbol as TToken["symbol"]
+  )
+  const [tokenTo, setTokenTo] = useState(
+    LIST_TOKEN[2].symbol as TToken["symbol"]
+  )
   const [isFromOpen, setIsFromOpen] = useState(false)
   const [isToOpen, setIsToOpen] = useState(false)
   const [valueFrom, setValueFrom] = useState<number | null>(null)
@@ -41,7 +45,12 @@ export const FormSwap: React.FC<Props> = ({ onSuccess }) => {
       toast.error("Token đi và token đến phải khác nhau")
       return
     }
-    if (!valueFrom || valueFrom <= 0 || valueFrom > 9999999 || valueFrom === null) {
+    if (
+      !valueFrom ||
+      valueFrom <= 0 ||
+      valueFrom > 9999999 ||
+      valueFrom === null
+    ) {
       const el = document.getElementById(inputId) as HTMLInputElement
       el?.focus()
       toast.error("Vui lòng nhập số lượng hợp lệ")
@@ -106,12 +115,16 @@ export const FormSwap: React.FC<Props> = ({ onSuccess }) => {
           <Drawer open={isFromOpen} onOpenChange={setIsFromOpen}>
             <DrawerTrigger asChild>
               <button type="button">
-                <Badge className="cursor-pointer font-semibold">{tokenFrom}</Badge>
+                <Badge className="cursor-pointer font-semibold">
+                  {tokenFrom}
+                </Badge>
               </button>
             </DrawerTrigger>
             <DrawerContent className="h-[70%] max-h-full">
               <DrawerHeader>
-                <DrawerTitle className="text-start text-lg font-medium">Chọn token</DrawerTitle>
+                <DrawerTitle className="text-start text-lg font-medium">
+                  Chọn token
+                </DrawerTitle>
               </DrawerHeader>
               <div className="no-scrollbar w-full overflow-y-auto px-2.5">
                 {LIST_TOKEN.map((t) => (
@@ -141,10 +154,10 @@ export const FormSwap: React.FC<Props> = ({ onSuccess }) => {
         </div>
       </div>
 
-      <div className="flex justify-center -my-3 z-10 relative">
+      <div className="relative z-10 -my-3 flex justify-center">
         <button
           onClick={handleReverseTokens}
-          className="rounded-full border border-border bg-background p-2 transition-colors hover:bg-accent shadow-sm"
+          className="rounded-full border border-border bg-background p-2 shadow-sm transition-colors hover:bg-accent"
           type="button"
         >
           <ArrowDownUp className="h-4 w-4" />
@@ -167,7 +180,9 @@ export const FormSwap: React.FC<Props> = ({ onSuccess }) => {
             </DrawerTrigger>
             <DrawerContent className="h-[70%] max-h-full">
               <DrawerHeader>
-                <DrawerTitle className="text-start text-lg font-medium">Chọn token</DrawerTitle>
+                <DrawerTitle className="text-start text-lg font-medium">
+                  Chọn token
+                </DrawerTitle>
               </DrawerHeader>
               <div className="no-scrollbar w-full overflow-y-auto px-2.5">
                 {LIST_TOKEN.filter((t) => t.symbol !== tokenFrom).map((t) => (
@@ -195,11 +210,18 @@ export const FormSwap: React.FC<Props> = ({ onSuccess }) => {
 
       <div className="min-h-[20px]">
         {valueInUSDT > 0 && (
-          <p className="text-center text-xs text-foreground/40">≈ {valueInUSDT.toFixed(2)} USDT</p>
+          <p className="text-center text-xs text-foreground/40">
+            ≈ {valueInUSDT.toFixed(2)} USDT
+          </p>
         )}
       </div>
 
-      <Button onClick={handleSwap} disabled={isLoading} size="lg" className="w-full mt-2">
+      <Button
+        onClick={handleSwap}
+        disabled={isLoading}
+        size="lg"
+        className="mt-2 w-full"
+      >
         {isLoading ? "Đang xử lý..." : "Hoán đổi ngay"}
       </Button>
     </div>

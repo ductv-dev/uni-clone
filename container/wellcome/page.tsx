@@ -34,14 +34,14 @@ export const Wellcome = () => {
   const { isInstallable, install } = usePwaInstall()
 
   return (
-    <div className="min-h-screen w-screen overflow-hidden bg-background">
+    <div className="min-h-screen overflow-hidden bg-background">
       {/* ── MOBILE ── */}
       <div className="flex min-h-screen flex-col md:hidden">
         {/* Top hero area */}
         <div className="relative flex flex-1 flex-col items-center justify-center overflow-hidden">
           {/* Background glow */}
           <div className="pointer-events-none absolute inset-0">
-            <div className="absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/20 blur-3xl" />
+            <div className="absolute top-1/2 left-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/20 blur-3xl" />
           </div>
 
           {/* Orbiting circles */}
@@ -77,14 +77,14 @@ export const Wellcome = () => {
 
           {/* Center logo text */}
           <div className="z-10 flex flex-col items-center gap-1">
-            <span className="text-xs font-semibold uppercase tracking-[0.25em] text-primary/70">
+            <span className="text-xs font-semibold tracking-[0.25em] text-primary/70 uppercase">
               Uni Crypto
             </span>
           </div>
         </div>
 
         {/* Bottom CTA panel */}
-        <div className="rounded-t-3xl border-t border-border bg-card/80 px-5 pb-10 pt-6 backdrop-blur-xl">
+        <div className="rounded-t-3xl border-t border-border bg-card/80 px-5 pt-6 pb-10 backdrop-blur-xl">
           <div className="flex flex-col items-center gap-4">
             <div className="text-center">
               <h1 className="text-2xl font-bold tracking-tight text-foreground">
@@ -114,11 +114,10 @@ export const Wellcome = () => {
 
             {/* Buttons */}
             <div className="mt-1 flex w-full flex-col gap-3">
-              <div className="flex gap-2.5 items-center">
-
+              <div className="flex items-center gap-2.5">
                 <a
                   href="/login"
-                  className="flex flex-1 h-13 w-full items-center justify-center rounded-2xl bg-primary px-6 shadow-lg shadow-primary/30 transition-all active:scale-95"
+                  className="flex h-13 w-full flex-1 items-center justify-center rounded-2xl bg-primary px-6 shadow-lg shadow-primary/30 transition-all active:scale-95"
                 >
                   <p className="text-sm font-bold text-primary-foreground">
                     Đăng nhập
@@ -127,10 +126,13 @@ export const Wellcome = () => {
                 {isInstallable && (
                   <div
                     onClick={install}
-                    className="flex  size-13 rounded-2xl  items-center justify-center bg-primary"
+                    className="flex size-13 items-center justify-center rounded-2xl bg-primary"
                   >
-
-                    <Download size={16} strokeWidth={2} className="text-accent" />
+                    <Download
+                      size={16}
+                      strokeWidth={2}
+                      className="text-accent"
+                    />
                   </div>
                 )}
               </div>
@@ -138,18 +140,26 @@ export const Wellcome = () => {
                 href="/register"
                 className="flex h-13 w-full items-center justify-center rounded-2xl border border-border bg-background px-6 transition-all active:scale-95"
               >
-                <p className="text-sm font-bold text-foreground">Tạo tài khoản</p>
+                <p className="text-sm font-bold text-foreground">
+                  Tạo tài khoản
+                </p>
               </a>
             </div>
 
             {/* Terms */}
             <p className="text-center text-xs text-foreground/40">
               Tiếp tục đồng nghĩa với việc bạn chấp nhận{" "}
-              <a href="#" className="font-semibold text-primary/70 underline underline-offset-2">
+              <a
+                href="#"
+                className="font-semibold text-primary/70 underline underline-offset-2"
+              >
                 Điều khoản dịch vụ
               </a>{" "}
               &amp;{" "}
-              <a href="#" className="font-semibold text-primary/70 underline underline-offset-2">
+              <a
+                href="#"
+                className="font-semibold text-primary/70 underline underline-offset-2"
+              >
                 Chính sách bảo mật
               </a>
             </p>
@@ -161,18 +171,18 @@ export const Wellcome = () => {
       <div className="relative hidden min-h-screen items-center md:flex">
         {/* Background */}
         <div className="absolute inset-0 bg-background">
-          <div className="absolute left-1/4 top-1/3 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 blur-3xl" />
-          <div className="absolute right-1/4 top-2/3 h-[400px] w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/5 blur-3xl" />
+          <div className="absolute top-1/3 left-1/4 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 blur-3xl" />
+          <div className="absolute top-2/3 right-1/4 h-[400px] w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/5 blur-3xl" />
         </div>
 
         <div className="relative mx-auto flex w-full max-w-5xl items-center justify-between gap-12 px-8 py-16">
           {/* Left — Text */}
           <div className="flex flex-1 flex-col gap-8">
             <div>
-              <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-primary">
+              <p className="mb-3 text-sm font-semibold tracking-widest text-primary uppercase">
                 Uni Crypto Platform
               </p>
-              <h1 className="text-5xl font-bold leading-tight tracking-tight text-foreground">
+              <h1 className="text-5xl leading-tight font-bold tracking-tight text-foreground">
                 Nền tảng crypto{" "}
                 <span className="bg-gradient-to-r from-primary to-primary/50 bg-clip-text text-transparent">
                   duy nhất
@@ -180,8 +190,8 @@ export const Wellcome = () => {
                 bạn cần
               </h1>
               <p className="mt-4 text-lg text-foreground/60">
-                Giao dịch BTC, ETH, BNB và hơn 400 loại tiền điện tử với tỷ
-                giá tốt nhất, bảo mật tuyệt đối.
+                Giao dịch BTC, ETH, BNB và hơn 400 loại tiền điện tử với tỷ giá
+                tốt nhất, bảo mật tuyệt đối.
               </p>
             </div>
 
@@ -192,7 +202,9 @@ export const Wellcome = () => {
                   key={s.label}
                   className="rounded-2xl border border-border bg-card/60 px-5 py-4 backdrop-blur-xl"
                 >
-                  <p className="text-2xl font-bold text-foreground">{s.value}</p>
+                  <p className="text-2xl font-bold text-foreground">
+                    {s.value}
+                  </p>
                   <p className="text-xs text-foreground/50">{s.label}</p>
                 </div>
               ))}
@@ -244,12 +256,12 @@ export const Wellcome = () => {
           <div className="relative flex flex-1 items-center justify-center">
             {/* Glow behind phone */}
             <div className="absolute h-80 w-80 rounded-full bg-primary/20 blur-3xl" />
-            <div className="relative z-10 w-60 h-auto">
+            <div className="relative z-10 h-auto w-60">
               <Iphone src="https://i.pinimg.com/1200x/6f/4e/ad/6f4ead9b9aedd1cebaf2cebcc1acf19c.jpg" />
             </div>
 
             {/* Floating stat cards */}
-            <div className="absolute -left-4 top-16 z-20 rounded-2xl border border-border bg-card/80 px-4 py-3 shadow-xl backdrop-blur-xl">
+            <div className="absolute top-16 -left-4 z-20 rounded-2xl border border-border bg-card/80 px-4 py-3 shadow-xl backdrop-blur-xl">
               <p className="text-xs text-foreground/50">BTC/USDT</p>
               <p className="text-base font-bold text-foreground">$67,420</p>
               <p className="text-xs font-semibold text-green-500">+2.34%</p>

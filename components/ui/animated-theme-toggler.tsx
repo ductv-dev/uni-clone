@@ -23,7 +23,9 @@ export const AnimatedThemeToggler = ({
   useEffect(() => {
     const updateTheme = () => {
       setIsDark(document.documentElement.classList.contains("dark"))
-      setTheme(document.documentElement.classList.contains("dark") ? "dark" : "light")
+      setTheme(
+        document.documentElement.classList.contains("dark") ? "dark" : "light"
+      )
     }
 
     updateTheme()

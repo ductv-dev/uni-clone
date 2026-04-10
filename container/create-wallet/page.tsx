@@ -67,7 +67,9 @@ export const CreateWallet = () => {
                 value={newName}
               />
               <InputGroupAddon align="inline-end">
-                <p className="text-xl font-semibold text-foreground">.uni.eth</p>
+                <p className="text-xl font-semibold text-foreground">
+                  .uni.eth
+                </p>
               </InputGroupAddon>
             </InputGroup>
           </Field>

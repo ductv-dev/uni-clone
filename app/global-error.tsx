@@ -31,7 +31,14 @@ export default function GlobalError({ error, reset }: Props) {
           <h1 style={{ fontSize: "1.25rem", fontWeight: 700, margin: 0 }}>
             Lỗi hệ thống nghiêm trọng
           </h1>
-          <p style={{ fontSize: "0.875rem", color: "#888", margin: 0, textAlign: "center" }}>
+          <p
+            style={{
+              fontSize: "0.875rem",
+              color: "#888",
+              margin: 0,
+              textAlign: "center",
+            }}
+          >
             Ứng dụng gặp sự cố không thể khôi phục.
             {error.digest && ` (ID: ${error.digest})`}
           </p>

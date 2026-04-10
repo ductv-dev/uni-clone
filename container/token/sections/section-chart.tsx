@@ -1,7 +1,17 @@
 import { CandlestickChart } from "@/components/charts/charts-candle"
 import { Badge } from "@/components/ui/badge"
-import { generateOHLC, Timeframe } from "@/lib/utils"
-import { CandlestickData, Time } from "lightweight-charts"
+import {
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  Select,
+} from "@/components/ui/select"
+import { generateOHLC, generateVolumeData, Timeframe } from "@/lib/utils"
+import { TTypeChart } from "@/types"
+import { CandlestickData, HistogramData, Time } from "lightweight-charts"
+import { ChartCandlestick, ChartLine } from "lucide-react"
 import { useTheme } from "next-themes"
 import { useMemo, useState } from "react"
 
@@ -13,9 +23,15 @@ const TIMEFRAMES: { label: string; value: Timeframe }[] = [
   { label: "Năm", value: "1Y" },
 ]
 
-export const SectionChart = () => {
-  const { resolvedTheme, theme, setTheme } = useTheme()
+const TYPE_CHART: TTypeChart[] = [
+  { label: "Candle", value: "candle", icon: <ChartCandlestick /> },
+  { label: "Line", value: "line", icon: <ChartLine /> },
+]
 
+export const SectionChart = () => {
+  const { resolvedTheme } = useTheme()
+  const [typeChart, setTypeChart] = useState<TTypeChart>(TYPE_CHART[0])
+  console.log("typeChart", typeChart)
   const colors = {
     backgroundColor: resolvedTheme === "dark" ? "#1f2937" : "#fff",
     textColor: resolvedTheme === "dark" ? "#d1d4dc" : "#1f2937",
@@ -25,37 +41,73 @@ export const SectionChart = () => {
     wickDownColor: "#ef5350",
     vertLines: resolvedTheme === "dark" ? "#374151" : "#e0e1f9",
     horzLines: resolvedTheme === "dark" ? "#374151" : "#e0e1f9",
-
   }
   const [activeTimeframe, setActiveTimeframe] = useState<Timeframe>("1D")
   const data = useMemo(() => {
     return generateOHLC(500, 120, activeTimeframe) as CandlestickData<Time>[]
   }, [activeTimeframe])
+  const volumeData = useMemo(() => {
+    return generateVolumeData(data) as HistogramData<Time>[]
+  }, [data])
   return (
     <div className="flex flex-col gap-2.5">
+      <div className="flex items-center justify-between">
+        <Select
+          value={activeTimeframe}
+          onValueChange={(value) =>
+            setActiveTimeframe(value as Timeframe)
+          }
+        >
+          <SelectTrigger className="w-full max-w-48">
+            <SelectValue placeholder="Chọn khung thời gian" />
+          </SelectTrigger>
+          <SelectContent position="popper">
+            <SelectGroup>
+              {TIMEFRAMES.map((t) => (
+                <SelectItem key={t.value} value={t.value}>
+                  {t.label}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+        <Select
+          value={typeChart.value}
+          onValueChange={(value) =>
+            setTypeChart(
+              TYPE_CHART.find((t) => t.value === value) || TYPE_CHART[0]
+            )
+          }
+        >
+          <SelectTrigger className="w-full max-w-48">
+            <SelectValue placeholder="Chọn loại biểu đồ" />
+          </SelectTrigger>
+          <SelectContent position="popper">
+            <SelectGroup>
+              {TYPE_CHART.map((option, index) => (
+                <SelectItem key={index} value={option.value}>
+                  <div className="flex items-center gap-1">
+                    <div>{option.icon}</div>
+                    <p>{option.label}</p>
+                  </div>
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </div>
       <div
         style={{
           overflow: "hidden",
           maxWidth: "800px",
         }}
       >
-        <CandlestickChart data={data} colors={colors} />
-      </div>
-      <div className="no-scrollbar flex w-full items-center gap-2.5 scroll-auto px-2.5">
-        Xem theo:
-        {TIMEFRAMES.map((t) => (
-          <Badge
-            onClick={() => setActiveTimeframe(t.value)}
-            className={
-              t.value === activeTimeframe
-                ? "bg-primary text-background"
-                : "bg-background text-primary"
-            }
-            key={t.value}
-          >
-            {t.label}
-          </Badge>
-        ))}
+        <CandlestickChart
+          type={typeChart}
+          volumeData={volumeData}
+          data={data}
+          colors={colors}
+        />
       </div>
     </div>
   )

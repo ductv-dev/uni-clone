@@ -77,14 +77,14 @@ export const SearchPage = () => {
   return (
     <div className="h-full w-full">
       {/* Field tìm kiếm */}
-      <div className="fixed lg:static top-0 z-50 max-w-xl mx-auto w-full bg-background p-2.5">
+      <div className="fixed top-0 z-50 mx-auto w-full max-w-xl bg-background p-2.5 lg:static">
         <BottomSheetSearch />
       </div>
 
-      <div className="mt-20 lg:mt-0 lg:flex w-full px-2.5 gap-2.5 lg:gap-5 pb-20">
+      <div className="mt-20 w-full gap-2.5 px-2.5 pb-20 lg:mt-0 lg:flex lg:gap-5">
         {/* List token yêu thích */}
         <div className="lg:w-[380px]">
-          <div className="flex sticky top-0 flex-col gap-2">
+          <div className="sticky top-0 flex flex-col gap-2">
             <p className="font-semibold text-foreground/60">Token yêu thích</p>
 
             <div className="grid grid-cols-2 gap-2.5">
@@ -124,7 +124,7 @@ export const SearchPage = () => {
           </div>
         </div>
         {/* List token hàng đầu */}
-        <div className="flex flex-1  flex-col gap-2">
+        <div className="flex flex-1 flex-col gap-2">
           {/* Bộ lọc */}
           <div className="flex items-center">
             <p className="flex-1 font-semibold text-foreground/60">

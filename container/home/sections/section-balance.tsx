@@ -13,7 +13,9 @@ export const SectionBalance: React.FC<Props> = ({
   number_changes,
   isDesktop = false,
 }) => {
-  const formattedBalance = total_balance?.toLocaleString(undefined, { minimumFractionDigits: 2 })
+  const formattedBalance = total_balance?.toLocaleString(undefined, {
+    minimumFractionDigits: 2,
+  })
 
   if (isDesktop) {
     return (
@@ -26,14 +28,22 @@ export const SectionBalance: React.FC<Props> = ({
           {number_changes >= 0 ? (
             <>
               <ChevronUp className="h-5 w-5 text-green-500" />
-              <span className="text-sm font-semibold text-green-500">+{number_changes}%</span>
-              <span className="text-xs text-foreground/40 ml-1">so với hôm qua</span>
+              <span className="text-sm font-semibold text-green-500">
+                +{number_changes}%
+              </span>
+              <span className="ml-1 text-xs text-foreground/40">
+                so với hôm qua
+              </span>
             </>
           ) : (
             <>
               <ChevronDown className="h-5 w-5 text-red-500" />
-              <span className="text-sm font-semibold text-red-500">{number_changes}%</span>
-              <span className="text-xs text-foreground/40 ml-1">so với hôm qua</span>
+              <span className="text-sm font-semibold text-red-500">
+                {number_changes}%
+              </span>
+              <span className="ml-1 text-xs text-foreground/40">
+                so với hôm qua
+              </span>
             </>
           )}
         </div>

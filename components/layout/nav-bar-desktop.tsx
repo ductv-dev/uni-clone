@@ -1,22 +1,11 @@
 "use client"
 
 import { CardSetting } from "@/components/custom/cards/card-setting"
-import {
-  Drawer,
-  DrawerContent,
-  DrawerTrigger,
-} from "@/components/ui/drawer"
+import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer"
 import { shortenHex } from "@/lib/utils"
 import { useUser } from "@/store/user-store"
 import { TUser } from "@/types"
-import {
-  ArrowLeftRight,
-  Copy,
-
-  Settings,
-  User2,
-  Wallet,
-} from "lucide-react"
+import { ArrowLeftRight, Copy, Settings, User2, Wallet } from "lucide-react"
 import { usePathname, useRouter } from "next/navigation"
 import { useState } from "react"
 import { toast } from "sonner"
@@ -45,7 +34,7 @@ export const NavbarDesktop: React.FC<Props> = ({ data }) => {
   }
 
   return (
-    <header className="sticky top-0 z-50 hidden w-full  bg-background/80 backdrop-blur-xl md:block">
+    <header className="sticky top-0 z-50 hidden w-full bg-background/80 backdrop-blur-xl md:block">
       <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-6">
         {/* ── Logo ── */}
         <a href="/user/home" className="flex items-center gap-2.5">
@@ -65,10 +54,11 @@ export const NavbarDesktop: React.FC<Props> = ({ data }) => {
               <a
                 key={item.href}
                 href={item.href}
-                className={`relative flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all ${isActive
-                  ? "bg-background text-primary  border-primary border-t shadow-sm"
-                  : "text-foreground/60 hover:text-foreground"
-                  }`}
+                className={`relative flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all ${
+                  isActive
+                    ? "border-t border-primary bg-background text-primary shadow-sm"
+                    : "text-foreground/60 hover:text-foreground"
+                }`}
               >
                 <span className={isActive ? "text-primary" : ""}>
                   {item.icon}
@@ -81,10 +71,12 @@ export const NavbarDesktop: React.FC<Props> = ({ data }) => {
 
         {/* ── Right: Swap + User ── */}
         <div className="flex items-center gap-3">
-
-
           {/* User avatar dropdown */}
-          <Drawer open={isDrawerOpen} onOpenChange={setIsDrawerOpen} direction="right">
+          <Drawer
+            open={isDrawerOpen}
+            onOpenChange={setIsDrawerOpen}
+            direction="right"
+          >
             <DrawerTrigger asChild>
               <button className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/20 ring-2 ring-primary/20 transition-all hover:ring-primary/40">
                 <UserAvatar src={user.avatar} size={36} />
@@ -135,12 +127,9 @@ export const NavbarDesktop: React.FC<Props> = ({ data }) => {
                 title="Settings"
                 icon={<Settings strokeWidth={3} size={20} />}
               />
-
-
             </DrawerContent>
           </Drawer>
           <AnimatedThemeToggler />
-
         </div>
       </div>
     </header>

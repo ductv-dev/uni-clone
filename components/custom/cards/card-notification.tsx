@@ -48,7 +48,9 @@ export const CardNotification: React.FC<TCardNoti> = ({
             )}
           </div>
         </div>
-        <div className="line-clamp-2 text-sm text-foreground/60">{description}</div>
+        <div className="line-clamp-2 text-sm text-foreground/60">
+          {description}
+        </div>
       </div>
     </div>
   )
