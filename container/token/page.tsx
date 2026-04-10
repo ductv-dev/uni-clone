@@ -70,22 +70,6 @@ export const TokenInfor: React.FC<Props> = ({ symbol }) => {
           <SectionAbout data={data} />
           <StatisticalSection data={data} />
         </div>
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button>
-              <SquareArrowOutUpRight />
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="max-w-7xl">
-            <SectionChart />
-            <DialogFooter>
-              <DialogClose asChild>
-                <Button variant="outline">Cancel</Button>
-              </DialogClose>
-              <Button type="submit">Save changes</Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
 
         {/* Cột phải (Ẩn trên Mobile, fixed width trên Desktop) */}
         <div className="hidden w-[380px] shrink-0 md:block">

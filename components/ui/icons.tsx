@@ -10,6 +10,7 @@ import {
   Landmark,
   Send,
   Import,
+  Wallet2,
 } from "lucide-react"
 
 export type IconProps = React.HTMLAttributes<SVGElement>
@@ -26,6 +27,8 @@ export const Icons = {
   bank: (props: IconProps) => <Landmark {...props} />,
   send: (props: IconProps) => <Send {...props} />,
   import: (props: IconProps) => <Import {...props} />,
+  wallet2: (props: IconProps) => <Wallet2 {...props} />,
+
 
   linkedin: (props: IconProps) => (
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" {...props}>

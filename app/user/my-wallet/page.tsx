@@ -1,3 +1,5 @@
+import { MyWallet } from "@/container/my-wallet/page";
+
 export default function MyWalletpage() {
-  return <div>My Wallet Page</div>
+  return <MyWallet />
 }
