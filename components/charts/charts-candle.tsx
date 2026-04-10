@@ -1,17 +1,16 @@
 ""
-import React, { useEffect, useRef } from "react"
-import {
-  createChart,
-  ColorType,
-  CandlestickData,
-  Time,
-  CandlestickSeries,
-  HistogramSeries,
-  HistogramData,
-  LineSeries,
-  AreaSeries,
-} from "lightweight-charts"
 import { TTypeChart } from "@/types"
+import {
+  CandlestickData,
+  CandlestickSeries,
+  ColorType,
+  createChart,
+  HistogramData,
+  HistogramSeries,
+  LineSeries,
+  Time,
+} from "lightweight-charts"
+import React, { useEffect, useRef } from "react"
 
 type ChartProps = {
   type: TTypeChart
@@ -90,8 +89,6 @@ export const CandlestickChart: React.FC<ChartProps> = ({
         bottom: 0.4,
       },
     })
-
-
 
     const volumeSeries = chart.addSeries(HistogramSeries, {
       priceFormat: { type: "volume" },

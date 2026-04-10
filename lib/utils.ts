@@ -119,7 +119,7 @@ export function generateVolumeData(data: CandlestickData<Time>[]) {
   return data.map((candle) => ({
     time: candle.time,
     value: candle.high - candle.low,
-    color: candle.close >= candle.open ? "#26a69a" : "#ef5350",
+    color: candle.close >= candle.open ? "#92d3cc" : "#f6a8a7",
   }))
 }
 
