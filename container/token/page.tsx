@@ -1,4 +1,3 @@
-"use client"
 
 import { ButtonNav } from "@/components/custom/button/button-navigation"
 import { LIST_TOKEN } from "@/data/mock-data-list-token"
@@ -15,10 +14,7 @@ import { toast } from "sonner"
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer"
 import { NavbarDesktop } from "@/components/layout/nav-bar-desktop"
 import { NAVBAR_ITEMS } from "@/lib/nav-config"
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
-import { FieldGroup, Field } from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+
 
 type Props = {
   symbol: string

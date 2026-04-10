@@ -3,6 +3,7 @@ import { MiniChart } from "@/components/charts/chart-widget"
 import { AvatarImage, Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { cn, randomData24h } from "@/lib/utils"
 import { ChevronDown, ChevronUp } from "lucide-react"
+import { useMemo } from "react"
 
 type TcardToken1Props = {
   rank?: number
@@ -27,7 +28,7 @@ export const CardToken1: React.FC<TcardToken1Props> = ({
   onClick,
   className,
 }) => {
-  const data = randomData24h()
+  const data = useMemo(() => randomData24h(), [])
   return (
     <div
       onClick={onClick}

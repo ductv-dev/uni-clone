@@ -54,11 +54,10 @@ export const NavbarDesktop: React.FC<Props> = ({ data }) => {
               <a
                 key={item.href}
                 href={item.href}
-                className={`relative flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all ${
-                  isActive
-                    ? "border-t border-primary bg-background text-primary shadow-sm"
-                    : "text-foreground/60 hover:text-foreground"
-                }`}
+                className={`relative flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all ${isActive
+                  ? "border-t border-primary bg-background text-primary shadow-sm"
+                  : "text-foreground/60 hover:text-foreground"
+                  }`}
               >
                 <span className={isActive ? "text-primary" : ""}>
                   {item.icon}
@@ -78,9 +77,9 @@ export const NavbarDesktop: React.FC<Props> = ({ data }) => {
             direction="right"
           >
             <DrawerTrigger asChild>
-              <button className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/20 ring-2 ring-primary/20 transition-all hover:ring-primary/40">
+              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/20 ring-2 ring-primary/20 transition-all hover:ring-primary/40">
                 <UserAvatar src={user.avatar} size={36} />
-              </button>
+              </div>
             </DrawerTrigger>
             <DrawerContent className="px-2.5">
               {/* Profile header */}

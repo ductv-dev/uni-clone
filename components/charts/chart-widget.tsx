@@ -1,3 +1,4 @@
+"use client"
 import React from "react"
 
 export type DataPoint = {
@@ -18,6 +19,7 @@ export const MiniChart: React.FC<MiniChartProps> = ({
   height = 40,
   strokeWidth = 2,
 }) => {
+
   if (!data || data.length < 2) return <span>No data</span>
 
   const firstValue = data[0].value
