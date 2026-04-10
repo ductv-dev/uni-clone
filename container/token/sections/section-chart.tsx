@@ -16,6 +16,7 @@ import { useTheme } from "next-themes"
 import { useMemo, useState } from "react"
 
 const TIMEFRAMES: { label: string; value: Timeframe }[] = [
+
   { label: "Giờ", value: "1H" },
   { label: "Ngày", value: "1D" },
   { label: "Tuần", value: "1W" },

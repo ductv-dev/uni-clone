@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
 import { Toaster } from "sonner"
 import Providers from "@/provider/query-provider"
+import { CheckNetwork } from "@/components/custom/notification/check-network"
 
 export const metadata: Metadata = {
   title: "Uni",
