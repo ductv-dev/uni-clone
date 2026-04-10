@@ -77,8 +77,8 @@ export const CandlestickChart: React.FC<ChartProps> = ({
       mainSeries.setData(data)
     } else {
       mainSeries = chart.addSeries(LineSeries, {
-        color: "#1e1bd1",
-        lineWidth: 1,
+        color: "#100cf5",
+        lineWidth: 2,
       })
       const lineData = data.map((d) => ({ time: d.time, value: d.close }))
       mainSeries.setData(lineData)
