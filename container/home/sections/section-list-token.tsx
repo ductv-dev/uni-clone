@@ -43,7 +43,7 @@ export const SectionListToken: React.FC<Props> = ({
 
   return (
     <div className="flex flex-col gap-1 px-2.5">
-      {data.map((token, index) => (
+      {data.map((token) => (
         <CardToken1
           key={token.address}
           name={token.name}

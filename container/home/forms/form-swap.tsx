@@ -14,7 +14,7 @@ import { LIST_TOKEN } from "@/data/mock-data-list-token"
 import { cn } from "@/lib/utils"
 import { TToken } from "@/types/type-token"
 import { ArrowDownUp } from "lucide-react"
-import { useEffect, useState, useId } from "react"
+import { useState, useId } from "react"
 import { toast } from "sonner"
 
 type Props = {
@@ -32,9 +32,22 @@ export const FormSwap: React.FC<Props> = ({ onSuccess }) => {
   const [isFromOpen, setIsFromOpen] = useState(false)
   const [isToOpen, setIsToOpen] = useState(false)
   const [valueFrom, setValueFrom] = useState<number | null>(null)
-  const [valueTo, setValueTo] = useState<number | null>(null)
-  const [valueInUSDT, setValueInUSDT] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
+
+  let valueTo: number | null = 0
+  let valueInUSDT = 0
+
+  if (tokenFrom && tokenTo && valueFrom) {
+    const tokenFromData = LIST_TOKEN.find((t) => t.symbol === tokenFrom)
+    const tokenToData = LIST_TOKEN.find((t) => t.symbol === tokenTo)
+    if (tokenFromData && tokenToData) {
+      const valueFromNum = Number(valueFrom)
+      if (valueFromNum > 0) {
+        valueInUSDT = valueFromNum * tokenFromData.usdt
+        valueTo = valueInUSDT / tokenToData.usdt
+      }
+    }
+  }
 
   const handleSwap = async () => {
     if (!tokenFrom || !tokenTo) {
@@ -66,7 +79,6 @@ export const FormSwap: React.FC<Props> = ({ onSuccess }) => {
 
     setValueFrom(null)
     setTokenTo("")
-    setValueTo(0)
     setIsLoading(false)
 
     if (onSuccess) {
@@ -82,27 +94,7 @@ export const FormSwap: React.FC<Props> = ({ onSuccess }) => {
     setTokenFrom(tokenTo)
     setTokenTo(tokenFrom)
     setValueFrom(null)
-    setValueTo(null)
   }
-
-  useEffect(() => {
-    if (tokenFrom && tokenTo && valueFrom) {
-      const tokenFromData = LIST_TOKEN.find((t) => t.symbol === tokenFrom)
-      const tokenToData = LIST_TOKEN.find((t) => t.symbol === tokenTo)
-      if (tokenFromData && tokenToData) {
-        const valueFromNum = Number(valueFrom)
-        if (valueFromNum > 0) {
-          const valueUSDT = valueFromNum * tokenFromData.usdt
-          setValueInUSDT(valueUSDT)
-          const valueTo = valueUSDT / tokenToData.usdt
-          setValueTo(valueTo)
-        }
-      }
-    } else {
-      setValueTo(0)
-      setValueInUSDT(0)
-    }
-  }, [valueFrom, tokenFrom, tokenTo])
 
   return (
     <div className="flex flex-col gap-4">

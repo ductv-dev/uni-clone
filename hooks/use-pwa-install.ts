@@ -18,14 +18,17 @@ export function usePwaInstall() {
   const [isInstallable, setIsInstallable] = useState(false)
 
   useEffect(() => {
-    // Check if the app is already installed
+    // To avoid synchronous setState warning, we use a timeout or requestAnimationFrame
+    // Default to true so the button shows up even on iOS or Dev mode
+    let initialInstallable = true
     if (window.matchMedia("(display-mode: standalone)").matches) {
-      setIsInstallable(false)
-      return
+      initialInstallable = false
     }
 
-    // Default to true so the button shows up even on iOS or Dev mode
-    setIsInstallable(true)
+    // schedule state update after layout
+    setTimeout(() => {
+      setIsInstallable(initialInstallable)
+    }, 0)
 
     const handleBeforeInstallPrompt = (e: Event) => {
       e.preventDefault()

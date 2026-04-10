@@ -3,7 +3,7 @@
 import { CardSetting } from "@/components/custom/cards/card-setting"
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler"
 import { usePwaInstall } from "@/hooks/use-pwa-install"
-import { ChevronLeft, Download, Moon, Settings, Sun, User2 } from "lucide-react"
+import { ChevronLeft, Download, Settings, User2 } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 

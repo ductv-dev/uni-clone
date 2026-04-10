@@ -29,7 +29,6 @@ export const Icons = {
   import: (props: IconProps) => <Import {...props} />,
   wallet2: (props: IconProps) => <Wallet2 {...props} />,
 
-
   linkedin: (props: IconProps) => (
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" {...props}>
       <title>LinkedIn</title>

@@ -1,12 +1,11 @@
 import { CandlestickChart } from "@/components/charts/charts-candle"
-import { Badge } from "@/components/ui/badge"
 import {
-  SelectTrigger,
-  SelectValue,
+  Select,
   SelectContent,
   SelectGroup,
   SelectItem,
-  Select,
+  SelectTrigger,
+  SelectValue,
 } from "@/components/ui/select"
 import { generateOHLC, generateVolumeData, Timeframe } from "@/lib/utils"
 import { TTypeChart } from "@/types"
@@ -16,7 +15,6 @@ import { useTheme } from "next-themes"
 import { useMemo, useState } from "react"
 
 const TIMEFRAMES: { label: string; value: Timeframe }[] = [
-
   { label: "Giờ", value: "1H" },
   { label: "Ngày", value: "1D" },
   { label: "Tuần", value: "1W" },
@@ -55,9 +53,7 @@ export const SectionChart = () => {
       <div className="flex items-center justify-between">
         <Select
           value={activeTimeframe}
-          onValueChange={(value) =>
-            setActiveTimeframe(value as Timeframe)
-          }
+          onValueChange={(value) => setActiveTimeframe(value as Timeframe)}
         >
           <SelectTrigger className="w-full max-w-48">
             <SelectValue placeholder="Chọn khung thời gian" />

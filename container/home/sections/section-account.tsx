@@ -14,7 +14,6 @@ import { shortenHex } from "@/lib/utils"
 import { TUser } from "@/types/type-user"
 import { Copy, Settings, User2, Wallet } from "lucide-react"
 import { useRouter } from "next/navigation"
-import { useState } from "react"
 import { toast } from "sonner"
 
 type Props = {
@@ -33,10 +32,10 @@ export const SectionAccount: React.FC<Props> = ({ data }) => {
         icon: <Copy size={16} strokeWidth={2} className="text-green-500" />,
       })
     } catch (err) {
+      console.log(err)
       toast.error("Failed to copy to clipboard!")
     }
   }
-  const [isOpen, setIsOpen] = useState(false)
 
   const shortID = shortenHex(data.id)
   return (

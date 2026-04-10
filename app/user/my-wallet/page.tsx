@@ -1,4 +1,4 @@
-import { MyWallet } from "@/container/my-wallet/page";
+import { MyWallet } from "@/container/my-wallet/page"
 
 export default function MyWalletpage() {
   return <MyWallet />

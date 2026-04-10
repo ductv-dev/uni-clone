@@ -1,20 +1,30 @@
-
 import { ButtonNav } from "@/components/custom/button/button-navigation"
-import { LIST_TOKEN } from "@/data/mock-data-list-token"
-import { SectionHeader } from "./sections/section-header"
-import { Landmark, SearchX, SquareArrowOutUpRight } from "lucide-react"
-import { SectionMain } from "./sections/section-main"
-import { SectionChart } from "./sections/section-chart"
-import { SectionAbout } from "./sections/section-about"
-import { StatisticalSection } from "./sections/section-statistical"
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { useMemo, useState } from "react"
-import { Button } from "@/components/ui/button"
-import { toast } from "sonner"
-import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer"
 import { NavbarDesktop } from "@/components/layout/nav-bar-desktop"
+import { Button } from "@/components/ui/button"
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer"
+import { LIST_TOKEN } from "@/data/mock-data-list-token"
 import { NAVBAR_ITEMS } from "@/lib/nav-config"
-
+import { Landmark, SearchX } from "lucide-react"
+import { useMemo, useState } from "react"
+import { toast } from "sonner"
+import { SectionAbout } from "./sections/section-about"
+import { SectionChart } from "./sections/section-chart"
+import { SectionHeader } from "./sections/section-header"
+import { SectionMain } from "./sections/section-main"
+import { StatisticalSection } from "./sections/section-statistical"
 
 type Props = {
   symbol: string
@@ -38,12 +48,10 @@ export const TokenInfor: React.FC<Props> = ({ symbol }) => {
       setAmount(null)
       setIsOpen(false)
     }, 2000)
-
   }
   if (!data)
     return (
       <div className="flex min-h-screen w-full flex-col items-center justify-center gap-5">
-
         <div className="flex h-14 w-14 items-center justify-center rounded-xl border-t border-red-500/40 bg-background text-red-500 shadow-lg shadow-red-500/10">
           <SearchX strokeWidth={3} size={24} />
         </div>
@@ -53,7 +61,6 @@ export const TokenInfor: React.FC<Props> = ({ symbol }) => {
     )
   return (
     <div className="w-full pb-20">
-
       <NavbarDesktop data={NAVBAR_ITEMS} />
       <SectionHeader />
 
@@ -89,7 +96,9 @@ export const TokenInfor: React.FC<Props> = ({ symbol }) => {
                     <input
                       type="number"
                       value={amount?.toString() || ""}
-                      onChange={(e) => setAmount(parseFloat(e.target.value) || 0)}
+                      onChange={(e) =>
+                        setAmount(parseFloat(e.target.value) || 0)
+                      }
                       placeholder="0"
                       className="w-full bg-transparent text-end text-2xl font-bold [-moz-appearance:textfield] focus:outline-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
                     />
@@ -116,7 +125,9 @@ export const TokenInfor: React.FC<Props> = ({ symbol }) => {
                 </div>
 
                 <div className="rounded-xl border border-border bg-background/50 px-4 py-3 text-sm text-foreground/50">
-                  <p>1 {data.symbol} ≈ {data.usdt.toFixed(2)} USDT</p>
+                  <p>
+                    1 {data.symbol} ≈ {data.usdt.toFixed(2)} USDT
+                  </p>
                 </div>
 
                 <Button
@@ -134,8 +145,7 @@ export const TokenInfor: React.FC<Props> = ({ symbol }) => {
       </div>
 
       {/* Button Mua/Bán dưới cùng màn hình (Chỉ hiện trên Mobile) */}
-      <div className="fixed bottom-0  flex w-full justify-center bg-accent/0 pb-5 px-4 md:hidden">
-
+      <div className="fixed bottom-0 flex w-full justify-center bg-accent/0 px-4 pb-5 md:hidden">
         <Drawer open={isOpen} onOpenChange={setIsOpen}>
           <DrawerTrigger>
             <ButtonNav classname="w-full">
@@ -194,10 +204,10 @@ export const TokenInfor: React.FC<Props> = ({ symbol }) => {
               </div>
 
               <div className="rounded-xl border border-border bg-background/50 px-4 py-3 text-sm text-foreground/50">
-                <p>1 {data.symbol} ≈ {data.usdt.toFixed(2)} USDT</p>
+                <p>
+                  1 {data.symbol} ≈ {data.usdt.toFixed(2)} USDT
+                </p>
               </div>
-
-
             </CardContent>
             <CardFooter>
               <Button

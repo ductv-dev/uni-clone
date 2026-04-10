@@ -29,7 +29,7 @@ export const Login = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginSchemaType>({ resolver: zodResolver(LoginSchema as any) })
+  } = useForm<LoginSchemaType>({ resolver: zodResolver(LoginSchema) })
   const onSubmit: SubmitHandler<LoginSchemaType> = (data) => {
     toast.success(
       `Login successfully. Email: ${data.email} Password: ${data.password}`

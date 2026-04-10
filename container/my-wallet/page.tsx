@@ -1,64 +1,63 @@
 "use client"
 
-import { Card, CardContent } from "@/components/ui/card"
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import { useUser } from "@/store/user-store"
-import { TUser, TWallet } from "@/types"
+import { TUser } from "@/types"
+import { useState } from "react"
 import { AddNewWallet } from "./sections/add-new-wallet"
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { useState, useEffect } from "react"
-import { SectionMyWallet } from "./sections/section-my-wallet"
 import { HeaderMyWallet } from "./sections/header-my-wallet"
+import { SectionMyWallet } from "./sections/section-my-wallet"
 
 export const MyWallet = () => {
-    const user = useUser((state: { user: TUser }) => state.user)
-    const wallet = user?.wallet
-    const [walletSelected, setWalletSelected] = useState<TWallet | undefined>(wallet?.[0])
+  const user = useUser((state: { user: TUser }) => state.user)
+  const wallet = user?.wallet
+  const [selectedWalletAddress, setSelectedWalletAddress] = useState<
+    string | undefined
+  >()
 
-    useEffect(() => {
-        if (!walletSelected && wallet && wallet.length > 0) {
-            setWalletSelected(wallet[0])
-        }
-    }, [wallet, walletSelected])
+  const activeWallet = selectedWalletAddress
+    ? wallet?.find((w) => w.address === selectedWalletAddress) || wallet?.[0]
+    : wallet?.[0]
 
-    return (
-        <div className="min-h-screen ">
-            <HeaderMyWallet />
-            {
-                wallet && wallet.length > 0 ? (
-                    <div className="">
-                        <Select
-                            value={walletSelected?.address}
-                            onValueChange={(val) => {
-                                const selected = wallet.find(w => w.address === val)
-                                setWalletSelected(selected)
-                            }}
-                        >
-                            <SelectTrigger className="bg-primary text-primary-foreground px-4 py-2 w-[200px] font-semibold">
-                                <SelectValue placeholder="Select a wallet" />
-                            </SelectTrigger>
-                            <SelectGroup>
-                                <SelectContent>
-                                    <div className="flex flex-col gap-2">
-                                        {
-                                            wallet.map((item) => (
-                                                <SelectItem key={item.address} value={item.address}>
-                                                    {item.name}
-                                                </SelectItem>
-                                            ))
-                                        }
-                                    </div>
-                                </SelectContent>
-                            </SelectGroup>
-                        </Select>
+  return (
+    <div className="min-h-screen">
+      <HeaderMyWallet />
+      {wallet && wallet.length > 0 ? (
+        <div className="">
+          <Select
+            value={activeWallet?.address}
+            onValueChange={(val) => setSelectedWalletAddress(val)}
+          >
+            <SelectTrigger className="w-[200px] bg-primary px-4 py-2 font-semibold text-primary-foreground">
+              <SelectValue placeholder="Select a wallet" />
+            </SelectTrigger>
+            <SelectGroup>
+              <SelectContent>
+                <div className="flex flex-col gap-2">
+                  {wallet.map((item) => (
+                    <SelectItem key={item.address} value={item.address}>
+                      {item.name}
+                    </SelectItem>
+                  ))}
+                </div>
+              </SelectContent>
+            </SelectGroup>
+          </Select>
 
-                        <SectionMyWallet data={walletSelected ? walletSelected : wallet[0]} />
-                    </div>
-                ) : (
-                    <div className="mt-20">
-                        <AddNewWallet />
-                    </div>
-                )
-            }
+          <SectionMyWallet data={activeWallet!} />
         </div>
-    )
+      ) : (
+        <div className="mt-20">
+          <AddNewWallet />
+        </div>
+      )}
+    </div>
+  )
 }

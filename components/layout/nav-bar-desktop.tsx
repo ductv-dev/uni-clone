@@ -54,10 +54,11 @@ export const NavbarDesktop: React.FC<Props> = ({ data }) => {
               <a
                 key={item.href}
                 href={item.href}
-                className={`relative flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all ${isActive
-                  ? "border-t border-primary bg-background text-primary shadow-sm"
-                  : "text-foreground/60 hover:text-foreground"
-                  }`}
+                className={`relative flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all ${
+                  isActive
+                    ? "border-t border-primary bg-background text-primary shadow-sm"
+                    : "text-foreground/60 hover:text-foreground"
+                }`}
               >
                 <span className={isActive ? "text-primary" : ""}>
                   {item.icon}

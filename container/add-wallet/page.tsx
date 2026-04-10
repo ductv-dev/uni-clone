@@ -1,14 +1,6 @@
 "use client"
 
-import {
-  ChevronLeft,
-  Key,
-  ShieldCheck,
-  Cpu,
-  User,
-  Wallet,
-  Wallet2Icon,
-} from "lucide-react"
+import { ChevronLeft, Cpu, Key, Wallet, Wallet2Icon } from "lucide-react"
 import { useRouter } from "next/navigation"
 const LIST_WALLET = [
   {

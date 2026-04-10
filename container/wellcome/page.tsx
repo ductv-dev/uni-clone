@@ -1,6 +1,5 @@
 "use client"
 
-import { CardSetting } from "@/components/custom/cards/card-setting"
 import { Iphone } from "@/components/ui/iphone"
 import { OrbitingCircles } from "@/components/ui/orbiting-circles"
 import { usePwaInstall } from "@/hooks/use-pwa-install"

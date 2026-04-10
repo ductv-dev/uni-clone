@@ -14,7 +14,7 @@ import { LIST_TOKEN } from "@/data/mock-data-list-token"
 import { cn } from "@/lib/utils"
 import { TToken } from "@/types/type-token"
 import { ArrowDownUp } from "lucide-react"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { toast } from "sonner"
 
 export const DesktopSwapCard = () => {
@@ -27,9 +27,22 @@ export const DesktopSwapCard = () => {
   const [isFromOpen, setIsFromOpen] = useState(false)
   const [isToOpen, setIsToOpen] = useState(false)
   const [valueFrom, setValueFrom] = useState<number | null>(null)
-  const [valueTo, setValueTo] = useState<number | null>(null)
-  const [valueInUSDT, setValueInUSDT] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
+
+  let valueTo: number | null = 0
+  let valueInUSDT = 0
+
+  if (tokenFrom && tokenTo && valueFrom) {
+    const fromData = LIST_TOKEN.find((t) => t.symbol === tokenFrom)
+    const toData = LIST_TOKEN.find((t) => t.symbol === tokenTo)
+    if (fromData && toData) {
+      const v = Number(valueFrom)
+      if (v > 0) {
+        valueInUSDT = v * fromData.usdt
+        valueTo = valueInUSDT / toData.usdt
+      }
+    }
+  }
 
   const handleSwap = async () => {
     if (!tokenFrom || !tokenTo) {
@@ -55,7 +68,6 @@ export const DesktopSwapCard = () => {
     )
     setValueFrom(null)
     setTokenTo("")
-    setValueTo(0)
     setIsLoading(false)
   }
 
@@ -67,26 +79,7 @@ export const DesktopSwapCard = () => {
     setTokenFrom(tokenTo)
     setTokenTo(tokenFrom)
     setValueFrom(null)
-    setValueTo(null)
   }
-
-  useEffect(() => {
-    if (tokenFrom && tokenTo && valueFrom) {
-      const fromData = LIST_TOKEN.find((t) => t.symbol === tokenFrom)
-      const toData = LIST_TOKEN.find((t) => t.symbol === tokenTo)
-      if (fromData && toData) {
-        const v = Number(valueFrom)
-        if (v > 0) {
-          const usdt = v * fromData.usdt
-          setValueInUSDT(usdt)
-          setValueTo(usdt / toData.usdt)
-        }
-      }
-    } else {
-      setValueTo(0)
-      setValueInUSDT(0)
-    }
-  }, [valueFrom, tokenFrom, tokenTo])
 
   return (
     <div className="flex flex-col gap-3 rounded-2xl border border-border bg-card p-5 shadow-sm">
