@@ -16,6 +16,7 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer"
 import { LIST_TOKEN } from "@/data/mock-data-list-token"
+import { useMarketData } from "@/hooks/use-market-data"
 import { NAVBAR_ITEMS } from "@/lib/nav-config"
 import { Landmark, SearchX } from "lucide-react"
 import { useMemo, useState } from "react"
@@ -35,11 +36,27 @@ export const TokenInfor: React.FC<Props> = ({ symbol }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
 
+  // Sử dụng Custom Hook để quản lý toàn bộ data thị trường
+  const {
+    activeTimeframe,
+    setActiveTimeframe,
+    historicalData,
+    volumeData,
+    realtimeUpdate,
+    currentPrice,
+    priceChange,
+    percentageChange,
+    isLoading: isLoadingMarketData,
+    error: errorMarketData,
+  } = useMarketData(data?.usdt || 0)
+
+  // Tính tổng USDT
   const totalUSDT = useMemo(() => {
     if (!amount || !data) return 0
     return amount * data.usdt
   }, [amount, data])
 
+  // Xử lý khi click mua
   const handleConfirm = () => {
     setIsLoading(true)
     setTimeout(() => {
@@ -67,8 +84,21 @@ export const TokenInfor: React.FC<Props> = ({ symbol }) => {
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 md:flex-row md:px-6 md:py-8">
         {/* Cột trái (Mặc định full trên Mobile, 2/3 trên Desktop) */}
         <div className="flex min-w-0 flex-1 flex-col gap-5">
-          <SectionMain data={data} />
-          <SectionChart />
+          <SectionMain
+            data={data}
+            currentPrice={currentPrice}
+            priceChange={priceChange}
+            percentageChange={percentageChange}
+          />
+          <SectionChart
+            isLoading={isLoadingMarketData}
+            error={errorMarketData}
+            historicalData={historicalData}
+            volumeData={volumeData}
+            realtimeUpdate={realtimeUpdate}
+            activeTimeframe={activeTimeframe}
+            onTimeframeChange={setActiveTimeframe}
+          />
 
           <SectionAbout data={data} />
           <StatisticalSection data={data} />
@@ -147,7 +177,7 @@ export const TokenInfor: React.FC<Props> = ({ symbol }) => {
       {/* Button Mua/Bán dưới cùng màn hình (Chỉ hiện trên Mobile) */}
       <div className="fixed bottom-0 flex w-full justify-center bg-accent/0 px-4 pb-5 md:hidden">
         <Drawer open={isOpen} onOpenChange={setIsOpen}>
-          <DrawerTrigger>
+          <DrawerTrigger asChild>
             <ButtonNav classname="w-full">
               <div className="flex items-center justify-center gap-1 font-bold text-primary">
                 <Landmark /> <p>Mua</p>

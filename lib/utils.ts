@@ -42,7 +42,7 @@ export function generateRandomToken(): TToken {
   }
 }
 
-export type Timeframe = "1H" | "1D" | "1W" | "1M" | "1Y"
+export type Timeframe = "1S" | "1H" | "1D" | "1W" | "1M" | "1Y"
 
 export function generateOHLC(
   count = 150,
@@ -55,6 +55,9 @@ export function generateOHLC(
   // Điều chỉnh mức độ biến động giá (volatility) dựa trên khung thời gian
   let volatility = 4
   switch (timeframe) {
+    case "1S":
+      volatility = 1
+      break
     case "1H":
       volatility = 100
       break
@@ -74,6 +77,7 @@ export function generateOHLC(
 
   // 1. Tính toán thời điểm bắt đầu (lui về quá khứ 'count' khoảng thời gian)
   const currentTime = new Date()
+  if (timeframe === "1S") currentTime.setSeconds(currentTime.getSeconds() - count)
   if (timeframe === "1H") currentTime.setHours(currentTime.getHours() - count)
   if (timeframe === "1D") currentTime.setDate(currentTime.getDate() - count)
   if (timeframe === "1W") currentTime.setDate(currentTime.getDate() - count * 7)
@@ -84,6 +88,7 @@ export function generateOHLC(
   // 2. Tạo dữ liệu tiến dần về hiện tại
   for (let i = 0; i < count; i++) {
     // Cộng thêm thời gian cho cây nến tiếp theo
+    if (timeframe === "1S") currentTime.setSeconds(currentTime.getSeconds() + 1)
     if (timeframe === "1H") currentTime.setHours(currentTime.getHours() + 1)
     if (timeframe === "1D") currentTime.setDate(currentTime.getDate() + 1)
     if (timeframe === "1W") currentTime.setDate(currentTime.getDate() + 7)
@@ -135,85 +140,23 @@ export function randomData24h() {
   }
   return data
 }
-// random data realtime
-let randomFactor = 25 + Math.random() * 25
-const samplePoint = (i: number) =>
-  i *
-    (0.5 +
-      Math.sin(i / 1) * 0.2 +
-      Math.sin(i / 2) * 0.4 +
-      Math.sin(i / randomFactor) * 0.8 +
-      Math.sin(i / 50) * 0.5) +
-  200 +
-  i * 2
-
-export function generateDataRealtime(
-  numberOfCandles = 500,
-  updatesPerCandle = 5,
-  startAt = 100
-) {
-  const createCandle = (val: number, time: number) => ({
-    time,
-    open: val,
-    high: val,
-    low: val,
-    close: val,
-  })
-
-  const updateCandle = (
-    candle: {
-      time: number
-      open: number
-      high: number
-      low: number
-      close: number
-    },
-    val: number
-  ) => ({
-    time: candle.time,
-    close: val,
-    open: candle.open,
-    low: Math.min(candle.low, val),
-    high: Math.max(candle.high, val),
-  })
-
-  randomFactor = 25 + Math.random() * 25
-  const date = new Date(Date.UTC(2018, 0, 1, 12, 0, 0, 0))
-  const numberOfPoints = numberOfCandles * updatesPerCandle
-  const initialData = []
-  const realtimeUpdates = []
-  let lastCandle:
-    | { time: number; open: number; high: number; low: number; close: number }
-    | undefined
-  let previousValue = samplePoint(-1)
-  for (let i = 0; i < numberOfPoints; ++i) {
-    if (i % updatesPerCandle === 0) {
-      date.setUTCDate(date.getUTCDate() + 1)
-    }
-    const time = date.getTime() / 1000
-    let value = samplePoint(i)
-    const diff = (value - previousValue) * Math.random()
-    value = previousValue + diff
-    previousValue = value
-    if (i % updatesPerCandle === 0) {
-      const candle = createCandle(value, time)
-      lastCandle = candle
-      if (i >= startAt) {
-        realtimeUpdates.push(candle)
-      }
-    } else {
-      const newCandle = updateCandle(lastCandle!, value)
-      lastCandle = newCandle
-      if (i >= startAt) {
-        realtimeUpdates.push(newCandle)
-      } else if ((i + 1) % updatesPerCandle === 0) {
-        initialData.push(newCandle)
-      }
-    }
-  }
+// Lấy thời gian và giá trị nến sau
+export function generateNextCandle(
+  previousCandle: CandlestickData<Time>
+): CandlestickData<Time> {
+  const time = (Number(previousCandle.time) + 1) as Time
+  const open = previousCandle.close
+  const volatility = 1
+  const change = (Math.random() - 0.48) * volatility
+  const close = Math.max(1, open + change)
+  const high = Math.max(open, close) + Math.random() * (volatility / 2)
+  const low = Math.min(open, close) - Math.random() * (volatility / 2)
 
   return {
-    initialData,
-    realtimeUpdates,
+    time,
+    open: +open.toFixed(2),
+    high: +high.toFixed(2),
+    low: +low.toFixed(2),
+    close: +close.toFixed(2),
   }
 }

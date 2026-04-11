@@ -3,7 +3,7 @@ import { MiniChart } from "@/components/charts/chart-widget"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { cn, randomData24h } from "@/lib/utils"
 import { ChevronDown, ChevronUp } from "lucide-react"
-import { useMemo } from "react"
+import { useEffect, useState } from "react"
 
 type TcardToken1Props = {
   rank?: number
@@ -28,7 +28,16 @@ export const CardToken1: React.FC<TcardToken1Props> = ({
   onClick,
   className,
 }) => {
-  const data = useMemo(() => randomData24h(), [])
+  const [data, setData] = useState<{ time: number; value: number }[]>([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      // giả lập delay để tránh lỗi "setState synchronously"
+      await new Promise((resolve) => setTimeout(resolve, 0))
+      setData(randomData24h())
+    }
+    fetchData()
+  }, [])
   return (
     <div
       onClick={onClick}

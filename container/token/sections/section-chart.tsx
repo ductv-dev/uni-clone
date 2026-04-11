@@ -1,4 +1,7 @@
-import { CandlestickChart } from "@/components/charts/charts-candle"
+import {
+  CandlestickChart,
+  RealtimeUpdate,
+} from "@/components/charts/charts-candle"
 import {
   Select,
   SelectContent,
@@ -7,14 +10,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { generateOHLC, generateVolumeData, Timeframe } from "@/lib/utils"
+import { Timeframe } from "@/lib/utils"
 import { TTypeChart } from "@/types"
 import { CandlestickData, HistogramData, Time } from "lightweight-charts"
-import { ChartCandlestick, ChartLine } from "lucide-react"
+import { ChartCandlestick, ChartLine, Loader2 } from "lucide-react"
 import { useTheme } from "next-themes"
 import { useMemo, useState } from "react"
 
 const TIMEFRAMES: { label: string; value: Timeframe }[] = [
+  { label: "Giây", value: "1S" },
   { label: "Giờ", value: "1H" },
   { label: "Ngày", value: "1D" },
   { label: "Tuần", value: "1W" },
@@ -27,33 +31,49 @@ const TYPE_CHART: TTypeChart[] = [
   { label: "Line", value: "line", icon: <ChartLine /> },
 ]
 
-export const SectionChart = () => {
+type Props = {
+  historicalData: CandlestickData<Time>[]
+  volumeData: HistogramData<Time>[]
+  realtimeUpdate?: RealtimeUpdate
+  activeTimeframe: Timeframe
+  onTimeframeChange: (timeframe: Timeframe) => void
+  isLoading: boolean
+  error: Error | null
+}
+
+export const SectionChart: React.FC<Props> = ({
+  historicalData,
+  volumeData,
+  realtimeUpdate,
+  activeTimeframe,
+  onTimeframeChange,
+  isLoading,
+  error,
+}) => {
   const { resolvedTheme } = useTheme()
   const [typeChart, setTypeChart] = useState<TTypeChart>(TYPE_CHART[0])
-  console.log("typeChart", typeChart)
-  const colors = {
-    backgroundColor: resolvedTheme === "dark" ? "#1f2937" : "#fff",
-    textColor: resolvedTheme === "dark" ? "#d1d4dc" : "#1f2937",
-    upColor: "#26a69a",
-    downColor: "#ef5350",
-    wickUpColor: "#26a69a",
-    wickDownColor: "#ef5350",
-    vertLines: resolvedTheme === "dark" ? "#374151" : "#e0e1f9",
-    horzLines: resolvedTheme === "dark" ? "#374151" : "#e0e1f9",
-  }
-  const [activeTimeframe, setActiveTimeframe] = useState<Timeframe>("1D")
-  const data = useMemo(() => {
-    return generateOHLC(500, 120, activeTimeframe) as CandlestickData<Time>[]
-  }, [activeTimeframe])
-  const volumeData = useMemo(() => {
-    return generateVolumeData(data) as HistogramData<Time>[]
-  }, [data])
+
+  const colors = useMemo(
+    () => ({
+      backgroundColor: resolvedTheme === "dark" ? "#1f2937" : "#fff",
+      textColor: resolvedTheme === "dark" ? "#d1d4dc" : "#1f2937",
+      upColor: "#26a69a",
+      downColor: "#ef5350",
+      wickUpColor: "#26a69a",
+      wickDownColor: "#ef5350",
+      vertLines: resolvedTheme === "dark" ? "#374151" : "#e0e1f9",
+      horzLines: resolvedTheme === "dark" ? "#374151" : "#e0e1f9",
+    }),
+    [resolvedTheme]
+  )
+
   return (
     <div className="flex flex-col gap-2.5">
       <div className="flex items-center justify-between">
         <Select
+          disabled={isLoading}
           value={activeTimeframe}
-          onValueChange={(value) => setActiveTimeframe(value as Timeframe)}
+          onValueChange={(value) => onTimeframeChange(value as Timeframe)}
         >
           <SelectTrigger className="w-full max-w-48">
             <SelectValue placeholder="Chọn khung thời gian" />
@@ -99,12 +119,23 @@ export const SectionChart = () => {
           maxWidth: "800px",
         }}
       >
-        <CandlestickChart
-          type={typeChart}
-          volumeData={volumeData}
-          data={data}
-          colors={colors}
-        />
+        {isLoading ? (
+          <div className="flex h-[400px] items-center justify-center">
+            <Loader2 className="size-8 animate-spin" />
+          </div>
+        ) : error ? (
+          <div className="flex h-[400px] items-center justify-center">
+            <p className="text-red-500">{error.message}</p>
+          </div>
+        ) : (
+          <CandlestickChart
+            type={typeChart}
+            volumeData={volumeData}
+            data={historicalData}
+            realtimeUpdate={realtimeUpdate}
+            colors={colors}
+          />
+        )}
       </div>
     </div>
   )

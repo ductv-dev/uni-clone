@@ -1,35 +1,25 @@
 "use client"
 
-import { useEffect, useState } from "react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
+import { FavoriteStar } from "@/components/ui/favotite-heart"
 import { TToken } from "@/types/type-token"
 import { ChevronDown, ChevronUp, ShieldCheck } from "lucide-react"
-import { FavoriteStar } from "@/components/ui/favotite-heart"
+import { useState } from "react"
 
 type Props = {
   data: TToken
+  currentPrice: number
+  priceChange: number
+  percentageChange: number
 }
-export const SectionMain: React.FC<Props> = ({ data }) => {
+export const SectionMain: React.FC<Props> = ({
+  data,
+  currentPrice,
+  priceChange,
+  percentageChange,
+}) => {
   const [isFavorite, setIsFavorite] = useState(false)
-  const [randomChange, setRandomChange] = useState<number>(
-    data.number_changes ?? 0
-  )
-
-  useEffect(() => {
-    const updateRandomChange = () => {
-      setRandomChange(parseFloat((Math.random() * 0.1 - 0.05).toFixed(2)))
-    }
-
-    const intervalId = window.setInterval(updateRandomChange, 1000)
-    updateRandomChange()
-
-    return () => window.clearInterval(intervalId)
-  }, [])
-
-  const price = data.usdt * (1 + randomChange)
-  const priceChange = data.usdt * randomChange
-  const percentageChange = randomChange * 100
 
   return (
     <div className="flex gap-2.5">
@@ -59,11 +49,11 @@ export const SectionMain: React.FC<Props> = ({ data }) => {
           <div className="flex items-start justify-between gap-3">
             <div>
               <p className="text-2xl font-bold text-foreground/80">
-                {price.toFixed(2)} US$
+                {currentPrice.toFixed(2)} US$
               </p>
               <div className="mt-1 flex gap-2.5">
                 <div className="flex">
-                  {randomChange > 0 ? (
+                  {priceChange > 0 ? (
                     <ChevronUp className="text-green-500" />
                   ) : (
                     <ChevronDown className="text-red-500" />

@@ -1,4 +1,3 @@
-""
 import { TTypeChart } from "@/types"
 import {
   CandlestickData,
@@ -7,15 +6,22 @@ import {
   createChart,
   HistogramData,
   HistogramSeries,
+  ISeriesApi,
   LineSeries,
   Time,
 } from "lightweight-charts"
 import React, { useEffect, useRef } from "react"
 
+export type RealtimeUpdate = {
+  candle: CandlestickData<Time>
+  volume: HistogramData<Time>
+}
+
 type ChartProps = {
   type: TTypeChart
   data: CandlestickData<Time>[]
   volumeData: HistogramData<Time>[]
+  realtimeUpdate?: RealtimeUpdate
   colors?: {
     backgroundColor?: string
     textColor?: string
@@ -32,6 +38,7 @@ export const CandlestickChart: React.FC<ChartProps> = ({
   type,
   data,
   volumeData,
+  realtimeUpdate,
   colors: {
     backgroundColor = "#fff",
     textColor = "#d1d4dc",
@@ -44,11 +51,15 @@ export const CandlestickChart: React.FC<ChartProps> = ({
   } = {},
 }) => {
   const chartContainerRef = useRef<HTMLDivElement>(null)
+  const seriesRef = useRef<
+    ISeriesApi<"Candlestick"> | ISeriesApi<"Line"> | null
+  >(null)
+  const volumeSeriesRef = useRef<ISeriesApi<"Histogram"> | null>(null)
 
+  // 1. Khởi tạo biểu đồ và vẽ data lịch sử
   useEffect(() => {
     if (!chartContainerRef.current) return
 
-    //  Khởi tạo biểu đồ
     const chart = createChart(chartContainerRef.current, {
       layout: {
         background: { type: ColorType.Solid, color: backgroundColor },
@@ -89,10 +100,11 @@ export const CandlestickChart: React.FC<ChartProps> = ({
         bottom: 0.4,
       },
     })
+    seriesRef.current = mainSeries
 
     const volumeSeries = chart.addSeries(HistogramSeries, {
       priceFormat: { type: "volume" },
-      priceScaleId: "", // Đặt trống để biến nó thành overlay
+      priceScaleId: "",
     })
     volumeSeries.priceScale().applyOptions({
       scaleMargins: {
@@ -100,9 +112,8 @@ export const CandlestickChart: React.FC<ChartProps> = ({
         bottom: 0,
       },
     })
-
-    // Gắn dữ liệu vào biểu đồ volume
     volumeSeries.setData(volumeData)
+    volumeSeriesRef.current = volumeSeries
 
     // Xử lý sự kiện Resize để biểu đồ luôn responsive
     const handleResize = () => {
@@ -113,10 +124,12 @@ export const CandlestickChart: React.FC<ChartProps> = ({
 
     window.addEventListener("resize", handleResize)
 
-    // Dọn dẹp  khi component unmount
+    // Dọn dẹp khi component unmount
     return () => {
       window.removeEventListener("resize", handleResize)
       chart.remove()
+      seriesRef.current = null
+      volumeSeriesRef.current = null
     }
   }, [
     type,
@@ -131,6 +144,36 @@ export const CandlestickChart: React.FC<ChartProps> = ({
     vertLines,
     horzLines,
   ])
+
+  // 2. React với realtime tick data từ Socket truyền vào thông qua props
+  useEffect(() => {
+    if (!realtimeUpdate) return
+
+    if (seriesRef.current) {
+      try {
+        if (type.value === "candle") {
+          const series = seriesRef.current as ISeriesApi<"Candlestick">
+          series.update(realtimeUpdate.candle)
+        } else {
+          const series = seriesRef.current as ISeriesApi<"Line">
+          series.update({
+            time: realtimeUpdate.candle.time,
+            value: realtimeUpdate.candle.close,
+          })
+        }
+      } catch (err) {
+        console.warn("Chart update skipped:", err)
+      }
+    }
+
+    if (volumeSeriesRef.current) {
+      try {
+        volumeSeriesRef.current.update(realtimeUpdate.volume)
+      } catch (err) {
+        console.warn("Volume update skipped:", err)
+      }
+    }
+  }, [realtimeUpdate, type])
 
   return (
     <div ref={chartContainerRef} style={{ width: "100%", height: "400px" }} />
