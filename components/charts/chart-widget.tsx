@@ -22,7 +22,7 @@ export const MiniChart: React.FC<MiniChartProps> = ({
   height = 40,
   strokeWidth = 2,
 }) => {
-  if (!data || data.length < 2) return <span>No data</span>
+  if (!data || data.length < 2) return
 
   const firstValue = data[0].value
   const lastValue = data[data.length - 1].value

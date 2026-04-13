@@ -14,7 +14,7 @@ import { LIST_TOKEN } from "@/data/mock-data-list-token"
 import { cn } from "@/lib/utils"
 import { TToken } from "@/types/type-token"
 import { ArrowDownUp } from "lucide-react"
-import { useState, useId } from "react"
+import { useId, useState } from "react"
 import { toast } from "sonner"
 
 type Props = {
@@ -181,7 +181,6 @@ export const FormSwap: React.FC<Props> = ({ onSuccess }) => {
                   <CardToken1
                     key={t.symbol}
                     name={t.name}
-                    price={t.usdt}
                     image={t.logoURI}
                     symbol={t.symbol}
                     onClick={() => {

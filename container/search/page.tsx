@@ -2,12 +2,12 @@
 import { CardToken1 } from "@/components/custom/cards/card-token-1"
 import { CardToken2 } from "@/components/custom/cards/card-token-2"
 import {
-  SelectTrigger,
-  SelectValue,
+  Select,
   SelectContent,
   SelectGroup,
   SelectItem,
-  Select,
+  SelectTrigger,
+  SelectValue,
 } from "@/components/ui/select"
 import { LIST_TOKEN } from "@/data/mock-data-list-token"
 import { TToken } from "@/types/type-token"
@@ -94,8 +94,7 @@ export const SearchPage = () => {
                   key={token.address}
                   name={token.name}
                   image={token.logoURI}
-                  price={token.usdt}
-                  number_changes={token.number_changes}
+                  symbol={token.symbol}
                 />
               ))}
             </div>
@@ -157,8 +156,6 @@ export const SearchPage = () => {
                 name={token.name}
                 symbol={token.symbol}
                 image={token.logoURI}
-                price={token.usdt}
-                number_changes={token.number_changes}
                 key={token.address}
               />
             ))}

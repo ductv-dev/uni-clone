@@ -203,9 +203,11 @@ export function useBinanceTicker(symbol: string) {
         ws.onmessage = (event) => {
           try {
             const message = JSON.parse(event.data)
-            setCurrentPrice(parseFloat(message.c))
-            setPriceChange(parseFloat(message.p))
-            setPercentageChange(parseFloat(message.P))
+            if (!ignore) {
+              setCurrentPrice(parseFloat(message.c))
+              setPriceChange(parseFloat(message.p))
+              setPercentageChange(parseFloat(message.P))
+            }
           } catch (e) {
             console.error("Lỗi parse WebSocket Ticker:", e)
           }

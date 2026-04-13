@@ -1,6 +1,7 @@
 import { MiniChart } from "@/components/charts/chart-widget"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { useBinanceTicker } from "@/hooks/use-market-data"
+import { Skeleton } from "@/components/ui/skeleton"
+import { use24hData } from "@/hooks/use-24h-data"
 import { cn } from "@/lib/utils"
 import { ChevronDown, ChevronUp } from "lucide-react"
 
@@ -11,7 +12,6 @@ type TcardToken1Props = {
   description?: string
   image: string
   number_changes?: number
-  price?: number
   onClick?: () => void
   className?: string
 }
@@ -22,14 +22,16 @@ export const CardToken1: React.FC<TcardToken1Props> = ({
   symbol,
   description,
   image,
-  number_changes = 0,
-  price,
   onClick,
   className,
 }) => {
   const symbolUsdt = symbol ? `${symbol}USDT` : ""
-  const { currentPrice, data24h, percentageChange } =
-    useBinanceTicker(symbolUsdt)
+  const {
+    currentPrice,
+    data: data24h,
+    percentPriceChange: percentageChange,
+    isLoading,
+  } = use24hData(symbolUsdt)
   return (
     <div
       onClick={onClick}
@@ -38,7 +40,7 @@ export const CardToken1: React.FC<TcardToken1Props> = ({
         " flex w-full cursor-pointer items-center gap-2.5 rounded-lg px-4 py-2 hover:bg-accent"
       }
     >
-      <div className="flex flex-1 items-center gap-2.5">
+      <div className="flex w-6/10 items-center gap-2.5">
         {rank && <span className="font-medium text-foreground/60">{rank}</span>}
 
         <Avatar className="h-12 w-12">
@@ -53,38 +55,44 @@ export const CardToken1: React.FC<TcardToken1Props> = ({
           )}
         </div>
       </div>
-      <div>
-        <MiniChart data={data24h} width={50} height={12} strokeWidth={2} />
+      <div className="flex w-2/10 justify-start">
+        {isLoading ? (
+          <Skeleton className="h-[12px] w-[50px] rounded-full" />
+        ) : (
+          <MiniChart data={data24h} width={50} height={12} strokeWidth={2} />
+        )}
       </div>
-      <div className="flex flex-col items-end">
-        {(currentPrice > 0 ? currentPrice : price) !== undefined && (
+      <div className="flex w-2/10 flex-col items-end">
+        {isLoading ? (
+          <Skeleton className="mb-1 h-5 w-16" />
+        ) : (
           <span className="text-sm font-medium">
-            {(currentPrice > 0 ? currentPrice : price || 0).toLocaleString(
-              undefined,
-              { minimumFractionDigits: 2 }
-            )}{" "}
+            {(currentPrice || 0).toLocaleString(undefined, {
+              minimumFractionDigits: 2,
+            })}{" "}
             US$
           </span>
         )}
         {description && (
           <span className="text-xs text-foreground/60">{description}</span>
         )}
-        <div className="flex items-center">
-          {(percentageChange !== 0 ? percentageChange : number_changes) > 0 ? (
+        <div className="flex items-center justify-end">
+          {isLoading ? (
+            <Skeleton className="mt-1 h-4 w-10" />
+          ) : (percentageChange !== 0 ? percentageChange : 0) > 0 ? (
             <div className="flex">
               <ChevronUp className="h-4 w-4 text-green-500" />
               <span className="text-xs font-medium text-green-500">
-                {percentageChange !== 0 ? percentageChange : number_changes}%
+                {(percentageChange !== 0 ? percentageChange : 0).toFixed(2)}%
               </span>
             </div>
-          ) : (percentageChange !== 0 ? percentageChange : number_changes) <
-            0 ? (
+          ) : (percentageChange !== 0 ? percentageChange : 0) < 0 ? (
             <div className="flex">
               <ChevronDown className="h-4 w-4 text-red-500" />
               <span className="text-xs font-medium text-red-500">
                 {Math.abs(
-                  percentageChange !== 0 ? percentageChange : number_changes
-                )}
+                  percentageChange !== 0 ? percentageChange : 0
+                ).toFixed(2)}
                 %
               </span>
             </div>

@@ -171,7 +171,6 @@ export const DesktopSwapCard = () => {
                       <CardToken1
                         key={token.symbol}
                         name={token.name}
-                        price={token.usdt}
                         image={token.logoURI}
                         symbol={token.symbol}
                         onClick={() => {

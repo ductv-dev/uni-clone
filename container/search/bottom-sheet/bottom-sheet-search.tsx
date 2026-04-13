@@ -1,6 +1,7 @@
 "use client"
 
 import { CardToken1 } from "@/components/custom/cards/card-token-1"
+import { SkeletonCardToken1 } from "@/components/custom/skeleton/skeleton-card-token-1"
 import {
   Drawer,
   DrawerClose,
@@ -9,10 +10,9 @@ import {
 } from "@/components/ui/drawer"
 import {
   InputGroup,
-  InputGroupInput,
   InputGroupAddon,
+  InputGroupInput,
 } from "@/components/ui/input-group"
-import { SkeletonCardToken1 } from "@/components/custom/skeleton/skeleton-card-token-1"
 import { useSearchTokens } from "@/hooks/use-search"
 import { ChevronLeft, Search, SearchIcon } from "lucide-react"
 import { useRouter } from "next/navigation"
@@ -93,7 +93,6 @@ export const BottomSheetSearch = () => {
                     name={token.name}
                     symbol={token.symbol}
                     image={token.logoURI}
-                    price={token.usdt}
                     number_changes={token.number_changes}
                   />
                 ))

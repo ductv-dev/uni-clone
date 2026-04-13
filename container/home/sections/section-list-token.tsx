@@ -27,7 +27,6 @@ export const SectionListToken: React.FC<Props> = ({
               <CardToken1
                 name={token.name}
                 symbol={token.symbol}
-                price={token.decimals}
                 image={token.logoURI}
                 number_changes={token.number_changes}
                 onClick={() => route.push(`/token/${token.symbol}`)}
@@ -46,7 +45,6 @@ export const SectionListToken: React.FC<Props> = ({
           key={token.address}
           name={token.name}
           symbol={token.symbol}
-          price={token.decimals}
           image={token.logoURI}
           number_changes={token.number_changes}
           onClick={() => route.push(`/token/${token.symbol}`)}
