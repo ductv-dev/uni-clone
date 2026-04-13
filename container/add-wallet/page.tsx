@@ -1,3 +1,4 @@
+"use client"
 import { ChevronLeft, Cpu, Key, Wallet, Wallet2Icon } from "lucide-react"
 import { useRouter } from "next/navigation"
 const LIST_WALLET = [
