@@ -73,7 +73,7 @@ export const SectionMain: React.FC<Props> = ({
       <FavoriteStar
         isFavorite={isFavorite}
         onClick={() => setIsFavorite(!isFavorite)}
-      />{" "}
+      />
     </div>
   )
 }

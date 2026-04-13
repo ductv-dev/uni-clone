@@ -1,27 +1,21 @@
+import { useBinanceKline } from "@/hooks/use-market-data"
+import { Timeframe } from "@/lib/utils"
 import { TTypeChart } from "@/types"
 import {
-  CandlestickData,
   CandlestickSeries,
   ColorType,
   createChart,
-  HistogramData,
   HistogramSeries,
   ISeriesApi,
   LineSeries,
-  Time,
 } from "lightweight-charts"
+import { Loader2 } from "lucide-react"
 import React, { useEffect, useRef } from "react"
 
-export type RealtimeUpdate = {
-  candle: CandlestickData<Time>
-  volume: HistogramData<Time>
-}
-
-type ChartProps = {
+export type ChartProps = {
   type: TTypeChart
-  data: CandlestickData<Time>[]
-  volumeData: HistogramData<Time>[]
-  realtimeUpdate?: RealtimeUpdate
+  symbol: string
+  interval?: Timeframe
   colors?: {
     backgroundColor?: string
     textColor?: string
@@ -36,9 +30,8 @@ type ChartProps = {
 
 export const CandlestickChart: React.FC<ChartProps> = ({
   type,
-  data,
-  volumeData,
-  realtimeUpdate,
+  symbol,
+  interval = "1D",
   colors: {
     backgroundColor = "#fff",
     textColor = "#d1d4dc",
@@ -56,9 +49,19 @@ export const CandlestickChart: React.FC<ChartProps> = ({
   >(null)
   const volumeSeriesRef = useRef<ISeriesApi<"Histogram"> | null>(null)
 
-  // 1. Khởi tạo biểu đồ và vẽ data lịch sử
+  // Gọi Hook quản lý dữ liệu Binance (REST + WebSocket)
+  const {
+    historicalData,
+    volumeData,
+    isLoadingChart,
+    errorChart,
+    subscribeRealtime,
+  } = useBinanceKline(symbol, interval)
+
+  // 1. Khởi tạo biểu đồ và nạp data lịch sử
   useEffect(() => {
     if (!chartContainerRef.current) return
+    if (isLoadingChart) return // Chưa load xong API thì khoan vẽ Chart
 
     const chart = createChart(chartContainerRef.current, {
       layout: {
@@ -67,14 +70,18 @@ export const CandlestickChart: React.FC<ChartProps> = ({
         attributionLogo: false,
       },
       width: chartContainerRef.current.clientWidth,
-      height: chartContainerRef.current.clientHeight,
+      height: 400,
       grid: {
         vertLines: { color: vertLines },
         horzLines: { color: horzLines },
       },
+      timeScale: {
+        timeVisible: true,
+        secondsVisible: false,
+      },
     })
 
-    // Cấu hình định dạng chuỗi nến hoặc đường
+    // Xử lý tạo Series (Candle hoặc Line)
     let mainSeries
     if (type.value === "candle") {
       mainSeries = chart.addSeries(CandlestickSeries, {
@@ -84,47 +91,61 @@ export const CandlestickChart: React.FC<ChartProps> = ({
         wickUpColor,
         wickDownColor,
       })
-      mainSeries.setData(data)
+      mainSeries.setData(historicalData)
     } else {
       mainSeries = chart.addSeries(LineSeries, {
         color: "#100cf5",
         lineWidth: 2,
       })
-      const lineData = data.map((d) => ({ time: d.time, value: d.close }))
-      mainSeries.setData(lineData)
+      mainSeries.setData(
+        historicalData.map((d) => ({
+          time: d.time,
+          value: d.close,
+        }))
+      )
     }
 
     mainSeries.priceScale().applyOptions({
-      scaleMargins: {
-        top: 0.1,
-        bottom: 0.4,
-      },
+      scaleMargins: { top: 0.1, bottom: 0.4 },
     })
     seriesRef.current = mainSeries
 
+    // Xử lý tạo Volume Histogram
     const volumeSeries = chart.addSeries(HistogramSeries, {
       priceFormat: { type: "volume" },
       priceScaleId: "",
     })
     volumeSeries.priceScale().applyOptions({
-      scaleMargins: {
-        top: 0.8, // Volume chỉ chiếm 20% bên dưới
-        bottom: 0,
-      },
+      scaleMargins: { top: 0.8, bottom: 0 },
     })
     volumeSeries.setData(volumeData)
     volumeSeriesRef.current = volumeSeries
 
-    // Xử lý sự kiện Resize để biểu đồ luôn responsive
+    // Handle WebSocket trực tiếp qua tham chiếu (Callbacks Reference) để tránh re-renders UI
+    subscribeRealtime((candleUpdate, volumeUpdate) => {
+      try {
+        if (type.value === "candle") {
+          ;(seriesRef.current as ISeriesApi<"Candlestick">).update(candleUpdate)
+        } else {
+          ;(seriesRef.current as ISeriesApi<"Line">).update({
+            time: candleUpdate.time,
+            value: candleUpdate.close,
+          })
+        }
+        volumeSeriesRef.current?.update(volumeUpdate)
+      } catch (err) {
+        console.warn("Chart realtime update skipped:", err)
+      }
+    })
+
+    // Resize Event Handle
     const handleResize = () => {
       if (chartContainerRef.current) {
         chart.applyOptions({ width: chartContainerRef.current.clientWidth })
       }
     }
-
     window.addEventListener("resize", handleResize)
 
-    // Dọn dẹp khi component unmount
     return () => {
       window.removeEventListener("resize", handleResize)
       chart.remove()
@@ -133,8 +154,10 @@ export const CandlestickChart: React.FC<ChartProps> = ({
     }
   }, [
     type,
-    data,
+    historicalData,
     volumeData,
+    isLoadingChart,
+    subscribeRealtime,
     backgroundColor,
     textColor,
     upColor,
@@ -145,37 +168,27 @@ export const CandlestickChart: React.FC<ChartProps> = ({
     horzLines,
   ])
 
-  // 2. React với realtime tick data từ Socket truyền vào thông qua props
-  useEffect(() => {
-    if (!realtimeUpdate) return
-
-    if (seriesRef.current) {
-      try {
-        if (type.value === "candle") {
-          const series = seriesRef.current as ISeriesApi<"Candlestick">
-          series.update(realtimeUpdate.candle)
-        } else {
-          const series = seriesRef.current as ISeriesApi<"Line">
-          series.update({
-            time: realtimeUpdate.candle.time,
-            value: realtimeUpdate.candle.close,
-          })
-        }
-      } catch (err) {
-        console.warn("Chart update skipped:", err)
-      }
-    }
-
-    if (volumeSeriesRef.current) {
-      try {
-        volumeSeriesRef.current.update(realtimeUpdate.volume)
-      } catch (err) {
-        console.warn("Volume update skipped:", err)
-      }
-    }
-  }, [realtimeUpdate, type])
+  if (errorChart) {
+    return (
+      <div className="flex h-[400px] w-full items-center justify-center">
+        <p className="font-medium text-red-500">
+          Lỗi dữ liệu: {errorChart.message}
+        </p>
+      </div>
+    )
+  }
 
   return (
-    <div ref={chartContainerRef} style={{ width: "100%", height: "400px" }} />
+    <div className="relative h-[400px] w-full">
+      {isLoadingChart && (
+        <div className="absolute inset-0 z-10 flex items-center justify-center bg-background/50 backdrop-blur-sm">
+          <Loader2 className="size-8 animate-spin text-primary" />
+        </div>
+      )}
+      <div
+        ref={chartContainerRef}
+        className="h-full w-full overflow-hidden rounded-lg"
+      />
+    </div>
   )
 }

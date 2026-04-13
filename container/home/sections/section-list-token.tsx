@@ -1,5 +1,3 @@
-"use client"
-
 import { CardToken1 } from "@/components/custom/cards/card-token-1"
 import { TToken } from "@/types/type-token"
 import { useRouter } from "next/navigation"

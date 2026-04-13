@@ -1,9 +1,7 @@
-"use client"
-
-import { TTransaction } from "@/types"
-import { cn } from "@/lib/utils"
-import { ArrowDownUp, ArrowUp, ArrowDown, Download, Upload } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
+import { cn } from "@/lib/utils"
+import { TTransaction } from "@/types"
+import { ArrowDown, ArrowDownUp, ArrowUp, Download, Upload } from "lucide-react"
 
 type TCardHistory = {
   transaction: TTransaction

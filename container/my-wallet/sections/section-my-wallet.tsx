@@ -1,18 +1,18 @@
 "use client"
 
+import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { shortenHex } from "@/lib/utils"
 import { TWallet } from "@/types"
 import {
-  Copy,
-  Wallet2,
+  Activity,
   ArrowDownLeft,
   ArrowUpRight,
-  Activity,
+  Copy,
+  Wallet2,
 } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { toast } from "sonner"
-import { shortenHex } from "@/lib/utils"
 import { useState } from "react"
+import { toast } from "sonner"
 
 type Props = {
   data: TWallet

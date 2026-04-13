@@ -1,5 +1,3 @@
-"use client"
-
 import { CardNotification } from "@/components/custom/cards/card-notification"
 import { Wallet } from "lucide-react"
 import { useState } from "react"
@@ -12,14 +10,13 @@ type TNotification = {
   is_repuired: boolean
   read?: boolean
 }
+
 type Props = {
-  isDesktop?: boolean
   notifications?: TNotification[]
   onMarkRead?: (id: number, read: boolean) => void
 }
 
 export const SectionNotifications: React.FC<Props> = ({
-  isDesktop = false,
   notifications,
   onMarkRead,
 }) => {
@@ -59,37 +56,16 @@ export const SectionNotifications: React.FC<Props> = ({
     }
   }
 
-  if (unreadNotifications.length === 0 && isDesktop) {
+  if (unreadNotifications.length === 0) {
     return null
   }
 
-  if (isDesktop) {
-    return (
-      <div className="flex flex-col gap-2">
-        <p className="px-1 text-xs font-semibold tracking-wider text-foreground/40 uppercase">
-          Thông báo
-        </p>
-        <div className="no-scrollbar flex gap-3 overflow-x-auto pb-1">
-          {unreadNotifications.map((noti) => (
-            <CardNotification
-              key={noti.id}
-              title={noti.title}
-              description={noti.description}
-              icon={noti.icon}
-              isRequired={noti.is_repuired}
-              setNotification={(read: boolean) =>
-                handleSetNotification(noti.id, read)
-              }
-            />
-          ))}
-        </div>
-      </div>
-    )
-  }
-
   return (
-    <div className="flex w-full">
-      <div className="no-scrollbar flex w-full gap-2.5 overflow-x-auto py-5">
+    <div className="flex w-full flex-col md:gap-2">
+      <p className="hidden px-1 text-xs font-semibold tracking-wider text-foreground/40 uppercase md:block">
+        Thông báo
+      </p>
+      <div className="no-scrollbar flex w-full gap-2.5 overflow-x-auto py-5 md:gap-3 md:py-0 md:pb-1">
         {unreadNotifications.map((noti) => (
           <CardNotification
             key={noti.id}

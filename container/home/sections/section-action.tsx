@@ -1,5 +1,3 @@
-"use client"
-
 import { BottomSheetBuySell } from "../bottom-sheet/bottom-sheet-buy-sell"
 import { BottomSheetReceive } from "../bottom-sheet/bottom-sheet-receive"
 import { BottomSheetSend } from "../bottom-sheet/bottom-sheet-send"

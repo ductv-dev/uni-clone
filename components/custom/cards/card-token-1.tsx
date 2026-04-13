@@ -1,9 +1,8 @@
-"use client"
 import { MiniChart } from "@/components/charts/chart-widget"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { cn, randomData24h } from "@/lib/utils"
+import { useBinanceTicker } from "@/hooks/use-market-data"
+import { cn } from "@/lib/utils"
 import { ChevronDown, ChevronUp } from "lucide-react"
-import { useEffect, useState } from "react"
 
 type TcardToken1Props = {
   rank?: number
@@ -28,16 +27,9 @@ export const CardToken1: React.FC<TcardToken1Props> = ({
   onClick,
   className,
 }) => {
-  const [data, setData] = useState<{ time: number; value: number }[]>([])
-
-  useEffect(() => {
-    const fetchData = async () => {
-      // giả lập delay để tránh lỗi "setState synchronously"
-      await new Promise((resolve) => setTimeout(resolve, 0))
-      setData(randomData24h())
-    }
-    fetchData()
-  }, [])
+  const symbolUsdt = symbol ? `${symbol}USDT` : ""
+  const { currentPrice, data24h, percentageChange } =
+    useBinanceTicker(symbolUsdt)
   return (
     <div
       onClick={onClick}
@@ -62,30 +54,38 @@ export const CardToken1: React.FC<TcardToken1Props> = ({
         </div>
       </div>
       <div>
-        <MiniChart data={data} width={50} height={12} strokeWidth={2} />
+        <MiniChart data={data24h} width={50} height={12} strokeWidth={2} />
       </div>
       <div className="flex flex-col items-end">
-        {price && (
+        {(currentPrice > 0 ? currentPrice : price) !== undefined && (
           <span className="text-sm font-medium">
-            {price.toLocaleString(undefined, { minimumFractionDigits: 2 })} US$
+            {(currentPrice > 0 ? currentPrice : price || 0).toLocaleString(
+              undefined,
+              { minimumFractionDigits: 2 }
+            )}{" "}
+            US$
           </span>
         )}
         {description && (
           <span className="text-xs text-foreground/60">{description}</span>
         )}
         <div className="flex items-center">
-          {number_changes > 0 ? (
+          {(percentageChange !== 0 ? percentageChange : number_changes) > 0 ? (
             <div className="flex">
               <ChevronUp className="h-4 w-4 text-green-500" />
               <span className="text-xs font-medium text-green-500">
-                {number_changes}%
+                {percentageChange !== 0 ? percentageChange : number_changes}%
               </span>
             </div>
-          ) : number_changes < 0 ? (
+          ) : (percentageChange !== 0 ? percentageChange : number_changes) <
+            0 ? (
             <div className="flex">
               <ChevronDown className="h-4 w-4 text-red-500" />
               <span className="text-xs font-medium text-red-500">
-                {Math.abs(number_changes)}%
+                {Math.abs(
+                  percentageChange !== 0 ? percentageChange : number_changes
+                )}
+                %
               </span>
             </div>
           ) : (

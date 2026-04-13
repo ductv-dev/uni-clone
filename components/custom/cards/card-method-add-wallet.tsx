@@ -1,8 +1,6 @@
-"use client"
-
 import { Card, CardContent } from "@/components/ui/card"
-import { cn } from "@/lib/utils"
 import { Icons } from "@/components/ui/icons"
+import { cn } from "@/lib/utils"
 
 type Props = {
   className?: string

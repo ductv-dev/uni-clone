@@ -1,19 +1,19 @@
 "use client"
 import { LIST_TOKEN } from "@/data/mock-data-list-token"
 import { useUser } from "@/store/user-store"
+import { TUser } from "@/types"
+import { Wallet } from "lucide-react"
+import { useState } from "react"
+import { DesktopActionTabs } from "./desktop/desktop-action-tabs"
 import { SectionAccount } from "./sections/section-account"
 import { SectionAction } from "./sections/section-action"
 import { SectionBalance } from "./sections/section-balance"
 import { SectionListToken } from "./sections/section-list-token"
 import { SectionNotifications } from "./sections/section-notifications"
-import { DesktopActionTabs } from "./desktop/desktop-action-tabs"
-import { Wallet } from "lucide-react"
-import { useState } from "react"
-import { TUser } from "@/types"
 
 export const Home = () => {
   const user = useUser((state: { user: TUser }) => state.user)
-  const dataToken = LIST_TOKEN.slice(0, 5)
+  const dataToken = LIST_TOKEN.slice(0, 8)
 
   const [notifications, setNotifications] = useState([
     {
@@ -68,7 +68,6 @@ export const Home = () => {
             isDesktop
           />
           <SectionNotifications
-            isDesktop
             notifications={notifications}
             onMarkRead={(id, read) =>
               setNotifications((prev) =>

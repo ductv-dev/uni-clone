@@ -2,16 +2,6 @@ import { TToken } from "@/types/type-token"
 
 export const LIST_TOKEN: TToken[] = [
   {
-    name: "Tether USD",
-    symbol: "USDT",
-    address: "0x55d398326f99059ff775485246999027b3197955",
-    decimals: 18,
-    logoURI:
-      "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/smartchain/assets/0x55d398326f99059fF775485246999027B3197955/logo.png",
-    usdt: 1,
-    number_changes: 0.01,
-  },
-  {
     name: "BNB",
     symbol: "BNB",
     address: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
@@ -33,7 +23,7 @@ export const LIST_TOKEN: TToken[] = [
   },
   {
     name: "Bitcoin BEP2",
-    symbol: "BTCB",
+    symbol: "BTC", // Đã sửa từ BTCUSDT thành BTC
     address: "0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c",
     decimals: 18,
     logoURI:

@@ -1,4 +1,3 @@
-"use client"
 import { ButtonNav } from "@/components/custom/button/button-navigation"
 import { CardSetting } from "@/components/custom/cards/card-setting"
 import { Button } from "@/components/ui/button"

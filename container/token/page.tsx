@@ -16,8 +16,9 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer"
 import { LIST_TOKEN } from "@/data/mock-data-list-token"
-import { useMarketData } from "@/hooks/use-market-data"
+import { useBinanceTicker } from "@/hooks/use-market-data"
 import { NAVBAR_ITEMS } from "@/lib/nav-config"
+import { Timeframe } from "@/lib/utils"
 import { Landmark, SearchX } from "lucide-react"
 import { useMemo, useState } from "react"
 import { toast } from "sonner"
@@ -35,20 +36,13 @@ export const TokenInfor: React.FC<Props> = ({ symbol }) => {
   const [amount, setAmount] = useState<number | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
+  const symbolUsdt = `${symbol}USDT`
 
-  // Sử dụng Custom Hook để quản lý toàn bộ data thị trường
-  const {
-    activeTimeframe,
-    setActiveTimeframe,
-    historicalData,
-    volumeData,
-    realtimeUpdate,
-    currentPrice,
-    priceChange,
-    percentageChange,
-    isLoading: isLoadingMarketData,
-    error: errorMarketData,
-  } = useMarketData(data?.usdt || 0)
+  const [activeTimeframe, setActiveTimeframe] = useState<Timeframe>("1D")
+
+  // Sử dụng Custom Hook để lấy giá Ticker 24h
+  const { currentPrice, priceChange, percentageChange } =
+    useBinanceTicker(symbolUsdt)
 
   // Tính tổng USDT
   const totalUSDT = useMemo(() => {
@@ -91,11 +85,7 @@ export const TokenInfor: React.FC<Props> = ({ symbol }) => {
             percentageChange={percentageChange}
           />
           <SectionChart
-            isLoading={isLoadingMarketData}
-            error={errorMarketData}
-            historicalData={historicalData}
-            volumeData={volumeData}
-            realtimeUpdate={realtimeUpdate}
+            symbol={symbolUsdt}
             activeTimeframe={activeTimeframe}
             onTimeframeChange={setActiveTimeframe}
           />

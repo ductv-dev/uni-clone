@@ -1,7 +1,4 @@
-import {
-  CandlestickChart,
-  RealtimeUpdate,
-} from "@/components/charts/charts-candle"
+import { CandlestickChart } from "@/components/charts/charts-candle"
 import {
   Select,
   SelectContent,
@@ -12,8 +9,7 @@ import {
 } from "@/components/ui/select"
 import { Timeframe } from "@/lib/utils"
 import { TTypeChart } from "@/types"
-import { CandlestickData, HistogramData, Time } from "lightweight-charts"
-import { ChartCandlestick, ChartLine, Loader2 } from "lucide-react"
+import { ChartCandlestick, ChartLine } from "lucide-react"
 import { useTheme } from "next-themes"
 import { useMemo, useState } from "react"
 
@@ -32,23 +28,15 @@ const TYPE_CHART: TTypeChart[] = [
 ]
 
 type Props = {
-  historicalData: CandlestickData<Time>[]
-  volumeData: HistogramData<Time>[]
-  realtimeUpdate?: RealtimeUpdate
+  symbol: string
   activeTimeframe: Timeframe
   onTimeframeChange: (timeframe: Timeframe) => void
-  isLoading: boolean
-  error: Error | null
 }
 
 export const SectionChart: React.FC<Props> = ({
-  historicalData,
-  volumeData,
-  realtimeUpdate,
+  symbol,
   activeTimeframe,
   onTimeframeChange,
-  isLoading,
-  error,
 }) => {
   const { resolvedTheme } = useTheme()
   const [typeChart, setTypeChart] = useState<TTypeChart>(TYPE_CHART[0])
@@ -71,7 +59,6 @@ export const SectionChart: React.FC<Props> = ({
     <div className="flex flex-col gap-2.5">
       <div className="flex items-center justify-between">
         <Select
-          disabled={isLoading}
           value={activeTimeframe}
           onValueChange={(value) => onTimeframeChange(value as Timeframe)}
         >
@@ -119,23 +106,12 @@ export const SectionChart: React.FC<Props> = ({
           maxWidth: "800px",
         }}
       >
-        {isLoading ? (
-          <div className="flex h-[400px] items-center justify-center">
-            <Loader2 className="size-8 animate-spin" />
-          </div>
-        ) : error ? (
-          <div className="flex h-[400px] items-center justify-center">
-            <p className="text-red-500">{error.message}</p>
-          </div>
-        ) : (
-          <CandlestickChart
-            type={typeChart}
-            volumeData={volumeData}
-            data={historicalData}
-            realtimeUpdate={realtimeUpdate}
-            colors={colors}
-          />
-        )}
+        <CandlestickChart
+          type={typeChart}
+          symbol={symbol}
+          interval={activeTimeframe}
+          colors={colors}
+        />
       </div>
     </div>
   )

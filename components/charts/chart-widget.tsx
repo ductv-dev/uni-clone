@@ -1,9 +1,12 @@
-"use client"
 import React from "react"
 
 export type DataPoint = {
   time: number
   value: number
+  close: number
+  open: number
+  high: number
+  low: number
 }
 
 export type MiniChartProps = {

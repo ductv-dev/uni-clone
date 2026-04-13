@@ -77,7 +77,8 @@ export function generateOHLC(
 
   // 1. Tính toán thời điểm bắt đầu (lui về quá khứ 'count' khoảng thời gian)
   const currentTime = new Date()
-  if (timeframe === "1S") currentTime.setSeconds(currentTime.getSeconds() - count)
+  if (timeframe === "1S")
+    currentTime.setSeconds(currentTime.getSeconds() - count)
   if (timeframe === "1H") currentTime.setHours(currentTime.getHours() - count)
   if (timeframe === "1D") currentTime.setDate(currentTime.getDate() - count)
   if (timeframe === "1W") currentTime.setDate(currentTime.getDate() - count * 7)
